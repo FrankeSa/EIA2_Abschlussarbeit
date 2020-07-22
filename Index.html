@@ -13,7 +13,7 @@
 
 <form> 
 
-<div id="sidebar">
+<span id="sidebar">
 
     <fieldset>
         <legend>Canvas Größe wählen</legend>
@@ -21,19 +21,34 @@
         <label for="portrait">Portrait</label>
         <input type="radio" name="Canvas Größe wählen" id="landscape" value="landscape"/>
         <label for="landscape">Landscape</label>
+        <input type="radio" name="Canvas Größe wählen" id="panorama" value="panorama"/>
+        <label for="panorama">Panorama</label>
     </fieldset>
 
-
-</div>
-
+	<fieldset>
+        <legend>Hitergrund wählen</legend>
+        <select name="backgroundColor" id="backgroundColor">
+            <option value="blue">Blau</option>
+            <option value="green">grün</option>
+            <option value="gradienL">Gradient Linear</option>
+            <option value="gradienR">Gradient Radial</option>
+        </select>
+    </fieldset>
+</span>
 
 </form> 
+
+
+<button>Bild speichern</button>
+<div id="footer"></div>
+
+<button id="deleteBtn">Bild löschen</button>
 
   
 
 
     <div>
-        <canvas height="350" width="1000"></canvas>
+        <canvas height="350" width="500"></canvas>
     </div>
 
 

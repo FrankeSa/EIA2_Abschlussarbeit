@@ -1,13 +1,31 @@
 div {
 
-border: 3px;  
-width: 1050px;
-height: 450;
+border: 2px;  
+width: 900px;
+height: 350px;
 border-style: solid;
 }
 
-div#sidebar {
+span {
 
 background-color: aquamarine;
+float: right;
+height: 70px;
+width: 320px;
+}
+
+#footer{
+   
+position: fixed;
+bottom: 3px;
+height: 150px;
+width: 900px;
+border: 2px;  
+border-style: solid; 
+}
+
+#deleteBtn {
+    position: absolute;
+    bottom: 180px;
 
 }
