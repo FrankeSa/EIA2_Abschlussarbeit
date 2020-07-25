@@ -1,4 +1,4 @@
-div {
+#mainDiv {
 
 border: 2px;  
 width: 900px;
@@ -63,9 +63,10 @@ background-color: blue;
 grid-column: 3 ;
 grid-row: 1;
 
+
 }
 
-#star {
+#mickey {
 
 width: 150px;
 height: 150px;

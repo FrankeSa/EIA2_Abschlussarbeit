@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Stylesheet_Zauberbild.css" type="text/css" media="screen" />
-    <script src="Zauberbild.js"></script>
+    <script src="Main/Zauberbild.js"></script>
+    <script src="Objects/Objects.js"></script>
+    <script src="Vector/Vector.js"></script>
+   
     <title>Sarah´s Zauberbild</title>
 </head>
 
@@ -17,11 +20,11 @@
 
     <fieldset>
         <legend>Canvas Größe wählen</legend>
-        <input type="radio" name="Canvas Größe wählen" id="portrait" value="portrait" checked />
+        <input type="radio" name="CanvasSize" id="portrait" value="portrait" checked />
         <label for="portrait">Portrait</label>
-        <input type="radio" name="Canvas Größe wählen" id="landscape" value="landscape"/>
+        <input type="radio" name="CanvasSize" id="landscape" value="landscape"/>
         <label for="landscape">Landscape</label>
-        <input type="radio" name="Canvas Größe wählen" id="panorama" value="panorama"/>
+        <input type="radio" name="CanvasSize" id="panorama" value="panorama"/>
         <label for="panorama">Panorama</label>
     </fieldset>
 
@@ -34,19 +37,35 @@
             <option value="gradienR">Traum in rosa</option>
         </select>
     </fieldset>
+
+	<fieldset>
+        <legend>Animationsmuster wählen</legend>
+        <select name="anmiation" id="chooseAnimation">
+            <option value="random">Zufällig</option>
+            <option value="moving">Bewegen</option>
+            <option value="glowing">Leuchten</option>
+            <option value="rotating">Drehen</option>
+        </select>
+    </fieldset>
+
+
 </span>
 
 </form> 
 
 
+<div id="mainDiv">
+    <canvas id="mainCanvas" height="350" width="500"></canvas>
+</div>
+
+
 
 <div id="footer"> 
-<div id="star"></div>
-<div id="smiley"></div>
-<div id="bubbles"></div>
-<div id="mickey"></div>
 
-
+<div id="obj1"><canvas id="star" height="150px" width="150px"></canvas></div>
+<div id="obj2"><canvas id="smiley" height="150px" width="150px"></canvas></div>
+<div id="obj3"><canvas id="bubbles" height="150px" width="150px"></canvas></div>
+<div id="obj4"><canvas id="mickey" height="150px" width="150px"></canvas></div>
 </div>
 
 <button id="deleteBtn">Bild löschen</button>
@@ -54,9 +73,7 @@
   
 
 
-    <div>
-        <canvas height="350" width="500"></canvas>
-    </div>
+  
 
 
 

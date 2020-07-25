@@ -1,7 +1,16 @@
 namespace Zauberbild {
 
-    let crc2: CanvasRenderingContext2D;
+    export let crc2: CanvasRenderingContext2D; //MainCanvas
     let canvas: HTMLCanvasElement | null;
+    export let crc3: CanvasRenderingContext2D; //StarCanvas
+    let canvasStar: HTMLCanvasElement;
+    export let crc4: CanvasRenderingContext2D; //SmileyCanvas
+    let canvasSmiley: HTMLCanvasElement;
+    export let crc5: CanvasRenderingContext2D; //BubblesCanvas
+    let canvasBubbles: HTMLCanvasElement;
+    export let crc6: CanvasRenderingContext2D; //MickeyCanvas
+    let canvasMickey: HTMLCanvasElement;
+
 
 
     window.addEventListener("load", handleLoad);
@@ -14,14 +23,22 @@ namespace Zauberbild {
 
         let sidebar: HTMLDivElement = <HTMLDivElement>document.querySelector("span#sidebar");
         let deletBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#deleteBtn");
-        sidebar.addEventListener("change", chooseCanvasSize);
-        sidebar.addEventListener("change", chooseCanvasColor);
+        sidebar.addEventListener("change", chooseCanvasSize && chooseCanvasColor);
+        //sidebar.addEventListener("change", chooseCanvasColor);
         deletBtn.addEventListener("click", deleteCanvas);
-        canvas = document.querySelector("canvas");
+        canvas = document.querySelector("#mainCanvas");
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
+        canvasStar = <HTMLCanvasElement>document.querySelector("#star");
+        crc3 = <CanvasRenderingContext2D>canvasStar.getContext("2d");
+        canvasSmiley = <HTMLCanvasElement>document.querySelector("#smiley");
+        crc4 = <CanvasRenderingContext2D>canvasSmiley.getContext("2d");
+        canvasBubbles = <HTMLCanvasElement>document.querySelector("#bubbles");
+        crc5 = <CanvasRenderingContext2D>canvasBubbles.getContext("2d");
+        canvasMickey = <HTMLCanvasElement>document.querySelector("#mickey");
+        crc6 = <CanvasRenderingContext2D>canvasMickey.getContext("2d");
 
     }
 
@@ -88,6 +105,10 @@ namespace Zauberbild {
     function deleteCanvas(_event: Event): void {
 
         console.log("Ich wurde geklickt");
+        canvas = document.querySelector("#mainCanvas");
+        if (!canvas)
+            return;
+        crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
     }
 
