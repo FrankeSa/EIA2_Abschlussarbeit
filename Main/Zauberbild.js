@@ -1,6 +1,7 @@
 "use strict";
 var Zauberbild;
 (function (Zauberbild) {
+    let sidebar;
     let canvas;
     let canvasStar;
     let canvasSmiley;
@@ -9,26 +10,29 @@ var Zauberbild;
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
         //alert("Ziehe das gewünschte Symbol auf deine Zeichenfläche. Ziehe es zum Löschen außerhalb deiner Zeichenfläche");
-        let sidebar = document.querySelector("span#sidebar");
+        sidebar = document.querySelector("form");
         let deletBtn = document.querySelector("#deleteBtn");
+        let submitBtn = document.querySelector("button[type=button]");
         sidebar.addEventListener("change", chooseCanvasSize);
         sidebar.addEventListener("change", chooseCanvasColor);
         deletBtn.addEventListener("click", deleteCanvas);
+        submitBtn.addEventListener("click", sendDataToServer);
+        //**********Canvas */
         canvas = document.querySelector("#mainCanvas");
         if (!canvas)
             return;
         Zauberbild.crc2 = canvas.getContext("2d");
-        canvasStar = document.getElementById("star");
+        canvasStar = document.querySelector("#star");
         Zauberbild.crc3 = canvasStar.getContext("2d");
-        canvasSmiley = document.getElementById("smiley");
+        canvasSmiley = document.querySelector("#smiley");
         Zauberbild.crc4 = canvasSmiley.getContext("2d");
-        canvasBubbles = document.getElementById("bubbles");
+        canvasBubbles = document.querySelector("#bubbles");
         Zauberbild.crc5 = canvasBubbles.getContext("2d");
-        canvasMickey = document.getElementById("mickey");
+        canvasMickey = document.querySelector("#mickey");
         Zauberbild.crc6 = canvasMickey.getContext("2d");
     }
     function chooseCanvasSize(_event) {
-        let formData = new FormData(document.forms[0]); // document = Liste aller untergeordneten form-Elemente. forms[0] =  erste Formular des Dokuments ausgewertet
+        let formData = new FormData(sidebar); // document = Liste aller untergeordneten form-Elemente. forms[0] =  erste Formular des Dokuments ausgewertet
         for (let entry of formData) {
             switch (entry[1]) {
                 case "portrait":
@@ -69,9 +73,6 @@ var Zauberbild;
             }
         }
     }
-    function deleteCanvas(_event) {
-        console.log("Ich wurde geklickt");
-    }
     function drawBackgroundGradientL() {
         let gradient = Zauberbild.crc2.createLinearGradient(0, 0, 100, Zauberbild.crc2.canvas.height);
         gradient.addColorStop(0, "HSL(40, 100%, 45%)");
@@ -87,6 +88,15 @@ var Zauberbild;
         gradient.addColorStop(1, "HSL(330, 100%, 45%)");
         Zauberbild.crc2.fillStyle = gradient;
         Zauberbild.crc2.fillRect(0, 0, Zauberbild.crc2.canvas.width, Zauberbild.crc2.canvas.height);
+    }
+    function deleteCanvas(_event) {
+        console.log("Ich wurde geklickt");
+    }
+    async function sendDataToServer(_event) {
+        let formData = new FormData(sidebar);
+        let query = new URLSearchParams(formData);
+        await fetch("index.html?" + query.toString()); // verschickt request und erhält response
+        alert("send order");
     }
 })(Zauberbild || (Zauberbild = {}));
 //# sourceMappingURL=Zauberbild.js.map

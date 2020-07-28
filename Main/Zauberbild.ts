@@ -1,5 +1,6 @@
 namespace Zauberbild {
 
+    let sidebar: HTMLFormElement;
     export let crc2: CanvasRenderingContext2D; //MainCanvas
     let canvas: HTMLCanvasElement | null;
     export let crc3: CanvasRenderingContext2D; //StarCanvas
@@ -21,16 +22,19 @@ namespace Zauberbild {
     function handleLoad(_event: Event): void {
         //alert("Ziehe das gewünschte Symbol auf deine Zeichenfläche. Ziehe es zum Löschen außerhalb deiner Zeichenfläche");
 
-        let sidebar: HTMLDivElement = <HTMLDivElement>document.querySelector("span#sidebar");
+        sidebar = <HTMLFormElement>document.querySelector("form");
         let deletBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#deleteBtn");
-        sidebar.addEventListener("change", chooseCanvasSize && chooseCanvasColor);
-        //sidebar.addEventListener("change", chooseCanvasColor);
+        let submitBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=button]");
+        sidebar.addEventListener("change", chooseCanvasSize);
+        sidebar.addEventListener("change", chooseCanvasColor);
         deletBtn.addEventListener("click", deleteCanvas);
+        submitBtn.addEventListener("click", sendDataToServer);
+
+        //**********Canvas */
         canvas = document.querySelector("#mainCanvas");
         if (!canvas)
             return;
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-
         canvasStar = <HTMLCanvasElement>document.querySelector("#star");
         crc3 = <CanvasRenderingContext2D>canvasStar.getContext("2d");
         canvasSmiley = <HTMLCanvasElement>document.querySelector("#smiley");
@@ -46,7 +50,7 @@ namespace Zauberbild {
 
     function chooseCanvasSize(_event: Event): void {
 
-        let formData: FormData = new FormData(document.forms[0]); // document = Liste aller untergeordneten form-Elemente. forms[0] =  erste Formular des Dokuments ausgewertet
+        let formData: FormData = new FormData(sidebar); // document = Liste aller untergeordneten form-Elemente. forms[0] =  erste Formular des Dokuments ausgewertet
 
         for (let entry of formData) {
 
@@ -63,7 +67,6 @@ namespace Zauberbild {
             }
         }
     }
-
 
 
 
@@ -98,21 +101,6 @@ namespace Zauberbild {
         }
     }
 
-
-
-
-
-    function deleteCanvas(_event: Event): void {
-
-        console.log("Ich wurde geklickt");
-        canvas = document.querySelector("#mainCanvas");
-        if (!canvas)
-            return;
-        crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-
-    }
-
-
     function drawBackgroundGradientL(): void {
 
         let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 100, crc2.canvas.height);
@@ -122,6 +110,7 @@ namespace Zauberbild {
         crc2.fillStyle = gradient;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
     }
+
 
     function drawBackgroundGradientR(): void {
 
@@ -136,6 +125,23 @@ namespace Zauberbild {
 
 
 
+
+    function deleteCanvas(_event: Event): void {
+
+        console.log("Ich wurde geklickt");
+
+    }
+
+
+
+
+    async function sendDataToServer(_event: Event): Promise<void> {
+        let formData: FormData = new FormData(sidebar);
+        let query: URLSearchParams = new URLSearchParams(<any>formData);
+        await fetch("index.html?" + query.toString()); // verschickt request und erhält response
+
+        alert("send order");
+    }
 
 
 
