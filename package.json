@@ -1,0 +1,21 @@
+{
+  "name": "eia2_abschlussarbeit",
+  "version": "1.0.0",
+  "description": "dieAbschlussarbeit",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "start": "node Server/Server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FrankeSa/EIA2_Abschlussarbeit.git"
+  },
+  "author": "Sarah Franke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FrankeSa/EIA2_Abschlussarbeit/issues"
+  },
+  "homepage": "https://github.com/FrankeSa/EIA2_Abschlussarbeit#readme"
+}
