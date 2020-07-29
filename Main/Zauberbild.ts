@@ -1,6 +1,7 @@
 namespace Zauberbild {
-
     let sidebar: HTMLFormElement;
+    let url: string = "http://localhost:5001";
+
     export let crc2: CanvasRenderingContext2D; //MainCanvas
     let canvas: HTMLCanvasElement | null;
     export let crc3: CanvasRenderingContext2D; //StarCanvas
@@ -138,9 +139,9 @@ namespace Zauberbild {
     async function sendDataToServer(_event: Event): Promise<void> {
         let formData: FormData = new FormData(sidebar);
         let query: URLSearchParams = new URLSearchParams(<any>formData);
-        await fetch("index.html?" + query.toString()); // verschickt request und erhält response
-
-        alert("send order");
+        let response: Response = await fetch(url + "?" + query.toString()); // verschickt request und erhält response
+        let responseText: string = await response.text();
+        alert(responseText);
     }
 
 

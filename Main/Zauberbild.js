@@ -2,6 +2,7 @@
 var Zauberbild;
 (function (Zauberbild) {
     let sidebar;
+    let url = "http://localhost:5001";
     let canvas;
     let canvasStar;
     let canvasSmiley;
@@ -95,8 +96,9 @@ var Zauberbild;
     async function sendDataToServer(_event) {
         let formData = new FormData(sidebar);
         let query = new URLSearchParams(formData);
-        await fetch("index.html?" + query.toString()); // verschickt request und erhält response
-        alert("send order");
+        let response = await fetch(url + "?" + query.toString()); // verschickt request und erhält response
+        let responseText = await response.text();
+        alert(responseText);
     }
 })(Zauberbild || (Zauberbild = {}));
 //# sourceMappingURL=Zauberbild.js.map
