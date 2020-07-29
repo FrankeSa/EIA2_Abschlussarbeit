@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "dieAbschlussarbeit",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@types/mongodb": "^3.5.25",
+    "mongodb": "^3.5.9"
+  },
   "devDependencies": {},
   "scripts": {
     "start": "node Server/Server.js"
