@@ -3,7 +3,7 @@ namespace Zauberbild {
     //let url: string = "https://sarahabschlussarbeit.herokuapp.com/";
     let url: string = "http://localhost:5001";
 
-    export let crc2: CanvasRenderingContext2D; //MainCanvas
+    export let mainCanvas: CanvasRenderingContext2D; //MainCanvas
     let canvas: HTMLCanvasElement | null;
     export let crc3: CanvasRenderingContext2D; //StarCanvas
     let canvasStar: HTMLCanvasElement;
@@ -36,7 +36,7 @@ namespace Zauberbild {
         canvas = document.querySelector("#mainCanvas");
         if (!canvas)
             return;
-        crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
+        mainCanvas = <CanvasRenderingContext2D>canvas.getContext("2d");
         canvasStar = <HTMLCanvasElement>document.querySelector("#star");
         crc3 = <CanvasRenderingContext2D>canvasStar.getContext("2d");
         canvasSmiley = <HTMLCanvasElement>document.querySelector("#smiley");
@@ -45,9 +45,8 @@ namespace Zauberbild {
         crc5 = <CanvasRenderingContext2D>canvasBubbles.getContext("2d");
         canvasMickey = <HTMLCanvasElement>document.querySelector("#mickey");
         crc6 = <CanvasRenderingContext2D>canvasMickey.getContext("2d");
-
+        
     }
-
 
 
     function chooseCanvasSize(_event: Event): void {
@@ -58,13 +57,13 @@ namespace Zauberbild {
 
             switch (entry[1]) {
                 case "portrait":
-                    crc2.canvas.width = 500;
+                    mainCanvas.canvas.width = 500;
                     break;
                 case "landscape":
-                    crc2.canvas.width = 800;
+                    mainCanvas.canvas.width = 800;
                     break;
                 case "panorama":
-                    crc2.canvas.width = 900;
+                    mainCanvas.canvas.width = 900;
                     break;
             }
         }
@@ -82,14 +81,14 @@ namespace Zauberbild {
 
             switch (entry[1]) {
                 case "blue":
-                    crc2.fillStyle = "#80bfff";
+                    mainCanvas.fillStyle = "#80bfff";
                     //crc2.fill();
-                    crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+                    mainCanvas.fillRect(0, 0, mainCanvas.canvas.width, mainCanvas.canvas.height);
                     break;
                 case "green":
-                    crc2.fillStyle = "#00cc00";
+                    mainCanvas.fillStyle = "#00cc00";
                     //crc2.fill();
-                    crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+                    mainCanvas.fillRect(0, 0, mainCanvas.canvas.width, mainCanvas.canvas.height);
                     break;
                 case "gradienL":
                     drawBackgroundGradientL();
@@ -105,23 +104,23 @@ namespace Zauberbild {
 
     function drawBackgroundGradientL(): void {
 
-        let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 100, crc2.canvas.height);
+        let gradient: CanvasGradient = mainCanvas.createLinearGradient(0, 0, 100, mainCanvas.canvas.height);
         gradient.addColorStop(0, "HSL(40, 100%, 45%)");
         gradient.addColorStop(0.6, "HSL(60, 81%, 50%)");
         gradient.addColorStop(1, "HSL(40, 100%, 45%)");
-        crc2.fillStyle = gradient;
-        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+        mainCanvas.fillStyle = gradient;
+        mainCanvas.fillRect(0, 0, mainCanvas.canvas.width, mainCanvas.canvas.height);
     }
 
 
     function drawBackgroundGradientR(): void {
 
-        let gradient: CanvasGradient = crc2.createRadialGradient(100, 50, 50, 90, 60, 100);
+        let gradient: CanvasGradient = mainCanvas.createRadialGradient(100, 50, 50, 90, 60, 100);
         gradient.addColorStop(0, "HSL(336, 100%, 80%)");
         gradient.addColorStop(0.6, "HSL(330, 100%, 65%)");
         gradient.addColorStop(1, "HSL(330, 100%, 45%)");
-        crc2.fillStyle = gradient;
-        crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+        mainCanvas.fillStyle = gradient;
+        mainCanvas.fillRect(0, 0, mainCanvas.canvas.width, mainCanvas.canvas.height);
     }
 
 
