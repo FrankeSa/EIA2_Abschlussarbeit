@@ -2,7 +2,7 @@
 var Zauberbild;
 (function (Zauberbild) {
     let sidebar;
-    let url = "http://sarahabschlussarbeit.herokuapp.com/";
+    let url = "https://sarahabschlussarbeit.herokuapp.com/";
     let canvas;
     let canvasStar;
     let canvasSmiley;

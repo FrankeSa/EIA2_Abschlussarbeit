@@ -39,11 +39,6 @@ namespace Zauberbild {
         crc6.fill();
         crc6.restore();
         crc6.closePath();
-
-
-
-
-
-
+    }
 
 }
