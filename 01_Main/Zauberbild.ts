@@ -5,13 +5,13 @@ namespace Zauberbild {
 
     export let mainCanvas: CanvasRenderingContext2D; //MainCanvas
     let canvas: HTMLCanvasElement | null;
-    export let crc3: CanvasRenderingContext2D; //StarCanvas
+    export let crcstern: CanvasRenderingContext2D; //StarCanvas
     let canvasStar: HTMLCanvasElement;
-    export let crc4: CanvasRenderingContext2D; //SmileyCanvas
+    export let crcsmiley: CanvasRenderingContext2D; //SmileyCanvas
     let canvasSmiley: HTMLCanvasElement;
-    export let crc5: CanvasRenderingContext2D; //BubblesCanvas
+    export let crcbubbles: CanvasRenderingContext2D; //BubblesCanvas
     let canvasBubbles: HTMLCanvasElement;
-    export let crc6: CanvasRenderingContext2D; //MickeyCanvas
+    export let crcmickey: CanvasRenderingContext2D; //MickeyCanvas
     let canvasMickey: HTMLCanvasElement;
 
 
@@ -38,15 +38,15 @@ namespace Zauberbild {
             return;
         mainCanvas = <CanvasRenderingContext2D>canvas.getContext("2d");
         canvasStar = <HTMLCanvasElement>document.querySelector("#star");
-        crc3 = <CanvasRenderingContext2D>canvasStar.getContext("2d");
+        crcstern = <CanvasRenderingContext2D>canvasStar.getContext("2d");
         canvasSmiley = <HTMLCanvasElement>document.querySelector("#smiley");
-        crc4 = <CanvasRenderingContext2D>canvasSmiley.getContext("2d");
+        crcsmiley = <CanvasRenderingContext2D>canvasSmiley.getContext("2d");
         canvasBubbles = <HTMLCanvasElement>document.querySelector("#bubbles");
-        crc5 = <CanvasRenderingContext2D>canvasBubbles.getContext("2d");
+        crcbubbles = <CanvasRenderingContext2D>canvasBubbles.getContext("2d");
         canvasMickey = <HTMLCanvasElement>document.querySelector("#mickey");
-        crc6 = <CanvasRenderingContext2D>canvasMickey.getContext("2d");
+        crcmickey = <CanvasRenderingContext2D>canvasMickey.getContext("2d");
 
-        drawBubbles();
+       
         
     }
 
