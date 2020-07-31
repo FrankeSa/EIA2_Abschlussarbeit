@@ -45,6 +45,8 @@ namespace Zauberbild {
         crc5 = <CanvasRenderingContext2D>canvasBubbles.getContext("2d");
         canvasMickey = <HTMLCanvasElement>document.querySelector("#mickey");
         crc6 = <CanvasRenderingContext2D>canvasMickey.getContext("2d");
+
+        drawBubbles();
         
     }
 
@@ -142,8 +144,7 @@ namespace Zauberbild {
     }
 
 
-
-
+  
 
 
 
