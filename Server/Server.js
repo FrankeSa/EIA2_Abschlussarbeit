@@ -6,11 +6,11 @@ const Mongo = require("mongodb");
 var Zauberbild;
 (function (Zauberbild) {
     let pictureCollection;
-    let dbUrl = "mongodb+srv://FrankeSa:Milou@sarahcluster-pelct.mongodb.net/Zauberbild?retryWrites=true&w=majority";
     //open Port
     let port = process.env.Port; //process liefert den Port, wenn verfügbar
     if (port == undefined)
         port = 5001;
+    let dbUrl = "mongodb+srv://FrankeSa:Milou@sarahcluster-pelct.mongodb.net/Zauberbild?retryWrites=true&w=majority";
     startServer(port);
     connectToDatabase(dbUrl);
     function startServer(_port) {

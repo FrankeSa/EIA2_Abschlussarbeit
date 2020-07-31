@@ -9,13 +9,14 @@ export namespace Zauberbild {
     }
 
     let pictureCollection: Mongo.Collection;
-    let dbUrl: string = "mongodb+srv://FrankeSa:Milou@sarahcluster-pelct.mongodb.net/Zauberbild?retryWrites=true&w=majority";
+
 
     //open Port
     let port: number | string | undefined = process.env.Port; //process liefert den Port, wenn verfügbar
     if (port == undefined)
         port = 5001;
-
+    let dbUrl: string = "mongodb+srv://FrankeSa:Milou@sarahcluster-pelct.mongodb.net/Zauberbild?retryWrites=true&w=majority";
+    
     startServer(port);
     connectToDatabase(dbUrl);
 
