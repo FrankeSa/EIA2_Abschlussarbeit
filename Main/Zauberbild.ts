@@ -1,7 +1,7 @@
 namespace Zauberbild {
     let sidebar: HTMLFormElement;
-    //let url: string = "https://sarahabschlussarbeit.herokuapp.com/";
-    let url: string = "http://localhost:5001";
+    let url: string = "https://sarahabschlussarbeit.herokuapp.com/";
+    //let url: string = "http://localhost:5001";
 
     export let mainCanvas: CanvasRenderingContext2D; //MainCanvas
     let canvas: HTMLCanvasElement | null;
@@ -48,7 +48,6 @@ namespace Zauberbild {
         
     }
 
-
     function chooseCanvasSize(_event: Event): void {
 
         let formData: FormData = new FormData(sidebar); // document = Liste aller untergeordneten form-Elemente. forms[0] =  erste Formular des Dokuments ausgewertet
@@ -68,7 +67,6 @@ namespace Zauberbild {
             }
         }
     }
-
 
 
     function chooseCanvasColor(_event: Event): void {
@@ -98,7 +96,6 @@ namespace Zauberbild {
                     break;
 
             }
-
         }
     }
 

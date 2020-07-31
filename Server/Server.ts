@@ -45,7 +45,7 @@ export namespace Zauberbild {
             _response.write(jsonString);
             console.log(url.query);
             storeUserData(url.query);
-            
+
         }
 
         _response.end();
