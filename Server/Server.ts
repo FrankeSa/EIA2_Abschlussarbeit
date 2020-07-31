@@ -15,8 +15,9 @@ export namespace Zauberbild {
     let port: number | string | undefined = process.env.Port; //process liefert den Port, wenn verfügbar
     if (port == undefined)
         port = 5001;
+        
     let dbUrl: string = "mongodb+srv://FrankeSa:Milou@sarahcluster-pelct.mongodb.net/Zauberbild?retryWrites=true&w=majority";
-    
+
     startServer(port);
     connectToDatabase(dbUrl);
 
@@ -37,7 +38,7 @@ export namespace Zauberbild {
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
         console.log("Whats Upp");
-       
+
         _response.setHeader("content-type", "text/html; charset=utf-8"); // Angabe was verschickt wird. Hier Text
         _response.setHeader("Access-Control-Allow-Origin", "*"); // Ausschalten der Sicherheitsmechanismen, sodass man von überall anfragen kann
 
@@ -46,7 +47,7 @@ export namespace Zauberbild {
             for (let key in url.query) {
                 _response.write(key + ":" + url.query[key] + "<br/>");
             }
-           
+
             let jsonString: string = JSON.stringify(url.query);
             _response.write(jsonString);
             console.log(url.query);
