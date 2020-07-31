@@ -15,7 +15,7 @@ var Zauberbild;
     connectToDatabase(dbUrl);
     function startServer(_port) {
         let server = Http.createServer();
-        //console.log("SErver strarting on port" + _port);
+        console.log("SErver strarting on port" + _port);
         server.listen(_port);
         server.addListener("request", handleRequest);
     }
