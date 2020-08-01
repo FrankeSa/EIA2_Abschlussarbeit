@@ -1,4 +1,5 @@
 namespace Zauberbild {
+    
     let sidebar: HTMLFormElement;
     let url: string = "https://sarahabschlussarbeit.herokuapp.com/";
     //let url: string = "http://localhost:5001";

@@ -12,7 +12,7 @@ export namespace Zauberbild {
 
 
     //open Port
-    let port: number | string | undefined = process.env.Port; //process liefert den Port, wenn verfügbar
+    let port: number | string | undefined = process.env.PORT; //process liefert den Port, wenn verfügbar
     if (port == undefined)
         port = 5001;
         

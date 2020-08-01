@@ -7,7 +7,7 @@ var Zauberbild;
 (function (Zauberbild) {
     let pictureCollection;
     //open Port
-    let port = process.env.Port; //process liefert den Port, wenn verfügbar
+    let port = process.env.PORT; //process liefert den Port, wenn verfügbar
     if (port == undefined)
         port = 5001;
     let dbUrl = "mongodb+srv://FrankeSa:Milou@sarahcluster-pelct.mongodb.net/Zauberbild?retryWrites=true&w=majority";
