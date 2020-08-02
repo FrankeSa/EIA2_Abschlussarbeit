@@ -2,17 +2,16 @@ namespace Zauberbild {
     
     let sidebar: HTMLFormElement;
     let url: string = "https://sarahabschlussarbeit.herokuapp.com/";
-    //let url: string = "http://localhost:5001";
-
+   
     export let mainCanvas: CanvasRenderingContext2D; //MainCanvas
     let canvas: HTMLCanvasElement | null;
-    export let crcstern: CanvasRenderingContext2D; //StarCanvas
+    export let crcStern: CanvasRenderingContext2D; //StarCanvas
     let canvasStar: HTMLCanvasElement;
-    export let crcsmiley: CanvasRenderingContext2D; //SmileyCanvas
+    export let crcSmiley: CanvasRenderingContext2D; //SmileyCanvas
     let canvasSmiley: HTMLCanvasElement;
-    export let crcbubbles: CanvasRenderingContext2D; //BubblesCanvas
+    export let crcBubbles: CanvasRenderingContext2D; //BubblesCanvas
     let canvasBubbles: HTMLCanvasElement;
-    export let crcmickey: CanvasRenderingContext2D; //MickeyCanvas
+    export let crcMickey: CanvasRenderingContext2D; //MickeyCanvas
     let canvasMickey: HTMLCanvasElement;
 
 
@@ -39,15 +38,15 @@ namespace Zauberbild {
             return;
         mainCanvas = <CanvasRenderingContext2D>canvas.getContext("2d");
         canvasStar = <HTMLCanvasElement>document.querySelector("#star");
-        crcstern = <CanvasRenderingContext2D>canvasStar.getContext("2d");
+        crcStern = <CanvasRenderingContext2D>canvasStar.getContext("2d");
         canvasSmiley = <HTMLCanvasElement>document.querySelector("#smiley");
-        crcsmiley = <CanvasRenderingContext2D>canvasSmiley.getContext("2d");
+        crcSmiley = <CanvasRenderingContext2D>canvasSmiley.getContext("2d");
         canvasBubbles = <HTMLCanvasElement>document.querySelector("#bubbles");
-        crcbubbles = <CanvasRenderingContext2D>canvasBubbles.getContext("2d");
+        crcBubbles = <CanvasRenderingContext2D>canvasBubbles.getContext("2d");
         canvasMickey = <HTMLCanvasElement>document.querySelector("#mickey");
-        crcmickey = <CanvasRenderingContext2D>canvasMickey.getContext("2d");
+        crcMickey = <CanvasRenderingContext2D>canvasMickey.getContext("2d");
 
-       
+        drawSmiley();
         
     }
 

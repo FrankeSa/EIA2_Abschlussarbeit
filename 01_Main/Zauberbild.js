@@ -24,13 +24,14 @@ var Zauberbild;
             return;
         Zauberbild.mainCanvas = canvas.getContext("2d");
         canvasStar = document.querySelector("#star");
-        Zauberbild.crcstern = canvasStar.getContext("2d");
+        Zauberbild.crcStern = canvasStar.getContext("2d");
         canvasSmiley = document.querySelector("#smiley");
-        Zauberbild.crcsmiley = canvasSmiley.getContext("2d");
+        Zauberbild.crcSmiley = canvasSmiley.getContext("2d");
         canvasBubbles = document.querySelector("#bubbles");
-        Zauberbild.crcbubbles = canvasBubbles.getContext("2d");
+        Zauberbild.crcBubbles = canvasBubbles.getContext("2d");
         canvasMickey = document.querySelector("#mickey");
-        Zauberbild.crcmickey = canvasMickey.getContext("2d");
+        Zauberbild.crcMickey = canvasMickey.getContext("2d");
+        Zauberbild.drawSmiley();
     }
     function chooseCanvasSize(_event) {
         let formData = new FormData(sidebar); // document = Liste aller untergeordneten form-Elemente. forms[0] =  erste Formular des Dokuments ausgewertet
