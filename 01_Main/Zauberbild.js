@@ -97,11 +97,13 @@ var Zauberbild;
         Zauberbild.mainCanvas.fillStyle = "white";
     }
     async function sendDataToServer(_event) {
+        let pictureName;
         let formData = new FormData(sidebar);
         let query = new URLSearchParams(formData);
         let response = await fetch(url + "?" + query.toString()); // verschickt request und erhält response
         let responseText = await response.text();
-        alert(responseText);
+        pictureName = window.prompt("Gib deinen Bildnamen ein");
+        alert("Dein Bildname: " + pictureName + "\n" + "Folgende Daten sind abgespeichert: " + "\n" + responseText);
     }
 })(Zauberbild || (Zauberbild = {}));
 //# sourceMappingURL=Zauberbild.js.map

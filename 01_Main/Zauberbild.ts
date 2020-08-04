@@ -53,7 +53,7 @@ namespace Zauberbild {
         drawMicky();
         drawSmiley();
         drawStar();
-       
+
     }
 
     function chooseCanvasSize(_event: Event): void {
@@ -130,16 +130,19 @@ namespace Zauberbild {
 
     function clearCanvas(_event: Event): void {
 
-        console.log("Ich wurde geklickt");      
+        console.log("Ich wurde geklickt");
         mainCanvas.fillStyle = "white";
     }
 
     async function sendDataToServer(_event: Event): Promise<void> {
+        let pictureName: string | null;
         let formData: FormData = new FormData(sidebar);
         let query: URLSearchParams = new URLSearchParams(<any>formData);
         let response: Response = await fetch(url + "?" + query.toString()); // verschickt request und erhält response
         let responseText: string = await response.text();
-        alert(responseText);
+
+        pictureName = window.prompt("Gib deinen Bildnamen ein");
+        alert("Dein Bildname: " + pictureName + "\n" + "Folgende Daten sind abgespeichert: " + "\n" + responseText);
     }
 
 
