@@ -40,4 +40,4 @@ var Zauberbild;
     }
     Zauberbild.drawBubble = drawBubble;
 })(Zauberbild || (Zauberbild = {}));
-//# sourceMappingURL=Bubbles.js.map
+//# sourceMappingURL=Bubble.js.map
