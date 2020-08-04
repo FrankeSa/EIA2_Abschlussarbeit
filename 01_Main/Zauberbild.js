@@ -10,13 +10,13 @@ var Zauberbild;
     let canvasMickey;
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
-        //alert("Ziehe das gewünschte Symbol auf deine Zeichenfläche. Ziehe es zum Löschen außerhalb deiner Zeichenfläche");
+        alert("Ziehe das gewünschte Symbol auf deine Zeichenfläche. Ziehe es zum Löschen außerhalb deiner rechten Zeichenfläche");
         sidebar = document.querySelector("form");
         let deletBtn = document.querySelector("#deleteBtn");
         let submitBtn = document.querySelector("button[type=button]");
         sidebar.addEventListener("change", chooseCanvasSize);
         sidebar.addEventListener("change", chooseCanvasColor);
-        deletBtn.addEventListener("click", deleteCanvas);
+        deletBtn.addEventListener("click", clearCanvas);
         submitBtn.addEventListener("click", sendDataToServer);
         //**********Canvas */
         canvas = document.querySelector("#mainCanvas");
@@ -31,7 +31,10 @@ var Zauberbild;
         Zauberbild.crcBubbles = canvasBubbles.getContext("2d");
         canvasMickey = document.querySelector("#mickey");
         Zauberbild.crcMickey = canvasMickey.getContext("2d");
+        Zauberbild.drawBubble();
+        Zauberbild.drawMicky();
         Zauberbild.drawSmiley();
+        Zauberbild.drawStar();
     }
     function chooseCanvasSize(_event) {
         let formData = new FormData(sidebar); // document = Liste aller untergeordneten form-Elemente. forms[0] =  erste Formular des Dokuments ausgewertet
@@ -58,12 +61,10 @@ var Zauberbild;
             switch (entry[1]) {
                 case "blue":
                     Zauberbild.mainCanvas.fillStyle = "#80bfff";
-                    //crc2.fill();
                     Zauberbild.mainCanvas.fillRect(0, 0, Zauberbild.mainCanvas.canvas.width, Zauberbild.mainCanvas.canvas.height);
                     break;
                 case "green":
                     Zauberbild.mainCanvas.fillStyle = "#00cc00";
-                    //crc2.fill();
                     Zauberbild.mainCanvas.fillRect(0, 0, Zauberbild.mainCanvas.canvas.width, Zauberbild.mainCanvas.canvas.height);
                     break;
                 case "gradienL":
@@ -91,8 +92,9 @@ var Zauberbild;
         Zauberbild.mainCanvas.fillStyle = gradient;
         Zauberbild.mainCanvas.fillRect(0, 0, Zauberbild.mainCanvas.canvas.width, Zauberbild.mainCanvas.canvas.height);
     }
-    function deleteCanvas(_event) {
+    function clearCanvas(_event) {
         console.log("Ich wurde geklickt");
+        Zauberbild.mainCanvas.fillStyle = "white";
     }
     async function sendDataToServer(_event) {
         let formData = new FormData(sidebar);

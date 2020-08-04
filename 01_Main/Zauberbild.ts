@@ -1,8 +1,8 @@
 namespace Zauberbild {
-    
+
     let sidebar: HTMLFormElement;
     let url: string = "https://sarahabschlussarbeit.herokuapp.com/";
-   
+
     export let mainCanvas: CanvasRenderingContext2D; //MainCanvas
     let canvas: HTMLCanvasElement | null;
     export let crcStern: CanvasRenderingContext2D; //StarCanvas
@@ -22,14 +22,14 @@ namespace Zauberbild {
 
 
     function handleLoad(_event: Event): void {
-        //alert("Ziehe das gewünschte Symbol auf deine Zeichenfläche. Ziehe es zum Löschen außerhalb deiner Zeichenfläche");
+        alert("Ziehe das gewünschte Symbol auf deine Zeichenfläche. Ziehe es zum Löschen außerhalb deiner rechten Zeichenfläche");
 
         sidebar = <HTMLFormElement>document.querySelector("form");
         let deletBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#deleteBtn");
         let submitBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button[type=button]");
         sidebar.addEventListener("change", chooseCanvasSize);
         sidebar.addEventListener("change", chooseCanvasColor);
-        deletBtn.addEventListener("click", deleteCanvas);
+        deletBtn.addEventListener("click", clearCanvas);
         submitBtn.addEventListener("click", sendDataToServer);
 
         //**********Canvas */
@@ -37,17 +37,23 @@ namespace Zauberbild {
         if (!canvas)
             return;
         mainCanvas = <CanvasRenderingContext2D>canvas.getContext("2d");
+
         canvasStar = <HTMLCanvasElement>document.querySelector("#star");
         crcStern = <CanvasRenderingContext2D>canvasStar.getContext("2d");
+
         canvasSmiley = <HTMLCanvasElement>document.querySelector("#smiley");
         crcSmiley = <CanvasRenderingContext2D>canvasSmiley.getContext("2d");
+
         canvasBubbles = <HTMLCanvasElement>document.querySelector("#bubbles");
         crcBubbles = <CanvasRenderingContext2D>canvasBubbles.getContext("2d");
         canvasMickey = <HTMLCanvasElement>document.querySelector("#mickey");
         crcMickey = <CanvasRenderingContext2D>canvasMickey.getContext("2d");
 
+        drawBubble();
+        drawMicky();
         drawSmiley();
-        
+        drawStar();
+       
     }
 
     function chooseCanvasSize(_event: Event): void {
@@ -82,12 +88,10 @@ namespace Zauberbild {
             switch (entry[1]) {
                 case "blue":
                     mainCanvas.fillStyle = "#80bfff";
-                    //crc2.fill();
                     mainCanvas.fillRect(0, 0, mainCanvas.canvas.width, mainCanvas.canvas.height);
                     break;
                 case "green":
                     mainCanvas.fillStyle = "#00cc00";
-                    //crc2.fill();
                     mainCanvas.fillRect(0, 0, mainCanvas.canvas.width, mainCanvas.canvas.height);
                     break;
                 case "gradienL":
@@ -124,16 +128,11 @@ namespace Zauberbild {
 
 
 
+    function clearCanvas(_event: Event): void {
 
-
-    function deleteCanvas(_event: Event): void {
-
-        console.log("Ich wurde geklickt");
-
+        console.log("Ich wurde geklickt");      
+        mainCanvas.fillStyle = "white";
     }
-
-
-
 
     async function sendDataToServer(_event: Event): Promise<void> {
         let formData: FormData = new FormData(sidebar);
@@ -144,9 +143,7 @@ namespace Zauberbild {
     }
 
 
-  
-
-
-
-
 }
+
+
+

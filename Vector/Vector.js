@@ -1,6 +1,6 @@
 "use strict";
-var Zaberbild;
-(function (Zaberbild) {
+var Zauberbild;
+(function (Zauberbild) {
     class Vector {
         constructor(_x, _y) {
             this.set(_x, _y);
@@ -24,6 +24,6 @@ var Zaberbild;
             this.scale(length);
         }
     }
-    Zaberbild.Vector = Vector;
-})(Zaberbild || (Zaberbild = {}));
+    Zauberbild.Vector = Vector;
+})(Zauberbild || (Zauberbild = {}));
 //# sourceMappingURL=Vector.js.map

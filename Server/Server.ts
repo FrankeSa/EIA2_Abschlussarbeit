@@ -37,21 +37,17 @@ export namespace Zauberbild {
     }
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
-        console.log("Whats Upp");
 
         _response.setHeader("content-type", "text/html; charset=utf-8"); // Angabe was verschickt wird. Hier Text
         _response.setHeader("Access-Control-Allow-Origin", "*"); // Ausschalten der Sicherheitsmechanismen, sodass man von überall anfragen kann
 
         if (_request.url) {
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); // die URL wird geparst und durch true wird ein assoziatives Array daraus
-            for (let key in url.query) {
-                _response.write(key + ":" + url.query[key] + "<br/>");
-            }
-
             let jsonString: string = JSON.stringify(url.query);
             _response.write(jsonString);
             console.log(url.query);
             storeUserData(url.query);
+            
         }
 
         _response.end();
