@@ -80,7 +80,7 @@ namespace Zauberbild {
     function chooseCanvasColor(_event: Event): void {
         let inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll("input");
         console.log(inputs);
-        let formData: FormData = new FormData(document.forms[0]); // document = Liste aller untergeordneten form-Elemente. forms[0] =  erste Formular des Dokuments ausgewertet
+        let formData: FormData = new FormData(sidebar); // document = Liste aller untergeordneten form-Elemente. forms[0] =  erste Formular des Dokuments ausgewertet
 
         for (let entry of formData) {
             console.log(entry[1]);
@@ -132,17 +132,21 @@ namespace Zauberbild {
 
         console.log("Ich wurde geklickt");
         mainCanvas.fillStyle = "white";
+        mainCanvas.fillRect(0, 0, mainCanvas.canvas.width, mainCanvas.canvas.height);
+        sidebar.reset();
+          
+
     }
 
     async function sendDataToServer(_event: Event): Promise<void> {
-        let pictureName: string | null;
+        let x: string | null;
+        x = prompt("Gib deinen Bildnamen ein");
+        let pictureName: string = "Bildname: " + x;
         let formData: FormData = new FormData(sidebar);
         let query: URLSearchParams = new URLSearchParams(<any>formData);
         let response: Response = await fetch(url + "?" + query.toString()); // verschickt request und erhält response
         let responseText: string = await response.text();
-
-        pictureName = window.prompt("Gib deinen Bildnamen ein");
-        alert("Dein Bildname: " + pictureName + "\n" + "Folgende Daten sind abgespeichert: " + "\n" + responseText);
+        alert(pictureName + "\n" + "Folgende Daten sind abgespeichert: " + "\n" + responseText);
     }
 
 

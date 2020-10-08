@@ -55,7 +55,7 @@ var Zauberbild;
     function chooseCanvasColor(_event) {
         let inputs = document.querySelectorAll("input");
         console.log(inputs);
-        let formData = new FormData(document.forms[0]); // document = Liste aller untergeordneten form-Elemente. forms[0] =  erste Formular des Dokuments ausgewertet
+        let formData = new FormData(sidebar); // document = Liste aller untergeordneten form-Elemente. forms[0] =  erste Formular des Dokuments ausgewertet
         for (let entry of formData) {
             console.log(entry[1]);
             switch (entry[1]) {
@@ -95,15 +95,18 @@ var Zauberbild;
     function clearCanvas(_event) {
         console.log("Ich wurde geklickt");
         Zauberbild.mainCanvas.fillStyle = "white";
+        Zauberbild.mainCanvas.fillRect(0, 0, Zauberbild.mainCanvas.canvas.width, Zauberbild.mainCanvas.canvas.height);
+        sidebar.reset();
     }
     async function sendDataToServer(_event) {
-        let pictureName;
+        let x;
+        x = prompt("Gib deinen Bildnamen ein");
+        let pictureName = "Bildname: " + x;
         let formData = new FormData(sidebar);
         let query = new URLSearchParams(formData);
         let response = await fetch(url + "?" + query.toString()); // verschickt request und erhält response
         let responseText = await response.text();
-        pictureName = window.prompt("Gib deinen Bildnamen ein");
-        alert("Dein Bildname: " + pictureName + "\n" + "Folgende Daten sind abgespeichert: " + "\n" + responseText);
+        alert(pictureName + "\n" + "Folgende Daten sind abgespeichert: " + "\n" + responseText);
     }
 })(Zauberbild || (Zauberbild = {}));
 //# sourceMappingURL=Zauberbild.js.map

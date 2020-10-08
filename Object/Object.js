@@ -14,7 +14,7 @@ var Zauberbild;
         }
         move(_timeslice) {
             let offset = new Zauberbild.Vector(this.velocity.x, this.velocity.y);
-            offset.scale(_timeslice);
+            offset.scale(_timeslice); // verschiebung in der Zeit
             this.position.add(offset);
             if (this.position.x < 0)
                 this.position.x += Zauberbild.mainCanvas.canvas.width;

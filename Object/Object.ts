@@ -28,7 +28,7 @@ namespace Zauberbild {
 
         public move(_timeslice: number): void {
             let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
-            offset.scale(_timeslice);
+            offset.scale(_timeslice); // verschiebung in der Zeit
             this.position.add(offset);
 
             if (this.position.x < 0)

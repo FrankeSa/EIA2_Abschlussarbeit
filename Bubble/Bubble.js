@@ -19,6 +19,9 @@ var Zauberbild;
             Zauberbild.crcBubbles.closePath();
             Zauberbild.crcBubbles.restore();
         }
+        move(_timeslice) {
+            super.move(_timeslice);
+        }
     }
     Zauberbild.Bubbles = Bubbles;
     function drawBubble() {

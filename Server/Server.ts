@@ -6,6 +6,7 @@ export namespace Zauberbild {
 
     interface PicturesToStore {
         [type: string]: string | string[] | undefined;
+
     }
 
     let pictureCollection: Mongo.Collection;
@@ -15,7 +16,7 @@ export namespace Zauberbild {
     let port: number | string | undefined = process.env.PORT; //process liefert den Port, wenn verfügbar
     if (port == undefined)
         port = 5001;
-        
+
     let dbUrl: string = "mongodb+srv://FrankeSa:Milou@sarahcluster-pelct.mongodb.net/Zauberbild?retryWrites=true&w=majority";
 
     startServer(port);
@@ -45,9 +46,7 @@ export namespace Zauberbild {
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); // die URL wird geparst und durch true wird ein assoziatives Array daraus
             let jsonString: string = JSON.stringify(url.query);
             _response.write(jsonString);
-            console.log(url.query);
             storeUserData(url.query);
-            
         }
 
         _response.end();
@@ -56,6 +55,6 @@ export namespace Zauberbild {
 
     function storeUserData(_userData: PicturesToStore): void {
         pictureCollection.insert(_userData);
-    }
+          }
 
 }

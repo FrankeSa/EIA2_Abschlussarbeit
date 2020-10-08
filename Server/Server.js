@@ -33,7 +33,6 @@ var Zauberbild;
             let url = Url.parse(_request.url, true); // die URL wird geparst und durch true wird ein assoziatives Array daraus
             let jsonString = JSON.stringify(url.query);
             _response.write(jsonString);
-            console.log(url.query);
             storeUserData(url.query);
         }
         _response.end();

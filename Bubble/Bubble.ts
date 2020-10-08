@@ -21,6 +21,9 @@ namespace Zauberbild {
             crcBubbles.closePath();
             crcBubbles.restore();
         }
+        public move(_timeslice: number): void {
+            super.move(_timeslice);
+        }
 
     }
 
