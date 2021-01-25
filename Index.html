@@ -4,83 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Stylesheet_Zauberbild.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="Stylesheet.css" type="text/css" media="screen" />
     <script src="./01_Main/Zauberbild.js"></script>
-    <script src="Object/Object.js"></script>
-    <script src="./Smiley/Smiley.js"></script>
-    <script src="./Mickey/Mickey.js"></script>
-    <script src="./Star/Star.js"></script>
-    <script src="./Bubble/Bubble.js"></script>
-    <script src="Vector/Vector.js"></script>
-    
-    
-   
-    <title>Sarah´s Zauberbild</title>
+
+    <title>Feuerwerk</title>
 </head>
 
 <body>
 
-<form id="sidebar" method="GET"> 
+    <canvas width="870" height="500"></canvas>
+    
 
-<span>
-
-    <fieldset>
-        <legend>Canvas Größe wählen</legend>
-        <input type="radio" name="canvasSize" id="portrait" value="portrait" checked />
-        <label for="portrait">Portrait</label>
-        <input type="radio" name="canvasSize" id="landscape" value="landscape"/>
-        <label for="landscape">Landscape</label>
-        <input type="radio" name="canvasSize" id="panorama" value="panorama"/>
-        <label for="panorama">Panorama</label>
-    </fieldset>
-
-	<fieldset>
-        <legend>Hitergrund wählen</legend>
-        <select name="backgroundColor" id="backgroundColor">
-            <option value="blue">magisches Himmelblau</option>
-            <option value="green">Flip Grün</option>
-            <option value="gradienL">Glücksmoment</option>
-            <option value="gradienR">Traum in rosa</option>
-        </select>
-    </fieldset>
-
-	<fieldset>
-        <legend>Animationsmuster ändern</legend>
-        <select name="anmiation" id="chooseAnimation">
-            <option value="random">Zufällig</option>
-            <option value="moving">Bewegen</option>
-            <option value="glowing">Leuchten</option>
-            <option value="rotating">Drehen</option>
-        </select>
-    </fieldset>
-<fieldset>
-    <legend>Bildnamen eingeben</legend>
-    <input type="color"></input>
-</fieldset id="names"></fieldset>
-
-</span>
-
-</form> 
+    <form>
+        
+            <fieldset>
+                <legend> Checkbox Group </legend>
+                <input type="checkbox" name="Checkbox1" value="check1" id="check1" />
+                <label for="check1">Checkbox 1</label>
+            </fieldset>
+            <fieldset>
+                <legend> Checkbox Group </legend>
+                <input type="checkbox" name="Checkbox1" value="check1" id="check1" />
+                <label for="check1">Checkbox 1</label>
+            </fieldset>
+            <fieldset>
+                <legend> Checkbox Group </legend>
+                <input type="checkbox" name="Checkbox1" value="check1" id="check1" />
+                <label for="check1">Checkbox 1</label>
+            </fieldset>
+            <fieldset>
+                <legend> Checkbox Group </legend>
+                <input type="checkbox" name="Checkbox1" value="check1" id="check1" />
+                <label for="check1">Checkbox 1</label>
+            </fieldset>
+       
 
 
-<div id="mainDiv">
-    <canvas id="mainCanvas" height="350" width="500"></canvas>
-</div>
+    </form>
+    <div>Speicherung <fieldset>
+            <legend> Checkbox Group </legend>
+            <input type="checkbox" name="Checkbox1" value="check1" id="check1" />
+            <label for="check1">Checkbox 1</label>
+        </fieldset>
+        <fieldset>
+            <legend> Checkbox Group </legend>
+            <input type="checkbox" name="Checkbox1" value="check1" id="check1" />
+            <label for="check1">Checkbox 1</label>
+        </fieldset>
+        <button>Push Me</button>
+        <button>Push Me Not</button>
+    </div>
 
-
-
-<div id="footer"> 
-
-<div id="obj1"><canvas id="star" height="150px" width="150px"></canvas></div>
-<div id="obj2"><canvas id="smiley" height="150px" width="150px"></canvas></div>
-<div id="obj3"><canvas id="bubbles" height="150px" width="150px"></canvas></div>
-<div id="obj4"><canvas id="mickey" height="150px" width="150px"></canvas></div>
-</div>
-
-<button id="deleteBtn">Bild löschen</button>
-<button type= "button" form="sidebar" >Bild speichern</button>
-
-<div id="text"><p>Ziehe das gewünschte Bild von unten auf deine Zeichenfläche. <br> Um das Bild zu löschen, ziehe es rechts außerhalb deiner Zeichenfläche.</p></div>
 </body>
 
 </html>
