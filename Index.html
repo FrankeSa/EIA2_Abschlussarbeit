@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Stylesheet.css" type="text/css" media="screen" />
-    <script src="./01_Main/Zauberbild.js"></script>
+    <script src="./Main/Main.js"></script>
 
     <title>Feuerwerk</title>
 </head>
@@ -13,46 +13,46 @@
 <body>
 
     <canvas width="870" height="500"></canvas>
-    
-
-    <form>
-        
-            <fieldset>
-                <legend> Checkbox Group </legend>
-                <input type="checkbox" name="Checkbox1" value="check1" id="check1" />
-                <label for="check1">Checkbox 1</label>
-            </fieldset>
-            <fieldset>
-                <legend> Checkbox Group </legend>
-                <input type="checkbox" name="Checkbox1" value="check1" id="check1" />
-                <label for="check1">Checkbox 1</label>
-            </fieldset>
-            <fieldset>
-                <legend> Checkbox Group </legend>
-                <input type="checkbox" name="Checkbox1" value="check1" id="check1" />
-                <label for="check1">Checkbox 1</label>
-            </fieldset>
-            <fieldset>
-                <legend> Checkbox Group </legend>
-                <input type="checkbox" name="Checkbox1" value="check1" id="check1" />
-                <label for="check1">Checkbox 1</label>
-            </fieldset>
-       
 
 
-    </form>
-    <div>Speicherung <fieldset>
-            <legend> Checkbox Group </legend>
-            <input type="checkbox" name="Checkbox1" value="check1" id="check1" />
-            <label for="check1">Checkbox 1</label>
+    <form id="controlPanel">
+
+        <fieldset>
+            <legend> choose particle quantity </legend>
+            <input type="number" name="Stepper" step="5" min="5" max="25" value="5" />
+            <meter value="0" min="5" max="25"> </meter>
         </fieldset>
         <fieldset>
-            <legend> Checkbox Group </legend>
-            <input type="checkbox" name="Checkbox1" value="check1" id="check1" />
-            <label for="check1">Checkbox 1</label>
+            <legend> choose explosion size</legend>
+            <input type="radio" name="ExplosionSize" id="small" value="small" checked />
+            <label for="small">Small</label>
+            <input type="radio" name="ExplosionSize" id="medium" value="medium" />
+            <label for="medium">Medium</label>
+            <input type="radio" name="ExplosionSize" id="big" value="big" />
+            <label for="big">Big</label>
         </fieldset>
-        <button>Push Me</button>
-        <button>Push Me Not</button>
+        <fieldset>
+            <legend> choose particle shape </legend>
+            <select name="Charge">
+                <option value="dots">Dots</option>
+                <option value="confetti">Confetti</option>
+                <option value="heart">Heart </option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <legend> choose particle color </legend>
+            <input type="color" name="Particlecolor" id="particlecolor" value="#ffffff">
+        </fieldset>
+   </form>
+
+
+    <div>
+        <input type="text" name="userTitel" placeholder="name your rocket" required />
+        <button type="button" id="saveBtn" form="controlPanel">save rocket</button>
+        <fieldset id="fireworkTitel">
+            <legend>your saved rockets</legend>
+        </fieldset>
+        <button type="button" id="loadBtn">load rocket</button>
     </div>
 
 </body>
