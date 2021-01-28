@@ -37,25 +37,27 @@ namespace Firework {
         case "ExplosionSize":
           console.log("ExplosionSize= ", entry[1]);
           break;
-          case "Particlecolor":
-            console.log("Particlecolor= ", entry[1]);
-            break;
-            case "Shape":
-              console.log("Shape= ", entry[1]);
+        case "Particlecolor":
+          console.log("Particlecolor= ", entry[1]);
+          break;
+        case "Shape":
+          switch (entry[1]) {
+            case "dots":
+              console.log("startFunctionCreateDots");
               break;
+            case "confetti":
+              console.log("startFunctionCreateConfetti");
+              break;
+            case "heart":
+              console.log("startFunctionCreateHeart");
+              break;
+          }
+        default:
       }
      
-
     }
-
   }
 
-  function SendDataToServer(_event: Event): void {
-    let textArea: HTMLInputElement = <HTMLInputElement>document.querySelector("input#textarea");
-    let rocketTitel: string;
-    rocketTitel = textArea.value;
-    console.log("FireworkTitel= ", rocketTitel);
-  }
 
   function GetDataFromServer(_event: Event): void {
     console.log("Datein wurden geladen");
@@ -65,7 +67,12 @@ namespace Firework {
 
 
 
-
+  function SendDataToServer(_event: Event): void {
+    let textArea: HTMLInputElement = <HTMLInputElement>document.querySelector("input#textarea");
+    let rocketTitel: string;
+    rocketTitel = textArea.value;
+    console.log("FireworkTitel= ", rocketTitel);
+  }
 
 
 

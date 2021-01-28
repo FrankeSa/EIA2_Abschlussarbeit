@@ -34,19 +34,29 @@ var Firework;
                     console.log("Particlecolor= ", entry[1]);
                     break;
                 case "Shape":
-                    console.log("Shape= ", entry[1]);
-                    break;
+                    switch (entry[1]) {
+                        case "dots":
+                            console.log("startFunctionCreateDots");
+                            break;
+                        case "confetti":
+                            console.log("startFunctionCreateConfetti");
+                            break;
+                        case "heart":
+                            console.log("startFunctionCreateHeart");
+                            break;
+                    }
+                default:
             }
         }
+    }
+    function GetDataFromServer(_event) {
+        console.log("Datein wurden geladen");
     }
     function SendDataToServer(_event) {
         let textArea = document.querySelector("input#textarea");
         let rocketTitel;
         rocketTitel = textArea.value;
         console.log("FireworkTitel= ", rocketTitel);
-    }
-    function GetDataFromServer(_event) {
-        console.log("Datein wurden geladen");
     }
 })(Firework || (Firework = {}));
 //# sourceMappingURL=Main.js.map
