@@ -3,7 +3,6 @@ var Firework;
 (function (Firework) {
     window.addEventListener("load", handleLoad);
     let crc2;
-    // let quantity: number;
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
