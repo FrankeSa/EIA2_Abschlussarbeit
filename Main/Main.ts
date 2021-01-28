@@ -1,7 +1,7 @@
 namespace Firework {
   window.addEventListener("load", handleLoad);
   let crc2: CanvasRenderingContext2D;
-  //let quantity: number;
+ // let quantity: number;
 
 
   function handleLoad(_event: Event): void {
@@ -27,12 +27,14 @@ namespace Firework {
     let mousepositionY: number = _event.offsetY;
     console.log("x: ", mousePositionX, "y: ", mousepositionY);
     let formData: FormData = new FormData(document.forms[0]);
+  
 
     for (let entry of formData) {
-
+   
       switch (entry[0]) {
         case "Quantity":
           console.log("Quantity= ", entry[1]);
+         // quantity = entry[1];
           break;
         case "ExplosionSize":
           console.log("ExplosionSize= ", entry[1]);
@@ -54,7 +56,7 @@ namespace Firework {
           }
         default:
       }
-     
+    
     }
   }
 

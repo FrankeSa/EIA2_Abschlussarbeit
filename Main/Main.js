@@ -3,7 +3,7 @@ var Firework;
 (function (Firework) {
     window.addEventListener("load", handleLoad);
     let crc2;
-    //let quantity: number;
+    // let quantity: number;
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -26,6 +26,7 @@ var Firework;
             switch (entry[0]) {
                 case "Quantity":
                     console.log("Quantity= ", entry[1]);
+                    // quantity = entry[1];
                     break;
                 case "ExplosionSize":
                     console.log("ExplosionSize= ", entry[1]);
