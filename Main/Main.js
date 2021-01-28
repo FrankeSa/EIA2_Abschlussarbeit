@@ -3,6 +3,7 @@ var Firework;
 (function (Firework) {
     window.addEventListener("load", handleLoad);
     let crc2;
+    //let quantity: number;
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -13,21 +14,38 @@ var Firework;
         let loadBtn = document.querySelector("button#loadBtn");
         console.log("HalloWelt");
         canvas.addEventListener("click", dontknow);
-        saveBtn.addEventListener("click", saveData);
-        loadBtn.addEventListener("click", loadData);
+        saveBtn.addEventListener("click", SendDataToServer);
+        loadBtn.addEventListener("click", GetDataFromServer);
     }
     function dontknow(_event) {
         let mousePositionX = _event.offsetX;
         let mousepositionY = _event.offsetY;
         console.log("x: ", mousePositionX, "y: ", mousepositionY);
+        let formData = new FormData(document.forms[0]);
+        for (let entry of formData) {
+            switch (entry[0]) {
+                case "Quantity":
+                    console.log("Quantity= ", entry[1]);
+                    break;
+                case "ExplosionSize":
+                    console.log("ExplosionSize= ", entry[1]);
+                    break;
+                case "Particlecolor":
+                    console.log("Particlecolor= ", entry[1]);
+                    break;
+                case "Shape":
+                    console.log("Shape= ", entry[1]);
+                    break;
+            }
+        }
     }
-    function saveData(_event) {
+    function SendDataToServer(_event) {
         let textArea = document.querySelector("input#textarea");
-        let fireworkTitel;
-        fireworkTitel = textArea.value;
-        console.log("FireworkTitel= ", fireworkTitel);
+        let rocketTitel;
+        rocketTitel = textArea.value;
+        console.log("FireworkTitel= ", rocketTitel);
     }
-    function loadData(_event) {
+    function GetDataFromServer(_event) {
         console.log("Datein wurden geladen");
     }
 })(Firework || (Firework = {}));

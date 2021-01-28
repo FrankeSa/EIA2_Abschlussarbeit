@@ -1,7 +1,7 @@
 namespace Firework {
   window.addEventListener("load", handleLoad);
   let crc2: CanvasRenderingContext2D;
-
+  //let quantity: number;
 
 
   function handleLoad(_event: Event): void {
@@ -14,8 +14,8 @@ namespace Firework {
     let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
     console.log("HalloWelt");
     canvas.addEventListener("click", dontknow);
-    saveBtn.addEventListener("click", saveData);
-    loadBtn.addEventListener("click", loadData);
+    saveBtn.addEventListener("click", SendDataToServer);
+    loadBtn.addEventListener("click", GetDataFromServer);
 
   }
 
@@ -26,18 +26,38 @@ namespace Firework {
     let mousePositionX: number = _event.offsetX;
     let mousepositionY: number = _event.offsetY;
     console.log("x: ", mousePositionX, "y: ", mousepositionY);
+    let formData: FormData = new FormData(document.forms[0]);
+
+    for (let entry of formData) {
+
+      switch (entry[0]) {
+        case "Quantity":
+          console.log("Quantity= ", entry[1]);
+          break;
+        case "ExplosionSize":
+          console.log("ExplosionSize= ", entry[1]);
+          break;
+          case "Particlecolor":
+            console.log("Particlecolor= ", entry[1]);
+            break;
+            case "Shape":
+              console.log("Shape= ", entry[1]);
+              break;
+      }
+     
+
+    }
 
   }
 
-  function saveData(_event: Event): void {
+  function SendDataToServer(_event: Event): void {
     let textArea: HTMLInputElement = <HTMLInputElement>document.querySelector("input#textarea");
-    let fireworkTitel: string;
-    fireworkTitel = textArea.value;
-    console.log("FireworkTitel= ", fireworkTitel);
+    let rocketTitel: string;
+    rocketTitel = textArea.value;
+    console.log("FireworkTitel= ", rocketTitel);
   }
 
-  function loadData(_event: Event): void {
-    
+  function GetDataFromServer(_event: Event): void {
     console.log("Datein wurden geladen");
 
   }
