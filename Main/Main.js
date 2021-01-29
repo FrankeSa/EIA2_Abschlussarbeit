@@ -2,7 +2,7 @@
 var Firework;
 (function (Firework) {
     window.addEventListener("load", handleLoad);
-    let serverPage = "http://localhost:5001/"; //"https://hogwartsrecipes.herokuapp.com"; 
+    let serverPage = "http://localhost:5001/"; //"https://sarahabschlussarbeit.herokuapp.com/"
     let crc2;
     let form;
     let quantity;
@@ -74,10 +74,10 @@ var Firework;
         rocketTitel = textArea.value;
         let query = new URLSearchParams(controlPanel);
         query.append("rocketTitel", rocketTitel);
-        //let response: Response = await fetch(serverPage + "?" + query.toString());
-        await fetch(serverPage + "?" + query.toString());
-        // let responseText: string = await response.text();
-        alert("Resquest send");
+        let response = await fetch(serverPage + "?" + query.toString());
+        let responseText = await response.text();
+        alert(responseText);
+        console.log("Daten geschickt");
     }
     function startFunctionCreateDots(_nquantity, _mousePositionX) {
         for (let i = 0; i < _nquantity; i++) {

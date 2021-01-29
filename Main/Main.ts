@@ -1,6 +1,6 @@
 namespace Firework {
   window.addEventListener("load", handleLoad);
-  let serverPage: string = "http://localhost:5001/"; //"https://hogwartsrecipes.herokuapp.com"; 
+  let serverPage: string = "http://localhost:5001/"; //"https://sarahabschlussarbeit.herokuapp.com/"
   let crc2: CanvasRenderingContext2D;
   let form: HTMLFormElement;
   let quantity: number;
@@ -92,10 +92,10 @@ namespace Firework {
     rocketTitel = textArea.value;
     let query: URLSearchParams = new URLSearchParams(<any>controlPanel);
     query.append("rocketTitel", rocketTitel);
-    //let response: Response = await fetch(serverPage + "?" + query.toString());
-    await fetch(serverPage + "?" + query.toString());
-    // let responseText: string = await response.text();
-    alert("Resquest send");
+    let response: Response = await fetch(serverPage + "?" + query.toString());
+    let responseText: string = await response.text();
+    alert(responseText);
+    console.log("Daten geschickt");
 
   }
 
