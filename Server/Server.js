@@ -4,14 +4,17 @@ const Http = require("http");
 const Url = require("url");
 var Firework;
 (function (Firework) {
-    let server = Http.createServer();
-    console.log(server);
     let port = process.env.PORT;
     if (port == undefined)
         port = 5001;
-    console.log("Server starting on Port" + port);
-    server.listen(port);
-    server.addListener("request", handleRequest);
+    startServer(port);
+    connectToDatabase();
+    function startServer(_port) {
+        let server = Http.createServer();
+        console.log("Server startet auf Port " + _port);
+        server.listen(_port);
+        server.addListener("request", handleRequest);
+    }
     function handleRequest(_request, _response) {
         console.log("handleRequest");
         _response.setHeader("content-type", "text/html; charset=utf-8");
@@ -26,6 +29,9 @@ var Firework;
         }
         _response.write("Was geht?");
         _response.end();
+    }
+    function connectToDatabase() {
+        //
     }
 })(Firework = exports.Firework || (exports.Firework = {}));
 //# sourceMappingURL=Server.js.map
