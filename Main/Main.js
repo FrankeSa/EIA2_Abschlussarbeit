@@ -2,7 +2,16 @@
 var Firework;
 (function (Firework) {
     window.addEventListener("load", handleLoad);
+    let serverPage = "http://localhost:5001/"; //"https://hogwartsrecipes.herokuapp.com"; 
     let crc2;
+    let form;
+    let quantity;
+    let color;
+    let lifetime;
+    // let formDatass: any = [];
+    // interface ContrPan {
+    //   quantity: number;
+    // }
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -11,12 +20,13 @@ var Firework;
         //  let form: HTMLFormElement = <HTMLFormElement>document.querySelector("#form#controlPanel");
         let saveBtn = document.querySelector("button#saveBtn");
         let loadBtn = document.querySelector("button#loadBtn");
+        form = document.querySelector("form#controlPanel");
         console.log("HalloWelt");
-        canvas.addEventListener("click", dontknow);
+        canvas.addEventListener("click", createObject);
         saveBtn.addEventListener("click", SendDataToServer);
         loadBtn.addEventListener("click", GetDataFromServer);
     }
-    function dontknow(_event) {
+    function createObject(_event) {
         let mousePositionX = _event.offsetX;
         let mousepositionY = _event.offsetY;
         console.log("x: ", mousePositionX, "y: ", mousepositionY);
@@ -24,19 +34,23 @@ var Firework;
         for (let entry of formData) {
             switch (entry[0]) {
                 case "Quantity":
-                    console.log("Quantity= ", entry[1]);
-                    // quantity = entry[1];
+                    quantity = Number(formData.get("Quantity"));
+                    console.log("Quantity= ", quantity);
                     break;
                 case "ExplosionSize":
+                    // formDatass.push(entry[1]);
                     console.log("ExplosionSize= ", entry[1]);
+                    lifetime = Number(formData.get("ExplosionSize"));
                     break;
                 case "Particlecolor":
-                    console.log("Particlecolor= ", entry[1]);
+                    // console.log("Particlecolor= ", entry[1]);
+                    color = String(formData.get("Particlecolor"));
+                    console.log("Particlecolor= ", color);
                     break;
                 case "Shape":
                     switch (entry[1]) {
                         case "dots":
-                            console.log("startFunctionCreateDots");
+                            startFunctionCreateDots(quantity, mousePositionX);
                             break;
                         case "confetti":
                             console.log("startFunctionCreateConfetti");
@@ -47,16 +61,30 @@ var Firework;
                     }
                 default:
             }
+            // console.log(formDatass);
         }
     }
     function GetDataFromServer(_event) {
         console.log("Datein wurden geladen");
     }
-    function SendDataToServer(_event) {
+    async function SendDataToServer(_event) {
+        let controlPanel = new FormData(form);
         let textArea = document.querySelector("input#textarea");
         let rocketTitel;
         rocketTitel = textArea.value;
-        console.log("FireworkTitel= ", rocketTitel);
+        let query = new URLSearchParams(controlPanel);
+        query.append("rocketTitel", rocketTitel);
+        //let response: Response = await fetch(serverPage + "?" + query.toString());
+        await fetch(serverPage + "?" + query.toString());
+        // let responseText: string = await response.text();
+        alert("Resquest send");
+    }
+    function startFunctionCreateDots(_nquantity, _mousePositionX) {
+        for (let i = 0; i < _nquantity; i++) {
+            console.log("startFunctionCreateDots");
+        }
+        // console.log(_color); //Warum undefined?
+        console.log(_mousePositionX);
     }
 })(Firework || (Firework = {}));
 //# sourceMappingURL=Main.js.map
