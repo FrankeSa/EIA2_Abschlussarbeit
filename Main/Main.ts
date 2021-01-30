@@ -8,19 +8,12 @@ namespace Firework {
 // let lifetime: number;
 
 
-  // let formDatass: any = [];
-
-  // interface ContrPan {
-  //   quantity: number;
-
-  // }
-
   function handleLoad(_event: Event): void {
     let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
     if (!canvas)
       return;
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-    //  let form: HTMLFormElement = <HTMLFormElement>document.querySelector("#form#controlPanel");
+   
     let saveBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#saveBtn");
     let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
     form = <HTMLFormElement>document.querySelector("form#controlPanel");

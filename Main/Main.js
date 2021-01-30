@@ -8,16 +8,11 @@ var Firework;
     let quantity;
     let color;
     // let lifetime: number;
-    // let formDatass: any = [];
-    // interface ContrPan {
-    //   quantity: number;
-    // }
     function handleLoad(_event) {
         let canvas = document.querySelector("canvas");
         if (!canvas)
             return;
         crc2 = canvas.getContext("2d");
-        //  let form: HTMLFormElement = <HTMLFormElement>document.querySelector("#form#controlPanel");
         let saveBtn = document.querySelector("button#saveBtn");
         let loadBtn = document.querySelector("button#loadBtn");
         form = document.querySelector("form#controlPanel");
