@@ -7,7 +7,7 @@ var Firework;
     let form;
     let quantity;
     let color;
-    let lifetime;
+    // let lifetime: number;
     // let formDatass: any = [];
     // interface ContrPan {
     //   quantity: number;
@@ -40,7 +40,7 @@ var Firework;
                 case "ExplosionSize":
                     // formDatass.push(entry[1]);
                     console.log("ExplosionSize= ", entry[1]);
-                    lifetime = Number(formData.get("ExplosionSize"));
+                    // lifetime = Number(formData.get("ExplosionSize"));
                     break;
                 case "Particlecolor":
                     // console.log("Particlecolor= ", entry[1]);

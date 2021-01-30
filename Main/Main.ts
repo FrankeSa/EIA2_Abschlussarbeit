@@ -5,7 +5,7 @@ namespace Firework {
   let form: HTMLFormElement;
   let quantity: number;
   let color: string;
-  let lifetime: number;
+// let lifetime: number;
 
 
   // let formDatass: any = [];
@@ -51,7 +51,7 @@ namespace Firework {
         case "ExplosionSize":
           // formDatass.push(entry[1]);
           console.log("ExplosionSize= ", entry[1]);
-          lifetime = Number(formData.get("ExplosionSize"));
+         // lifetime = Number(formData.get("ExplosionSize"));
           break;
         case "Particlecolor":
           // console.log("Particlecolor= ", entry[1]);

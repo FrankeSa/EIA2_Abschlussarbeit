@@ -1,16 +1,22 @@
 import * as Http from "http";
 import * as Url from "url";
+import * as Mongo from "mongodb";
 
 export namespace Firework {
+    interface Rocket {
+        [type: string]: string | string[] | undefined;
+    }
 
+    let fireworkCollection: Mongo.Collection;
 
+    let databaseUrl: string = "mongodb://localhost:27017"; //"mongodb+srv://FrankeSa:Milou@sarahcluster-pelct.mongodb.net/Firework?retryWrites=true&w=majority";
 
     let port: number | string | undefined = process.env.PORT;
     if (port == undefined)
         port = 5001;
 
     startServer(port);
-    connectToDatabase();
+    connectToDatabase(databaseUrl);
 
     function startServer(_port: number | string): void {
 
@@ -34,23 +40,31 @@ export namespace Firework {
             }
             let jsonString: string = JSON.stringify(url.query);
             _response.write(jsonString);
+            storeRocket(url.query);
+
         }
         _response.write("Was geht?");
         _response.end();
+
+
     }
 
-    function connectToDatabase(): void {
-        //
+    function storeRocket(_userRocket: Rocket): void {
+        fireworkCollection.insertOne(_userRocket);
+
     }
 
 
 
 
 
-
-
-
-
+    async function connectToDatabase(_url: string): Promise<void> {
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; //mit diesen options eine Verbindung zur DB aufbauen
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        fireworkCollection = mongoClient.db("Firework").collection("Rockets");
+        console.log("Database connection", fireworkCollection != undefined);
+    }
 
 
 

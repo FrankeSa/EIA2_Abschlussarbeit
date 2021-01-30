@@ -4,13 +4,13 @@
   "description": "dieAbschlussarbeit",
   "main": "index.js",
   "dependencies": {
-    "@types/mongodb": "^3.5.25",
+    "@types/mongodb": "^3.6.3",
     "@types/node": "^14.14.22",
-    "mongodb": "^3.5.9"
+    "mongodb": "^3.6.3"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node Server/Server.js"
+    "start": "node Server/Server.js remote"
   },
   "repository": {
     "type": "git",
