@@ -1,6 +1,6 @@
 namespace Firework {
   window.addEventListener("load", handleLoad);
-  let serverPage: string = "http://localhost:5001/"; //"https://sarahabschlussarbeit.herokuapp.com/"
+  let serverPage: string = "https://sarahabschlussarbeit.herokuapp.com/"; //"http://localhost:5001/";
   let crc2: CanvasRenderingContext2D;
   let form: HTMLFormElement;
   let quantity: number;
@@ -14,9 +14,9 @@ namespace Firework {
 
   async function handleLoad(_event: Event): Promise<void> {
 
-    let response: Response = await fetch(serverPage + "?" + "command=getTitels");
-    let responseContant: string = await response.text();
-    alert(responseContant);
+    // let response: Response = await fetch(serverPage + "?" + "command=getTitels");
+    // let responseContant: string = await response.text();
+    // alert(responseContant);
 
   
 

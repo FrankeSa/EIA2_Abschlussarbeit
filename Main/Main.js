@@ -2,15 +2,15 @@
 var Firework;
 (function (Firework) {
     window.addEventListener("load", handleLoad);
-    let serverPage = "http://localhost:5001/"; //"https://sarahabschlussarbeit.herokuapp.com/"
+    let serverPage = "https://sarahabschlussarbeit.herokuapp.com/"; //"http://localhost:5001/";
     let crc2;
     let form;
     let quantity;
     let color;
     async function handleLoad(_event) {
-        let response = await fetch(serverPage + "?" + "command=getTitels");
-        let responseContant = await response.text();
-        alert(responseContant);
+        // let response: Response = await fetch(serverPage + "?" + "command=getTitels");
+        // let responseContant: string = await response.text();
+        // alert(responseContant);
         let canvas = document.querySelector("canvas");
         if (!canvas)
             return;

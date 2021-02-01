@@ -6,7 +6,7 @@ const Mongo = require("mongodb");
 var Firework;
 (function (Firework) {
     let fireworkCollection;
-    let databaseUrl = "mongodb://localhost:27017"; //"mongodb+srv://FrankeSa:Milou@sarahcluster-pelct.mongodb.net/Firework?retryWrites=true&w=majority";
+    let databaseUrl = "mongodb+srv://FrankeSa:Milou@sarahcluster-pelct.mongodb.net/Firework?retryWrites=true&w=majority"; //"mongodb://localhost:27017";
     let port = process.env.PORT;
     if (port == undefined)
         port = 5001;
@@ -32,11 +32,11 @@ var Firework;
         if (_request.url) {
             let url = Url.parse(_request.url, true); // der Url.parser wandelt den UrlWithParsedQuery in ein anders Format um. Durch true wird daraus ein besser lesbares assoziatives Array. 
             let command = url.query["command"];
-            if (command == "getTitels") {
-                getTitels(_request, _response);
-                console.log("Titel geholt");
-                return;
-            }
+            // if (command == "getTitels") {
+            //     getTitels(_request, _response);
+            //     console.log("Titel geholt");
+            //     return;
+            // }
             if (command == "retrieveAll") {
                 getTitelData(_request, _response);
                 console.log("Titeldaten geholt");
@@ -50,14 +50,14 @@ var Firework;
         }
         _response.end();
     }
-    async function getTitels(_request, _response) {
-        let result = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: 1 } });
-        let arrayResult = await result.toArray();
-        let jsonResult = JSON.stringify(arrayResult);
-        console.log(jsonResult);
-        _response.write(jsonResult); //Übergabe der Daten an den client
-        _response.end();
-    }
+    // async function getTitels(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
+    //     let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: 1 } });
+    //     let arrayResult: string[] = await result.toArray();
+    //     let jsonResult: string = JSON.stringify(arrayResult);
+    //     console.log(jsonResult);
+    //     _response.write(jsonResult); //Übergabe der Daten an den client
+    //     _response.end();
+    // }
     async function getTitelData(_request, _response) {
         let result = fireworkCollection.find();
         let arrayResult = await result.toArray();
