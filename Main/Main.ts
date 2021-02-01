@@ -14,11 +14,11 @@ namespace Firework {
 
   async function handleLoad(_event: Event): Promise<void> {
 
-    // let response: Response = await fetch(serverPage + "?" + "command=getTitels");
-    // let responseContant: string = await response.text();
-    // let listOfTitels: Rocket = JSON.parse(responseContant);
-    // console.log(listOfTitels);
+    let response: Response = await fetch(serverPage + "?" + "command=getTitels");
+    let responseContant: string = await response.text();
+    alert(responseContant);
 
+  
 
 
     let canvas: HTMLCanvasElement | null = document.querySelector("canvas");

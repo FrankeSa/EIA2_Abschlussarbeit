@@ -27,6 +27,13 @@ export namespace Firework {
         server.addListener("request", handleRequest);
     }
 
+    async function connectToDatabase(_url: string): Promise<void> {
+        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; //mit diesen options eine Verbindung zur DB aufbauen
+        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
+        await mongoClient.connect();
+        fireworkCollection = mongoClient.db("Firework").collection("Rockets");
+        console.log("Database connection", fireworkCollection != undefined);
+    }
 
     function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
         console.log("handleRequest");
@@ -37,16 +44,15 @@ export namespace Firework {
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); // der Url.parser wandelt den UrlWithParsedQuery in ein anders Format um. Durch true wird daraus ein besser lesbares assoziatives Array. 
             let command: string | string[] | undefined = url.query["command"];
 
-
-            if (command == "getTitel") {
-                // getTitels(_request, _response);
+            if (command == "getTitels") {
+                getTitels(_request, _response);
                 console.log("Titel geholt");
-                //return;
+                return;
             }
             if (command == "retrieveAll") {
                 getTitelData(_request, _response);
                 console.log("Titeldaten geholt");
-                //return;
+                return;
             }
             else {
                 storeRocket(url.query, _response);
@@ -55,9 +61,28 @@ export namespace Firework {
             return;
         }
 
+        _response.end();
 
+    }
 
-        // _response.write("Hallo Sarah?");
+    async function getTitels(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
+
+        let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: 1 } });
+        let arrayResult: string[] = await result.toArray();
+        let jsonResult: string = JSON.stringify(arrayResult);
+        console.log(jsonResult);
+        _response.write(jsonResult); //Übergabe der Daten an den client
+        _response.end();
+
+    }
+
+    async function getTitelData(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
+
+        let result: Mongo.Cursor<any> = fireworkCollection.find();
+        let arrayResult: string[] = await result.toArray();
+        let jsonResult: string = JSON.stringify(arrayResult);
+        console.log(jsonResult);
+        _response.write(jsonResult); //Übergabe der Daten an den client
         _response.end();
 
     }
@@ -67,42 +92,6 @@ export namespace Firework {
         // let jsonText: string = JSON.stringify(_userRocket);
         // _response.write(jsonText); //_resonse.write übergibt die Daten dem Client
         _response.end();
-    }
-
-
-
-    // async function getTitels(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
-
-    //     let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: 1 } });
-    //     let arrayResult: string[] = await result.toArray();
-    //     let jsonResult: string = JSON.stringify(arrayResult);
-    //     console.log(jsonResult);
-
-    //     _response.write(jsonResult); //Übergabe der Daten an den client
-
-    //     _response.end();
-
-    // }
-
-    async function getTitelData(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
-
-        let result: Mongo.Cursor<any> = fireworkCollection.find();
-        let arrayResult: string[] = await result.toArray();
-        let jsonResult: string = JSON.stringify(arrayResult);
-        console.log(jsonResult);
-
-        _response.write(jsonResult); //Übergabe der Daten an den client
-
-        _response.end();
-
-    }
-
-    async function connectToDatabase(_url: string): Promise<void> {
-        let options: Mongo.MongoClientOptions = { useNewUrlParser: true, useUnifiedTopology: true }; //mit diesen options eine Verbindung zur DB aufbauen
-        let mongoClient: Mongo.MongoClient = new Mongo.MongoClient(_url, options);
-        await mongoClient.connect();
-        fireworkCollection = mongoClient.db("Firework").collection("Rockets");
-        console.log("Database connection", fireworkCollection != undefined);
     }
 
 
