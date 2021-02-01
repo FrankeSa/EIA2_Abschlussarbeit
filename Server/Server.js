@@ -23,19 +23,48 @@ var Firework;
         _response.setHeader("content-type", "text/html; charset=utf-8");
         _response.setHeader("Access-Control-Allow-Origin", "*");
         if (_request.url) {
-            let url = Url.parse(_request.url, true); //die Url, die in der request steckt, wird geparst und durch das true in ein assoziatives Array formatiert
-            for (let key in url.query) {
-                _response.write(key + ":" + url.query[key] + "<br/>");
+            let url = Url.parse(_request.url, true); // der Url.parser wandelt den UrlWithParsedQuery in ein anders Format um. Durch true wird daraus ein besser lesbares assoziatives Array. 
+            let command = url.query["command"];
+            if (command == "getTitel") {
+                // getTitels(_request, _response);
+                console.log("Titel geholt");
+                //return;
             }
-            let jsonString = JSON.stringify(url.query);
-            _response.write(jsonString);
-            storeRocket(url.query);
+            if (command == "retrieveAll") {
+                getTitelData(_request, _response);
+                console.log("Titeldaten geholt");
+                //return;
+            }
+            else {
+                storeRocket(url.query, _response);
+                console.log("Daten gespeichert");
+            }
+            return;
         }
-        _response.write("Was geht?");
+        // _response.write("Hallo Sarah?");
         _response.end();
     }
-    function storeRocket(_userRocket) {
+    function storeRocket(_userRocket, _response) {
         fireworkCollection.insertOne(_userRocket);
+        // let jsonText: string = JSON.stringify(_userRocket);
+        // _response.write(jsonText); //_resonse.write übergibt die Daten dem Client
+        _response.end();
+    }
+    // async function getTitels(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
+    //     let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: 1 } });
+    //     let arrayResult: string[] = await result.toArray();
+    //     let jsonResult: string = JSON.stringify(arrayResult);
+    //     console.log(jsonResult);
+    //     _response.write(jsonResult); //Übergabe der Daten an den client
+    //     _response.end();
+    // }
+    async function getTitelData(_request, _response) {
+        let result = fireworkCollection.find();
+        let arrayResult = await result.toArray();
+        let jsonResult = JSON.stringify(arrayResult);
+        console.log(jsonResult);
+        _response.write(jsonResult); //Übergabe der Daten an den client
+        _response.end();
     }
     async function connectToDatabase(_url) {
         let options = { useNewUrlParser: true, useUnifiedTopology: true }; //mit diesen options eine Verbindung zur DB aufbauen
@@ -44,5 +73,13 @@ var Firework;
         fireworkCollection = mongoClient.db("Firework").collection("Rockets");
         console.log("Database connection", fireworkCollection != undefined);
     }
+    // async function getTitels(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
+    //     let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: 1 } });
+    //     let arrayResult: string[] = await result.toArray();
+    //     let jsonResult: string = JSON.stringify(arrayResult);
+    //     console.log(jsonResult);
+    //     _response.write(jsonResult); //Übergabe der Daten an den client
+    //     _response.end();
+    // }
 })(Firework = exports.Firework || (exports.Firework = {}));
 //# sourceMappingURL=Server.js.map

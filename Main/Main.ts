@@ -5,22 +5,34 @@ namespace Firework {
   let form: HTMLFormElement;
   let quantity: number;
   let color: string;
-// let lifetime: number;
+  // let lifetime: number;
+
+  export interface Rocket {
+    rocketTitel: string | string[] | undefined;
+  }
 
 
-  function handleLoad(_event: Event): void {
+  async function handleLoad(_event: Event): Promise<void> {
+
+    // let response: Response = await fetch(serverPage + "?" + "command=getTitels");
+    // let responseContant: string = await response.text();
+    // let listOfTitels: Rocket = JSON.parse(responseContant);
+    // console.log(listOfTitels);
+
+
+
     let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
     if (!canvas)
       return;
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-   
+
     let saveBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#saveBtn");
     let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
     form = <HTMLFormElement>document.querySelector("form#controlPanel");
     console.log("HalloWelt");
     canvas.addEventListener("click", createObject);
-    saveBtn.addEventListener("click", SendDataToServer);
-    loadBtn.addEventListener("click", GetDataFromServer);
+    saveBtn.addEventListener("click", sendDataToServer);
+    loadBtn.addEventListener("click", getDataFromServer);
 
   }
 
@@ -42,9 +54,8 @@ namespace Firework {
           console.log("Quantity= ", quantity);
           break;
         case "ExplosionSize":
-          // formDatass.push(entry[1]);
           console.log("ExplosionSize= ", entry[1]);
-         // lifetime = Number(formData.get("ExplosionSize"));
+          // lifetime = Number(formData.get("ExplosionSize"));
           break;
         case "Particlecolor":
           // console.log("Particlecolor= ", entry[1]);
@@ -71,14 +82,17 @@ namespace Firework {
   }
 
 
-  function GetDataFromServer(_event: Event): void {
+  async function getDataFromServer(_event: Event): Promise<void> {
     console.log("Datein wurden geladen");
+    let response: Response = await fetch(serverPage + "?" + "command=retrieveAll");
+    let responseContant: string = await response.text();
+    alert(responseContant);
 
   }
 
 
 
-  async function SendDataToServer(_event: Event): Promise<void> {
+  async function sendDataToServer(_event: Event): Promise<void> {
     let controlPanel: FormData = new FormData(form);
     let textArea: HTMLInputElement = <HTMLInputElement>document.querySelector("input#textarea");
     let rocketTitel: string;
@@ -86,9 +100,10 @@ namespace Firework {
     let query: URLSearchParams = new URLSearchParams(<any>controlPanel);
     query.append("rocketTitel", rocketTitel);
     let response: Response = await fetch(serverPage + "?" + query.toString());
-    let responseText: string = await response.text();
-    alert(responseText);
+    // let responseText: string = await response.text();
+    alert("Deine Daten wurden gespeichert");
     console.log("Daten geschickt");
+    textArea.value = "";
 
   }
 

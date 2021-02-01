@@ -7,8 +7,11 @@ var Firework;
     let form;
     let quantity;
     let color;
-    // let lifetime: number;
-    function handleLoad(_event) {
+    async function handleLoad(_event) {
+        // let response: Response = await fetch(serverPage + "?" + "command=getTitels");
+        // let responseContant: string = await response.text();
+        // let listOfTitels: Rocket = JSON.parse(responseContant);
+        // console.log(listOfTitels);
         let canvas = document.querySelector("canvas");
         if (!canvas)
             return;
@@ -18,8 +21,8 @@ var Firework;
         form = document.querySelector("form#controlPanel");
         console.log("HalloWelt");
         canvas.addEventListener("click", createObject);
-        saveBtn.addEventListener("click", SendDataToServer);
-        loadBtn.addEventListener("click", GetDataFromServer);
+        saveBtn.addEventListener("click", sendDataToServer);
+        loadBtn.addEventListener("click", getDataFromServer);
     }
     function createObject(_event) {
         let mousePositionX = _event.offsetX;
@@ -33,7 +36,6 @@ var Firework;
                     console.log("Quantity= ", quantity);
                     break;
                 case "ExplosionSize":
-                    // formDatass.push(entry[1]);
                     console.log("ExplosionSize= ", entry[1]);
                     // lifetime = Number(formData.get("ExplosionSize"));
                     break;
@@ -59,10 +61,13 @@ var Firework;
             // console.log(formDatass);
         }
     }
-    function GetDataFromServer(_event) {
+    async function getDataFromServer(_event) {
         console.log("Datein wurden geladen");
+        let response = await fetch(serverPage + "?" + "command=retrieveAll");
+        let responseContant = await response.text();
+        alert(responseContant);
     }
-    async function SendDataToServer(_event) {
+    async function sendDataToServer(_event) {
         let controlPanel = new FormData(form);
         let textArea = document.querySelector("input#textarea");
         let rocketTitel;
@@ -70,9 +75,10 @@ var Firework;
         let query = new URLSearchParams(controlPanel);
         query.append("rocketTitel", rocketTitel);
         let response = await fetch(serverPage + "?" + query.toString());
-        let responseText = await response.text();
-        alert(responseText);
+        // let responseText: string = await response.text();
+        alert("Deine Daten wurden gespeichert");
         console.log("Daten geschickt");
+        textArea.value = "";
     }
     function startFunctionCreateDots(_nquantity, _mousePositionX) {
         for (let i = 0; i < _nquantity; i++) {
