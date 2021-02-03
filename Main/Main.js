@@ -13,8 +13,8 @@ var Firework;
     // }
     async function handleLoad(_event) {
         let response = await fetch(serverPage + "?" + "command=getTitels");
-        let responseContant = await response.text();
-        let titelList = JSON.parse(responseContant);
+        let listOfTitels = await response.text();
+        let titelList = JSON.parse(listOfTitels);
         Firework.generateContent(titelList);
         let canvas = document.querySelector("canvas");
         if (!canvas)

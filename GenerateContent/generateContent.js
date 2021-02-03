@@ -3,22 +3,22 @@ var Firework;
 (function (Firework) {
     function generateContent(_titelList) {
         console.log(_titelList);
-        let nameOfRockets = _titelList;
         let group = null;
-        group = createSelect(nameOfRockets);
         let fieldset = document.querySelector("fieldset#fireworkTitel");
+        group = createSelect(_titelList);
         if (fieldset && group) //wenn das Fieldset UND (&&) die Gruppe definiert ist, dann kannst du die group als Kind anhängen
             fieldset.appendChild(group);
     }
     Firework.generateContent = generateContent;
-    function createSelect(_nameOfRocket) {
+    function createSelect(_titelList) {
         // let group: HTMLDivElement = document.createElement("div");
         let selection = document.createElement("select");
         selection.name = "LoadedTitels";
-        for (let userName of _nameOfRocket) {
+        //selection.id = "Test";
+        for (let titel of _titelList) {
             let option = document.createElement("option");
-            option.setAttribute("name", userName.rocketTitel);
-            option.value = option.textContent = userName.rocketTitel;
+            option.setAttribute("name", titel.rocketTitel);
+            option.value = option.textContent = titel.rocketTitel;
             selection.appendChild(option);
             // group.appendChild(selection);
         }

@@ -15,8 +15,8 @@ namespace Firework {
   async function handleLoad(_event: Event): Promise<void> {
 
     let response: Response = await fetch(serverPage + "?" + "command=getTitels");
-    let responseContant: string = await response.text();
-    let titelList: Titel[] = JSON.parse(responseContant);
+    let listOfTitels: string = await response.text();
+    let titelList: Titel[] = JSON.parse(listOfTitels);
     
 
     generateContent(titelList);
