@@ -16,7 +16,7 @@ var Firework;
         let responseContant = await response.text();
         let titelList = JSON.parse(responseContant);
         //console.log(titelList);
-        Firework.generateContant(titelList);
+        Firework.generateContent(titelList);
         let canvas = document.querySelector("canvas");
         if (!canvas)
             return;

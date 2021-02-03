@@ -19,7 +19,7 @@ namespace Firework {
     let titelList: Titel[] = JSON.parse(responseContant);
     //console.log(titelList);
 
-    generateContant(titelList);
+    generateContent(titelList);
 
 
     let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
