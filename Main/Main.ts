@@ -17,7 +17,7 @@ namespace Firework {
     let response: Response = await fetch(serverPage + "?" + "command=getTitels");
     let responseContant: string = await response.text();
     let titelList: Titel[] = JSON.parse(responseContant);
-    //console.log(titelList);
+    
 
     generateContent(titelList);
 
