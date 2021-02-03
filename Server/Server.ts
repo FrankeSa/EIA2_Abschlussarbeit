@@ -9,8 +9,7 @@ export namespace Firework {
     }
 
     let fireworkCollection: Mongo.Collection;
-
-    let databaseUrl: string = "mongodb+srv://FrankeSa:Milou@sarahcluster-pelct.mongodb.net/Firework?retryWrites=true&w=majority";  //"mongodb://localhost:27017";
+    let databaseUrl: string = "mongodb+srv://FrankeSa:Milou@sarahcluster-pelct.mongodb.net/Firework?retryWrites=true&w=majority"; // "mongodb://localhost:27017";
 
     let port: number | string | undefined = process.env.PORT;
     if (port == undefined)
@@ -69,19 +68,19 @@ export namespace Firework {
 
     //     let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: 1 } });
     //     let arrayResult: string[] = await result.toArray();
-    //     let jsonResult: string = JSON.stringify(arrayResult);
-    //     console.log(jsonResult);
-    //     _response.write(jsonResult); //Übergabe der Daten an den client
+    //     let listOfTitels: string = JSON.stringify(arrayResult);
+    //     console.log(listOfTitels);
+    //     _response.write(listOfTitels); //Übergabe der Daten an den client
     //     _response.end();
 
     // }
 
     async function getTitelData(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
 
-        let result: Mongo.Cursor<any> = fireworkCollection.find();
+        let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, Shape: 1 } });
         let arrayResult: string[] = await result.toArray();
         let jsonResult: string = JSON.stringify(arrayResult);
-        console.log(jsonResult);
+        // console.log(jsonResult);
         _response.write(jsonResult); //Übergabe der Daten an den client
         _response.end();
 

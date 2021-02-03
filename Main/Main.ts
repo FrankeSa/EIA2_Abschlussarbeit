@@ -7,18 +7,18 @@ namespace Firework {
   let color: string;
   // let lifetime: number;
 
-  export interface Rocket {
-    rocketTitel: string | string[] | undefined;
-  }
+  // export interface Rocket {
+  //   rocketTitel: string | string[] | undefined;
+  // }
 
 
   async function handleLoad(_event: Event): Promise<void> {
 
     // let response: Response = await fetch(serverPage + "?" + "command=getTitels");
     // let responseContant: string = await response.text();
-    // alert(responseContant);
+    // alert("Hier sollten die Titel stehen" + responseContant);
 
-  
+
 
 
     let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
@@ -51,34 +51,34 @@ namespace Firework {
       switch (entry[0]) {
         case "Quantity":
           quantity = Number(formData.get("Quantity"));
-          console.log("Quantity= ", quantity);
+          // console.log("Quantity= ", quantity);
           break;
         case "ExplosionSize":
-          console.log("ExplosionSize= ", entry[1]);
+          //  console.log("ExplosionSize= ", entry[1]);
           // lifetime = Number(formData.get("ExplosionSize"));
           break;
         case "Particlecolor":
           // console.log("Particlecolor= ", entry[1]);
           color = String(formData.get("Particlecolor"));
-          console.log("Particlecolor= ", color);
+          // console.log("Particlecolor= ", color);
           break;
         case "Shape":
           switch (entry[1]) {
             case "dots":
-              startFunctionCreateDots(quantity, mousePositionX);
+              // startFunctionCreateDots(quantity, mousePositionX);
               break;
             case "confetti":
-              console.log("startFunctionCreateConfetti");
+              //console.log("startFunctionCreateConfetti");
               break;
             case "heart":
-              console.log("startFunctionCreateHeart");
+              // console.log("startFunctionCreateHeart");
               break;
           }
         default:
       }
-      // console.log(formDatass);
-    }
 
+    }
+    console.log("createParticle", quantity);
   }
 
 
@@ -86,40 +86,37 @@ namespace Firework {
     console.log("Datein wurden geladen");
     let response: Response = await fetch(serverPage + "?" + "command=retrieveAll");
     let responseContant: string = await response.text();
+    console.log(responseContant);
     alert(responseContant);
 
   }
 
-
-
   async function sendDataToServer(_event: Event): Promise<void> {
-    let controlPanel: FormData = new FormData(form);
+    let controlPanelData: FormData = new FormData(form);
     let textArea: HTMLInputElement = <HTMLInputElement>document.querySelector("input#textarea");
     let rocketTitel: string;
     rocketTitel = textArea.value;
-    let query: URLSearchParams = new URLSearchParams(<any>controlPanel);
+    let query: URLSearchParams = new URLSearchParams(<any>controlPanelData);
     query.append("rocketTitel", rocketTitel);
     let response: Response = await fetch(serverPage + "?" + query.toString());
-    // let responseText: string = await response.text();
+    let responseText: string = await response.text();
     alert("Deine Daten wurden gespeichert");
-    console.log("Daten geschickt");
+    console.log("Daten geschickt: ", responseText);
     textArea.value = "";
 
   }
 
 
+  // function startFunctionCreateDots(_quantity: number, _mousePositionX: number): void {
 
+  //   for (let i: number = 0; i < _quantity; i++) {
+  //     console.log("startFunctionCreateDots");
 
-  function startFunctionCreateDots(_nquantity: number, _mousePositionX: number): void {
+  //   }
 
-    for (let i: number = 0; i < _nquantity; i++) {
-      console.log("startFunctionCreateDots");
-
-    }
-
-    // console.log(_color); //Warum undefined?
-    console.log(_mousePositionX);
-  }
+  //   // console.log(_color); //Warum undefined?
+  //   console.log(_mousePositionX);
+  // }
 
 
 
