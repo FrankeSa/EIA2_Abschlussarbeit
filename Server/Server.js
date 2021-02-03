@@ -32,11 +32,11 @@ var Firework;
         if (_request.url) {
             let url = Url.parse(_request.url, true); // der Url.parser wandelt den UrlWithParsedQuery in ein anders Format um. Durch true wird daraus ein besser lesbares assoziatives Array. 
             let command = url.query["command"];
-            // if (command == "getTitels") {
-            //     getTitels(_request, _response);
-            //     console.log("Titel geholt");
-            //     return;
-            // }
+            if (command == "getTitels") {
+                getTitels(_request, _response);
+                console.log("Titel geholt");
+                return;
+            }
             if (command == "retrieveAll") {
                 getTitelData(_request, _response);
                 console.log("Titeldaten geholt");
@@ -50,16 +50,16 @@ var Firework;
         }
         _response.end();
     }
-    // async function getTitels(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
-    //     let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: 1 } });
-    //     let arrayResult: string[] = await result.toArray();
-    //     let listOfTitels: string = JSON.stringify(arrayResult);
-    //     console.log(listOfTitels);
-    //     _response.write(listOfTitels); //Übergabe der Daten an den client
-    //     _response.end();
-    // }
+    async function getTitels(_request, _response) {
+        let result = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: 1 } });
+        let arrayResult = await result.toArray();
+        let listOfTitels = JSON.stringify(arrayResult);
+        console.log(listOfTitels);
+        _response.write(listOfTitels); //Übergabe der Daten an den client
+        _response.end();
+    }
     async function getTitelData(_request, _response) {
-        let result = fireworkCollection.find({}, { projection: { _id: 0, Shape: 1 } });
+        let result = fireworkCollection.find({}, { projection: { _id: 0, ExplosionSize: 1 } });
         let arrayResult = await result.toArray();
         let jsonResult = JSON.stringify(arrayResult);
         // console.log(jsonResult);

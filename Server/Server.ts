@@ -43,11 +43,11 @@ export namespace Firework {
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); // der Url.parser wandelt den UrlWithParsedQuery in ein anders Format um. Durch true wird daraus ein besser lesbares assoziatives Array. 
             let command: string | string[] | undefined = url.query["command"];
 
-            // if (command == "getTitels") {
-            //     getTitels(_request, _response);
-            //     console.log("Titel geholt");
-            //     return;
-            // }
+            if (command == "getTitels") {
+                getTitels(_request, _response);
+                console.log("Titel geholt");
+                return;
+            }
             if (command == "retrieveAll") {
                 getTitelData(_request, _response);
                 console.log("Titeldaten geholt");
@@ -64,20 +64,20 @@ export namespace Firework {
 
     }
 
-    // async function getTitels(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
+    async function getTitels(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
 
-    //     let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: 1 } });
-    //     let arrayResult: string[] = await result.toArray();
-    //     let listOfTitels: string = JSON.stringify(arrayResult);
-    //     console.log(listOfTitels);
-    //     _response.write(listOfTitels); //Übergabe der Daten an den client
-    //     _response.end();
+        let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: 1 } });
+        let arrayResult: string[] = await result.toArray();
+        let listOfTitels: string = JSON.stringify(arrayResult);
+        console.log(listOfTitels);
+        _response.write(listOfTitels); //Übergabe der Daten an den client
+        _response.end();
 
-    // }
+    }
 
     async function getTitelData(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
 
-        let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, Shape: 1 } });
+        let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, ExplosionSize: 1 } });
         let arrayResult: string[] = await result.toArray();
         let jsonResult: string = JSON.stringify(arrayResult);
         // console.log(jsonResult);
