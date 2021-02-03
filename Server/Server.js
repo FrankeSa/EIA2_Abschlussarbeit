@@ -59,7 +59,7 @@ var Firework;
         _response.end();
     }
     async function getTitelData(_request, _response) {
-        let result = fireworkCollection.find({}, { projection: { _id: 0, ExplosionSize: 1 } });
+        let result = fireworkCollection.find();
         let arrayResult = await result.toArray();
         let jsonResult = JSON.stringify(arrayResult);
         // console.log(jsonResult);

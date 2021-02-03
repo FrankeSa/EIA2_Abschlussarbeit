@@ -16,9 +16,10 @@ namespace Firework {
 
     let response: Response = await fetch(serverPage + "?" + "command=getTitels");
     let responseContant: string = await response.text();
-    alert("Hier sollten die Titel stehen" + responseContant);
+    let titelList: Titel[] = JSON.parse(responseContant);
+    //console.log(titelList);
 
-
+    generateContant(titelList);
 
 
     let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
