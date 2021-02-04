@@ -59,7 +59,8 @@ var Firework;
         _response.end();
     }
     async function getTitelData(_request, _response) {
-        let result = fireworkCollection.find();
+        let option = document.querySelector("select#LoadedTitels");
+        let result = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: option.value } });
         let arrayResult = await result.toArray();
         let jsonResult = JSON.stringify(arrayResult);
         // console.log(jsonResult);

@@ -76,8 +76,8 @@ export namespace Firework {
     }
 
     async function getTitelData(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
-        
-        let result: Mongo.Cursor<any> = fireworkCollection.find();
+        let option: HTMLSelectElement = <HTMLSelectElement>document.querySelector("select#LoadedTitels");
+        let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: option.value } });
         let arrayResult: string[] = await result.toArray();
         let jsonResult: string = JSON.stringify(arrayResult);
         // console.log(jsonResult);
