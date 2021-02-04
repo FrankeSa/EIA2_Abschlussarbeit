@@ -68,13 +68,13 @@ var Firework;
         startFunctionCreateDots(quantity, mousePositionX, mousepositionY, color);
     }
     async function getDataFromServer(_event) {
-        // let target: HTMLInputElement = <HTMLInputElement>_event.target;
-        // let userValue: string;
-        // userValue = target.value;
+        let target = _event.target;
+        let userValue;
+        userValue = target.value;
         console.log("Datein wurden geladen");
         // let query: URLSearchParams = new URLSearchParams(<any>userValue);
         // query.append("rocketTitel", userValue);
-        let response = await fetch(serverPage + "?" + "command=retrieveAll");
+        let response = await fetch(serverPage + "?" + "command=retrieveAll" + "?" + userValue);
         let responseContant = await response.text();
         console.log(responseContant);
         alert(responseContant);
