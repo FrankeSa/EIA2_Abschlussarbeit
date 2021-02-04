@@ -92,9 +92,11 @@ namespace Firework {
     userValue = target.value;
 
     console.log("Datein wurden geladen");
-    // let query: URLSearchParams = new URLSearchParams(<any>userValue);
-    // query.append("rocketTitel", userValue);
-    let response: Response = await fetch(serverPage + "?" + "command=retrieveAll" + "?" + userValue);
+    let param: URLSearchParams = new URLSearchParams(<any>userValue);
+    param.append("select", userValue);
+    console.log(param.get("select"));
+    // query.append("userTitel", userValue);
+    let response: Response = await fetch(serverPage + "?" + "command=retrieveAll");
     let responseContant: string = await response.text();
     console.log(responseContant);
     alert(responseContant);
