@@ -1,7 +1,7 @@
 namespace Firework {
   window.addEventListener("load", handleLoad);
   let serverPage: string = "https://sarahabschlussarbeit.herokuapp.com/"; //"http://localhost:5001/";
-  let crc2: CanvasRenderingContext2D;
+  export let crc2: CanvasRenderingContext2D;
   let form: HTMLFormElement;
   let quantity: number;
   let color: string;
@@ -68,7 +68,7 @@ namespace Firework {
         case "Shape":
           switch (entry[1]) {
             case "dots":
-              startFunctionCreateDots(quantity, mousePositionX, mousepositionY);
+              // startFunctionCreateDots(quantity, mousePositionX, mousepositionY, color);
               break;
             case "confetti":
               //console.log("startFunctionCreateConfetti");
@@ -82,15 +82,17 @@ namespace Firework {
 
     }
     // console.log("createParticle", quantity, color);
-    //startFunctionCreateDots(quantity, mousePositionX, mousepositionY);
+    startFunctionCreateDots(quantity, mousePositionX, mousepositionY, color);
   }
 
 
-  async function getDataFromServer(_event: Event): Promise<void> {
-    // let option: HTMLSelectElement = <HTMLSelectElement>document.querySelector("select#LoadedTitels");
-    // let userValue: string = option.value;
-    console.log("Datein wurden geladen");
+  export async function getDataFromServer(_event: Event): Promise<void> {
+    let target: HTMLInputElement = <HTMLInputElement>_event.target;
+    let userValue: string;
+    userValue = target.value;
+    console.log("Datein wurden geladen" + userValue);
     let response: Response = await fetch(serverPage + "?" + "command=retrieveAll");
+
     let responseContant: string = await response.text();
     console.log(responseContant);
     alert(responseContant);
@@ -113,17 +115,16 @@ namespace Firework {
   }
 
 
-  function startFunctionCreateDots(_quantity: number, _mousePositionX: number, _mousePositionY: number): void {
-
+  function startFunctionCreateDots(_quantity: number, _mousePositionX: number, _mousePositionY: number, _color: string): void {
+    let pointer: Vector = new Vector(_mousePositionX, _mousePositionY);
     for (let i: number = 0; i < _quantity; i++) {
       console.log("startFunctionCreateDots");
-      crc2.arc(_mousePositionX, _mousePositionY, 10, 0, 2 * Math.PI);
-      crc2.fillStyle = "#ffe6e6";
-      crc2.fill();
+      // crc2.arc(_mousePositionX, _mousePositionY, 10, 0, 2 * Math.PI);
+      // crc2.fillStyle = _color;
+      // crc2.fill();
     }
-
-    // console.log(_color); //Warum undefined?
-    //console.log(_color);
+    let particle: Particle = new Particle(pointer);
+    particle.draw(_color);
   }
 
 

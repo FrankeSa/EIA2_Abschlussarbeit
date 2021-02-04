@@ -9,6 +9,16 @@ var Firework;
             this.x = _x;
             this.y = _y;
         }
+        scale(_factor) {
+            this.x *= _factor;
+            this.y *= _factor;
+        }
+        random(_minLength, _maxLength) {
+            let length = _minLength + Math.random() * (_maxLength - _minLength);
+            let direction = Math.random() * 2 * Math.PI;
+            this.set(Math.cos(direction), Math.sin(direction));
+            this.scale(length);
+        }
     }
     Firework.Vector = Vector;
 })(Firework || (Firework = {}));
