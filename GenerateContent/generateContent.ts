@@ -22,7 +22,7 @@ namespace Firework {
         // let group: HTMLDivElement = document.createElement("div");
         let selection: HTMLSelectElement = document.createElement("select");
         selection.name = "LoadedTitels";
-        selection.addEventListener("change", getDataFromServer);
+        selection.addEventListener("change", handleChange);
         //selection.id = "Test";
 
         for (let titel of _titelList) {
@@ -43,15 +43,15 @@ namespace Firework {
 
 
 
-    // function handleChange(_event: Event): void {
+    function handleChange(_event: Event): void {
 
-    //     let target: HTMLInputElement = <HTMLInputElement>_event.target;
-    //     let userValue: string;
-    //     userValue = target.value;
+        let target: HTMLInputElement = <HTMLInputElement>_event.target;
+        let userValue: string;
+        userValue = target.value;
 
-    //     console.log(userValue);
+        console.log(userValue);
 
-    // }
+    }
 
 
 
