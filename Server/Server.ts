@@ -49,8 +49,10 @@ export namespace Firework {
                 return;
             }
             if (command == "retrieveAll") {
-                getTitelData(_request, _response);
-                console.log("Titeldaten geholt");
+                let option: HTMLSelectElement = <HTMLSelectElement>document.querySelector("select#LoadedTitels");
+                let userValue: string = option.value;
+                getTitelData(_request, _response, userValue);
+                console.log("Titeldaten geholt", userValue);
                 return;
             }
             else {
@@ -75,9 +77,9 @@ export namespace Firework {
 
     }
 
-    async function getTitelData(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
-        let option: HTMLSelectElement = <HTMLSelectElement>document.querySelector("select#LoadedTitels");
-        let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: option.value } });
+    async function getTitelData(_request: Http.IncomingMessage, _response: Http.ServerResponse, _userValue: string): Promise<void> {
+
+        let result: Mongo.Cursor<any> = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: _userValue } });
         let arrayResult: string[] = await result.toArray();
         let jsonResult: string = JSON.stringify(arrayResult);
         // console.log(jsonResult);

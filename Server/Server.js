@@ -38,8 +38,10 @@ var Firework;
                 return;
             }
             if (command == "retrieveAll") {
-                getTitelData(_request, _response);
-                console.log("Titeldaten geholt");
+                let option = document.querySelector("select#LoadedTitels");
+                let userValue = option.value;
+                getTitelData(_request, _response, userValue);
+                console.log("Titeldaten geholt", userValue);
                 return;
             }
             else {
@@ -58,9 +60,8 @@ var Firework;
         _response.write(listOfTitels); //Übergabe der Daten an den client
         _response.end();
     }
-    async function getTitelData(_request, _response) {
-        let option = document.querySelector("select#LoadedTitels");
-        let result = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: option.value } });
+    async function getTitelData(_request, _response, _userValue) {
+        let result = fireworkCollection.find({}, { projection: { _id: 0, rocketTitel: _userValue } });
         let arrayResult = await result.toArray();
         let jsonResult = JSON.stringify(arrayResult);
         // console.log(jsonResult);
