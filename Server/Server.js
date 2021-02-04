@@ -38,10 +38,10 @@ var Firework;
                 return;
             }
             if (command == "retrieveAll") {
-                let option = document.querySelector("select#LoadedTitels");
-                let userValue = option.value;
+                // let option: HTMLSelectElement = <HTMLSelectElement>document.querySelector("select#LoadedTitels");
+                // let userValue: string = option.value;
                 getTitelData(_request, _response);
-                console.log("Titeldaten geholt+", userValue);
+                console.log("Titeldaten geholt");
                 return;
             }
             else {
