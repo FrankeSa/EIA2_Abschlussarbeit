@@ -2,7 +2,6 @@
 var Firework;
 (function (Firework) {
     function generateContent(_titelList) {
-        console.log(_titelList);
         let group = null;
         let fieldset = document.querySelector("fieldset#fireworkTitel");
         group = createSelect(_titelList);
@@ -14,7 +13,7 @@ var Firework;
         // let group: HTMLDivElement = document.createElement("div");
         let selection = document.createElement("select");
         selection.name = "LoadedTitels";
-        selection.addEventListener("change", Firework.getDataFromServer);
+        //  selection.addEventListener("change", handleChange);
         //selection.id = "Test";
         for (let titel of _titelList) {
             let option = document.createElement("option");
