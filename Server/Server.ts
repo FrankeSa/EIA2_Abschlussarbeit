@@ -42,6 +42,8 @@ export namespace Firework {
         if (_request.url) {
             let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true); // der Url.parser wandelt den UrlWithParsedQuery in ein anders Format um. Durch true wird daraus ein besser lesbares assoziatives Array. 
             let command: string | string[] | undefined = url.query["command"];
+            console.log("Der URL", _request.url);
+
 
             if (command == "getTitels") {
                 getTitels(_request, _response);

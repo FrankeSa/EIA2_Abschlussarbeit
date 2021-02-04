@@ -72,7 +72,7 @@ var Firework;
         let userValue;
         userValue = target.value;
         console.log("Datein wurden geladen" + userValue);
-        let response = await fetch(serverPage + "?" + "command=retrieveAll");
+        let response = await fetch(serverPage + "?" + "command=retrieveAll" + "?" + userValue);
         let responseContant = await response.text();
         console.log(responseContant);
         alert(responseContant);
