@@ -7,7 +7,7 @@ body{
 }
 
 canvas{
-    /* background-color: black; */
+    background-color: black;
     grid-template-columns: 1;
     grid-row-start: 1;
     grid-row-end: 3;
@@ -34,3 +34,11 @@ background-color: #d9d9d9;
 padding: 1em;
 }
 
+
+    meter::-webkit-meter-bar {
+        background: rgb(255, 255, 255);
+    }
+
+meter::-webkit-meter-optimum-value {
+    background: linear-gradient(#c8e90c, #c8e90c);
+}

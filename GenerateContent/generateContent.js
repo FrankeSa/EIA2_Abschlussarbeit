@@ -14,6 +14,7 @@ var Firework;
         // let group: HTMLDivElement = document.createElement("div");
         let selection = document.createElement("select");
         selection.name = "LoadedTitels";
+        selection.addEventListener("change", handelChange);
         //selection.id = "Test";
         for (let titel of _titelList) {
             let option = document.createElement("option");
@@ -23,6 +24,12 @@ var Firework;
             // group.appendChild(selection);
         }
         return selection;
+    }
+    function handelChange(_event) {
+        let target = _event.target;
+        let userValue;
+        userValue = target.value;
+        console.log(userValue);
     }
 })(Firework || (Firework = {}));
 //# sourceMappingURL=generateContent.js.map
