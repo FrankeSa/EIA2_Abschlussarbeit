@@ -1,10 +1,14 @@
 namespace Firework {
 
-    export interface Titel {
+    export interface Rocket {
         rocketTitel: string;
+        ExplosionSize: number;
+        Particlecolor: string;
+        Shape: string;
+        Quantity: number;
     }
 
-    export function generateContent(_titelList: Titel[]): void {
+    export function generateContent(_titelList: Rocket[]): void {
 
         let group: HTMLElement | null = null;
         let fieldset: HTMLFieldSetElement | null = document.querySelector("fieldset#fireworkTitel");
@@ -17,12 +21,12 @@ namespace Firework {
 
 
 
-    function createSelect(_titelList: Titel[]): HTMLElement | null {
+    function createSelect(_titelList: Rocket[]): HTMLElement | null {
 
         // let group: HTMLDivElement = document.createElement("div");
         let selection: HTMLSelectElement = document.createElement("select");
         selection.name = "LoadedTitels";
-        selection.addEventListener("change", getDataFromServer);
+       // selection.addEventListener("change", getDataFromServer);
         //selection.id = "Test";
 
         for (let titel of _titelList) {
