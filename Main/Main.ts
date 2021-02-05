@@ -51,16 +51,14 @@ namespace Firework {
       switch (entry[0]) {
         case "Quantity":
           quantity = Number(formData.get("Quantity"));
-          // console.log("Quantity= ", quantity);
+         
           break;
         case "ExplosionSize":
-          //  console.log("ExplosionSize= ", entry[1]);
+          
           // lifetime = Number(formData.get("ExplosionSize"));
           break;
         case "Particlecolor":
-          // console.log("Particlecolor= ", entry[1]);
           color = String(formData.get("Particlecolor"));
-          // console.log("Particlecolor= ", color);
           break;
         case "Shape":
           switch (entry[1]) {
@@ -88,17 +86,11 @@ namespace Firework {
     let target: HTMLInputElement = <HTMLInputElement>_event.target;
     let userValue: string;
     userValue = target.value;
-
-    // let param: URLSearchParams = new URLSearchParams(<any>userValue);
-    // param.append("select", userValue);
-    // console.log(param.get("select"));  
-    // console.log(param.toString());
-    // query.append("userTitel", userValue);
     let response: Response = await fetch(serverPage + "?" + "command=getAllDatas");
-    let responseContant: string = await response.text();
+    let responseContent: string = await response.text();
 
-    let dbDatas: Rocket[] = JSON.parse(responseContant);
-    let result: Rocket | undefined = dbDatas.find(item => item.rocketTitel === userValue);
+    let allDatas: Rocket[] = JSON.parse(responseContent);
+    let result: Rocket | undefined = allDatas.find(item => item.rocketTitel === userValue);
 
     console.log(result);
     // createUserRocket(result);

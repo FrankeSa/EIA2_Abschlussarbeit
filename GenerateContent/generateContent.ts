@@ -2,11 +2,10 @@ namespace Firework {
 
     export interface Rocket {
         rocketTitel: string;
-        ExplosionSize: number;
-        Particlecolor: string;
-        Shape: string;
-        Quantity: number;
-    }
+        explosionSize: number;
+        particlecolor: string;
+        shape: string;
+       }
 
     export function generateContent(_titelList: Rocket[]): void {
 

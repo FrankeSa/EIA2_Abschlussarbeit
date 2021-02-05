@@ -35,16 +35,12 @@ var Firework;
             switch (entry[0]) {
                 case "Quantity":
                     quantity = Number(formData.get("Quantity"));
-                    // console.log("Quantity= ", quantity);
                     break;
                 case "ExplosionSize":
-                    //  console.log("ExplosionSize= ", entry[1]);
                     // lifetime = Number(formData.get("ExplosionSize"));
                     break;
                 case "Particlecolor":
-                    // console.log("Particlecolor= ", entry[1]);
                     color = String(formData.get("Particlecolor"));
-                    // console.log("Particlecolor= ", color);
                     break;
                 case "Shape":
                     switch (entry[1]) {
@@ -69,15 +65,10 @@ var Firework;
         let target = _event.target;
         let userValue;
         userValue = target.value;
-        // let param: URLSearchParams = new URLSearchParams(<any>userValue);
-        // param.append("select", userValue);
-        // console.log(param.get("select"));  
-        // console.log(param.toString());
-        // query.append("userTitel", userValue);
         let response = await fetch(serverPage + "?" + "command=getAllDatas");
-        let responseContant = await response.text();
-        let dbDatas = JSON.parse(responseContant);
-        let result = dbDatas.find(item => item.rocketTitel === userValue);
+        let responseContent = await response.text();
+        let allDatas = JSON.parse(responseContent);
+        let result = allDatas.find(item => item.rocketTitel === userValue);
         console.log(result);
         // createUserRocket(result);
     }
