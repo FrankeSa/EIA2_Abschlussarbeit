@@ -6,7 +6,7 @@ namespace Firework {
   let quantity: number;
   let color: string;
   // let lifetime: number;
- 
+
 
 
   async function handleLoad(_event: Event): Promise<void> {
@@ -65,13 +65,13 @@ namespace Firework {
         case "Shape":
           switch (entry[1]) {
             case "dots":
-              
+              // startFunctionCreateDots(quantity, mousePositionX, mousepositionY, color);
               break;
             case "confetti":
-             
+              //console.log("startFunctionCreateConfetti");
               break;
             case "heart":
-             
+              // console.log("startFunctionCreateHeart");
               break;
           }
         default:
@@ -94,7 +94,7 @@ namespace Firework {
     // console.log(param.get("select"));  
     // console.log(param.toString());
     // query.append("userTitel", userValue);
-    let response: Response = await fetch(serverPage + "?" + "command=getAllDatas");
+    let response: Response = await fetch(serverPage + "?" + "command=retrieveAll");
     let responseContant: string = await response.text();
     let dbDatas: Rocket[] = JSON.parse(responseContant);
     let result: Rocket | undefined = dbDatas.find(item => item.rocketTitel === userValue);
@@ -110,7 +110,7 @@ namespace Firework {
     let lifetime: number | undefined = _result?.ExplosionSize;
     console.log(color, lifetime);
     // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
-    // eine Funktion die z.B. auf MouseUp hört
+    // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
 
   }
 
