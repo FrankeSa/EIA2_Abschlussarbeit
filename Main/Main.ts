@@ -96,23 +96,24 @@ namespace Firework {
     // query.append("userTitel", userValue);
     let response: Response = await fetch(serverPage + "?" + "command=retrieveAll");
     let responseContant: string = await response.text();
-    let dbDatas: Rocket[] = JSON.parse(responseContant);
-    let result: Rocket | undefined = dbDatas.find(item => item.rocketTitel === userValue);
+    alert("warum leer" + responseContant);
+    // let dbDatas: Rocket[] = JSON.parse(responseContant);
+    // let result: Rocket | undefined = dbDatas.find(item => item.rocketTitel === userValue);
 
-    console.log(result);
-    createUserRocket(result);
-
-  }
-
-  function createUserRocket(_result: Rocket | undefined): void {
-
-    let color: string | undefined = _result?.Particlecolor;
-    let lifetime: number | undefined = _result?.ExplosionSize;
-    console.log(color, lifetime);
-    // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
-    // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
+    // console.log(result);
+    // createUserRocket(result);
 
   }
+
+  // function createUserRocket(_result: Rocket | undefined): void {
+
+  //   let color: string | undefined = _result?.Particlecolor;
+  //   let lifetime: number | undefined = _result?.ExplosionSize;
+  //   console.log(color, lifetime);
+  //   // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
+  //   // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
+
+  // }
 
 
   async function sendDataToServer(_event: Event): Promise<void> {
