@@ -33,12 +33,12 @@ var Firework;
             let url = Url.parse(_request.url, true); // der Url.parser wandelt den UrlWithParsedQuery in ein anders Format um. Durch true wird daraus ein besser lesbares assoziatives Array. 
             let command = url.query["command"];
             console.log("Der URL", _request.url);
-            if (command == "getTitels") {
+            if (command === "getTitels") {
                 getTitels(_request, _response);
                 console.log("Titel geholt");
                 return;
             }
-            if (command == "retrieveAll") {
+            if (command === "retrieveAll") {
                 getTitelData(_request, _response);
                 console.log("Titeldaten geholt");
                 return;
@@ -69,8 +69,6 @@ var Firework;
     }
     function storeRocket(_userRocket, _response) {
         fireworkCollection.insertOne(_userRocket);
-        // let jsonText: string = JSON.stringify(_userRocket);
-        // _response.write(jsonText); //_resonse.write übergibt die Daten dem Client
         _response.end();
     }
     // async function getTitels(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {

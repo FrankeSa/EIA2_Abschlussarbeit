@@ -7,9 +7,6 @@ namespace Firework {
   let color: string;
   // let lifetime: number;
 
-  // export interface Rocket {
-  //   rocketTitel: string | string[] | undefined;
-  // }
 
 
   async function handleLoad(_event: Event): Promise<void> {
@@ -17,7 +14,7 @@ namespace Firework {
 
     let response: Response = await fetch(serverPage + "?" + "command=getTitels");
     let listOfTitels: string = await response.text();
-    let titelList: Titel[] = JSON.parse(listOfTitels);
+    let titelList: Rocket[] = JSON.parse(listOfTitels);
 
 
     generateContent(titelList);
@@ -87,21 +84,35 @@ namespace Firework {
 
 
   export async function getDataFromServer(_event: Event): Promise<void> {
+    console.log("Datein wurden geladen");
     let target: HTMLInputElement = <HTMLInputElement>_event.target;
     let userValue: string;
-    userValue = target.value;
-
-    console.log("Datein wurden geladen");
-    let param: URLSearchParams = new URLSearchParams(<any>userValue);
-    param.append("select", userValue);
-    console.log(param.get("select"));
+    userValue = target.value;    
+    console.log(userValue);
+    // let param: URLSearchParams = new URLSearchParams(<any>userValue);
+    // param.append("select", userValue);
+    // console.log(param.get("select"));  
+    // console.log(param.toString());
     // query.append("userTitel", userValue);
     let response: Response = await fetch(serverPage + "?" + "command=retrieveAll");
     let responseContant: string = await response.text();
-    console.log(responseContant);
-    alert(responseContant);
+    let dbDatas: Rocket[] = JSON.parse(responseContant);
+    let result: Rocket | undefined = dbDatas.find(item => item.rocketTitel === userValue);
+   
+    console.log(result);
+    Sarah(result);
+
+    //alert(responseContant);
 
   }
+
+  function Sarah(_result: Rocket | undefined): void {
+
+    let color: string | undefined = _result?.Particlecolor;
+    let lifetime: number | undefined = _result?.ExplosionSize;
+    console.log(color, lifetime);
+  }
+
 
   async function sendDataToServer(_event: Event): Promise<void> {
     let controlPanelData: FormData = new FormData(form);

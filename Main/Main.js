@@ -7,9 +7,6 @@ var Firework;
     let quantity;
     let color;
     // let lifetime: number;
-    // export interface Rocket {
-    //   rocketTitel: string | string[] | undefined;
-    // }
     async function handleLoad(_event) {
         console.log("HalloWelt");
         let response = await fetch(serverPage + "?" + "command=getTitels");
@@ -68,20 +65,30 @@ var Firework;
         startFunctionCreateDots(quantity, mousePositionX, mousepositionY, color);
     }
     async function getDataFromServer(_event) {
+        console.log("Datein wurden geladen");
         let target = _event.target;
         let userValue;
         userValue = target.value;
-        console.log("Datein wurden geladen");
-        let param = new URLSearchParams(userValue);
-        param.append("select", userValue);
-        console.log(param.get("select"));
+        console.log(userValue);
+        // let param: URLSearchParams = new URLSearchParams(<any>userValue);
+        // param.append("select", userValue);
+        // console.log(param.get("select"));  
+        // console.log(param.toString());
         // query.append("userTitel", userValue);
         let response = await fetch(serverPage + "?" + "command=retrieveAll");
         let responseContant = await response.text();
-        console.log(responseContant);
-        alert(responseContant);
+        let dbDatas = JSON.parse(responseContant);
+        let result = dbDatas.find(item => item.rocketTitel === userValue);
+        console.log(result);
+        Sarah(result);
+        //alert(responseContant);
     }
     Firework.getDataFromServer = getDataFromServer;
+    function Sarah(_result) {
+        let color = _result?.Particlecolor;
+        let lifetime = _result?.ExplosionSize;
+        console.log(color, lifetime);
+    }
     async function sendDataToServer(_event) {
         let controlPanelData = new FormData(form);
         let textArea = document.querySelector("input#textarea");
