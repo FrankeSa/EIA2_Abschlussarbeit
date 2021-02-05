@@ -39,7 +39,7 @@ var Firework;
                 return;
             }
             if (command === "getAllDatas") {
-                getTitelData(_request, _response);
+                getAllDatas(_request, _response);
                 console.log("Titeldaten geholt");
                 return;
             }
@@ -59,7 +59,7 @@ var Firework;
         _response.write(listOfTitels); //Übergabe der Daten an den client
         _response.end();
     }
-    async function getTitelData(_request, _response) {
+    async function getAllDatas(_request, _response) {
         let result = fireworkCollection.find();
         let arrayResult = await result.toArray();
         let jsonResult = JSON.stringify(arrayResult);
