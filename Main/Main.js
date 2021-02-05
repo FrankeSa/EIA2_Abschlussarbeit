@@ -74,12 +74,11 @@ var Firework;
         // console.log(param.get("select"));  
         // console.log(param.toString());
         // query.append("userTitel", userValue);
-        let response = await fetch(serverPage + "?" + "command=retrieveAll");
+        let response = await fetch(serverPage + "?" + "command=getAllDatas");
         let responseContant = await response.text();
-        alert("warum leer" + responseContant);
-        // let dbDatas: Rocket[] = JSON.parse(responseContant);
-        // let result: Rocket | undefined = dbDatas.find(item => item.rocketTitel === userValue);
-        // console.log(result);
+        let dbDatas = JSON.parse(responseContant);
+        let result = dbDatas.find(item => item.rocketTitel === userValue);
+        console.log(result);
         // createUserRocket(result);
     }
     Firework.getDataFromServer = getDataFromServer;

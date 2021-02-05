@@ -52,7 +52,7 @@ export namespace Firework {
                 console.log("Titel geholt");
                 return;
             }
-            if (command === "retrieveAll") {
+            if (command === "getAllDatas") {
                 getTitelData(_request, _response);
                 console.log("Titeldaten geholt");
                 return;

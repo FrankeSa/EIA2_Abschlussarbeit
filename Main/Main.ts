@@ -94,13 +94,13 @@ namespace Firework {
     // console.log(param.get("select"));  
     // console.log(param.toString());
     // query.append("userTitel", userValue);
-    let response: Response = await fetch(serverPage + "?" + "command=retrieveAll");
+    let response: Response = await fetch(serverPage + "?" + "command=getAllDatas");
     let responseContant: string = await response.text();
-    alert("warum leer" + responseContant);
-    // let dbDatas: Rocket[] = JSON.parse(responseContant);
-    // let result: Rocket | undefined = dbDatas.find(item => item.rocketTitel === userValue);
 
-    // console.log(result);
+    let dbDatas: Rocket[] = JSON.parse(responseContant);
+    let result: Rocket | undefined = dbDatas.find(item => item.rocketTitel === userValue);
+
+    console.log(result);
     // createUserRocket(result);
 
   }
