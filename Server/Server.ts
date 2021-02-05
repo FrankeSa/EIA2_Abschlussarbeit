@@ -52,9 +52,9 @@ export namespace Firework {
                 console.log("Titel geholt");
                 return;
             }
-            if (command === "retrieveAll") {
-                getTitelData(_request, _response);
-                console.log("Titeldaten geholt");
+            if (command === "getAllDatas") {
+                getAllDatas(_request, _response);
+                console.log("alle Daten geholt");
                 return;
             }
             else {
@@ -79,10 +79,9 @@ export namespace Firework {
 
     }
 
-    async function getTitelData(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
+    async function getAllDatas(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
 
         let result: Mongo.Cursor<any> = fireworkCollection.find();
-
         let arrayResult: string[] = await result.toArray();
         let jsonResult: string = JSON.stringify(arrayResult);
         // console.log(jsonResult);

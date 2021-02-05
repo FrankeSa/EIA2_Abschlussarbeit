@@ -6,7 +6,7 @@ namespace Firework {
   let quantity: number;
   let color: string;
   // let lifetime: number;
-
+ 
 
 
   async function handleLoad(_event: Event): Promise<void> {
@@ -26,13 +26,13 @@ namespace Firework {
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
     let saveBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#saveBtn");
-    let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
+    //let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
     let inputQuantity: HTMLButtonElement = <HTMLButtonElement>document.querySelector("input#quantity");
     form = <HTMLFormElement>document.querySelector("form#controlPanel");
 
     canvas.addEventListener("click", createObject);
     saveBtn.addEventListener("click", sendDataToServer);
-    loadBtn.addEventListener("click", getDataFromServer);
+    //loadBtn.addEventListener("click", getDataFromServer);
     inputQuantity.addEventListener("change", startMeter);
   }
 
@@ -65,13 +65,13 @@ namespace Firework {
         case "Shape":
           switch (entry[1]) {
             case "dots":
-              // startFunctionCreateDots(quantity, mousePositionX, mousepositionY, color);
+              
               break;
             case "confetti":
-              //console.log("startFunctionCreateConfetti");
+             
               break;
             case "heart":
-              // console.log("startFunctionCreateHeart");
+             
               break;
           }
         default:
@@ -87,30 +87,31 @@ namespace Firework {
     console.log("Datein wurden geladen");
     let target: HTMLInputElement = <HTMLInputElement>_event.target;
     let userValue: string;
-    userValue = target.value;    
-    console.log(userValue);
+    userValue = target.value;
+
     // let param: URLSearchParams = new URLSearchParams(<any>userValue);
     // param.append("select", userValue);
     // console.log(param.get("select"));  
     // console.log(param.toString());
     // query.append("userTitel", userValue);
-    let response: Response = await fetch(serverPage + "?" + "command=retrieveAll");
+    let response: Response = await fetch(serverPage + "?" + "command=getAllDatas");
     let responseContant: string = await response.text();
     let dbDatas: Rocket[] = JSON.parse(responseContant);
     let result: Rocket | undefined = dbDatas.find(item => item.rocketTitel === userValue);
-   
-    console.log(result);
-    Sarah(result);
 
-    //alert(responseContant);
+    console.log(result);
+    createUserRocket(result);
 
   }
 
-  function Sarah(_result: Rocket | undefined): void {
+  function createUserRocket(_result: Rocket | undefined): void {
 
     let color: string | undefined = _result?.Particlecolor;
     let lifetime: number | undefined = _result?.ExplosionSize;
     console.log(color, lifetime);
+    // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
+    // eine Funktion die z.B. auf MouseUp hört
+
   }
 
 

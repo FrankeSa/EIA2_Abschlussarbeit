@@ -18,12 +18,12 @@ var Firework;
             return;
         Firework.crc2 = canvas.getContext("2d");
         let saveBtn = document.querySelector("button#saveBtn");
-        let loadBtn = document.querySelector("button#loadBtn");
+        //let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
         let inputQuantity = document.querySelector("input#quantity");
         form = document.querySelector("form#controlPanel");
         canvas.addEventListener("click", createObject);
         saveBtn.addEventListener("click", sendDataToServer);
-        loadBtn.addEventListener("click", getDataFromServer);
+        //loadBtn.addEventListener("click", getDataFromServer);
         inputQuantity.addEventListener("change", startMeter);
     }
     function createObject(_event) {
@@ -49,13 +49,10 @@ var Firework;
                 case "Shape":
                     switch (entry[1]) {
                         case "dots":
-                            // startFunctionCreateDots(quantity, mousePositionX, mousepositionY, color);
                             break;
                         case "confetti":
-                            //console.log("startFunctionCreateConfetti");
                             break;
                         case "heart":
-                            // console.log("startFunctionCreateHeart");
                             break;
                     }
                 default:
@@ -69,25 +66,25 @@ var Firework;
         let target = _event.target;
         let userValue;
         userValue = target.value;
-        console.log(userValue);
         // let param: URLSearchParams = new URLSearchParams(<any>userValue);
         // param.append("select", userValue);
         // console.log(param.get("select"));  
         // console.log(param.toString());
         // query.append("userTitel", userValue);
-        let response = await fetch(serverPage + "?" + "command=retrieveAll");
+        let response = await fetch(serverPage + "?" + "command=getAllDatas");
         let responseContant = await response.text();
         let dbDatas = JSON.parse(responseContant);
         let result = dbDatas.find(item => item.rocketTitel === userValue);
         console.log(result);
-        Sarah(result);
-        //alert(responseContant);
+        createUserRocket(result);
     }
     Firework.getDataFromServer = getDataFromServer;
-    function Sarah(_result) {
+    function createUserRocket(_result) {
         let color = _result?.Particlecolor;
         let lifetime = _result?.ExplosionSize;
         console.log(color, lifetime);
+        // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
+        // eine Funktion die z.B. auf MouseUp hört
     }
     async function sendDataToServer(_event) {
         let controlPanelData = new FormData(form);
