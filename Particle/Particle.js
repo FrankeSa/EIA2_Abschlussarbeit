@@ -10,11 +10,11 @@ var Firework;
             this.lifetime = _lifetime;
         }
         move(_timeslice) {
-            this.position.x += this.velocity.x;
-            this.position.y += this.velocity.y;
             // let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
             // offset.scale(_timeslice);
-            // this.position.add(offset);
+            //this.position.add(offset);
+            this.position.x += this.velocity.x;
+            this.position.y += this.velocity.y;
             // this.position.test();
             // if (this.position.x < 0)
             //     this.position.x += crc2.canvas.width;

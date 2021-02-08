@@ -98,15 +98,13 @@ var Firework;
     function createParticle(_quantity, _mousePositionX, _mousePositionY, _color, _lifetime) {
         let pointer = new Firework.Vector(_mousePositionX, _mousePositionY);
         let color = _color;
-        //velocity.random(80, 100);
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 30; i++) {
             // console.log("startFunctionCreateDots");
-            // let angelIncrementX: number = (Math.PI * 2) / _quantity;
-            // let angelIncrementY: number = (Math.PI * 2) / _quantity;
-            // let ix: number = Math.cos(angelIncrementX * i) * Math.random();
-            // let iy: number = Math.sin(angelIncrementY * i) * Math.random();
-            let velocity = new Firework.Vector(0, 0);
-            velocity.random(40, 40);
+            let radian = (Math.PI * 2) / 30;
+            let ix = Math.cos(radian * i) * 20; //Math.random();
+            let iy = Math.sin(radian * i) * 20; //Math.random();
+            let velocity = new Firework.Vector(ix, iy);
+            //velocity.random(80, 100);
             let particle = new Firework.Particle(color, pointer, velocity, lifetime);
             particlesarray.push(particle);
             console.log(particle);
@@ -116,6 +114,7 @@ var Firework;
         // console.log(particle);
     }
     function update() {
+        console.log("Update läuft");
         //crc2.fillStyle = "rgba(0,0,0,0.2)";
         Firework.crc2.fillRect(0, 0, Firework.crc2.canvas.width, Firework.crc2.canvas.height);
         for (let particle of particlesarray) {

@@ -5,6 +5,7 @@ namespace Firework {
         color: string;
         lifetime: number;
 
+
         constructor(_color: string, _pointer: Vector, _velocity: Vector, _lifetime: number) {
 
 
@@ -21,15 +22,16 @@ namespace Firework {
 
         move(_timeslice: number): void {
 
-            this.position.x += this.velocity.x;
-            this.position.y += this.velocity.y;
-            
+
+
 
 
 
             // let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
             // offset.scale(_timeslice);
-            // this.position.add(offset);
+            //this.position.add(offset);
+            this.position.x += this.velocity.x;
+            this.position.y += this.velocity.y;
             // this.position.test();
 
             // if (this.position.x < 0)

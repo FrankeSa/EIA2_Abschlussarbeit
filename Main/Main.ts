@@ -126,24 +126,22 @@ namespace Firework {
 
   function createParticle(_quantity: number, _mousePositionX: number, _mousePositionY: number, _color: string, _lifetime: number): void {
     let pointer: Vector = new Vector(_mousePositionX, _mousePositionY);
-
     let color: string = _color;
-    //velocity.random(80, 100);
 
-    for (let i: number = 0; i < 5; i++) {
+
+    for (let i: number = 0; i < 30; i++) {
       // console.log("startFunctionCreateDots");
-      // let angelIncrementX: number = (Math.PI * 2) / _quantity;
-      // let angelIncrementY: number = (Math.PI * 2) / _quantity;
-      // let ix: number = Math.cos(angelIncrementX * i) * Math.random();
-      // let iy: number = Math.sin(angelIncrementY * i) * Math.random();
+      let radian: number = (Math.PI * 2) / 30;
 
-      let velocity: Vector = new Vector(0, 0);
-      velocity.random(40, 40);
+      let ix: number = Math.cos(radian * i) * 20 //Math.random();
+      let iy: number = Math.sin(radian * i) * 20 //Math.random();
 
-
+      let velocity: Vector = new Vector(ix, iy);
+      //velocity.random(80, 100);
       let particle: Particle = new Particle(color, pointer, velocity, lifetime);
       particlesarray.push(particle);
       console.log(particle);
+
 
 
     }
@@ -159,6 +157,7 @@ namespace Firework {
 
 
   function update(): void {
+    console.log("Update läuft");
 
     //crc2.fillStyle = "rgba(0,0,0,0.2)";
 
