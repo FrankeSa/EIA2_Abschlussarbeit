@@ -7,6 +7,7 @@ var Firework;
     let quantity;
     let color;
     let lifetime;
+    let type;
     let particlesarray = [];
     async function handleLoad(_event) {
         console.log("HalloWelt");
@@ -22,45 +23,36 @@ var Firework;
         //let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
         let inputQuantity = document.querySelector("input#quantity");
         form = document.querySelector("form#controlPanel");
-        canvas.addEventListener("click", createObject);
+        canvas.addEventListener("mouseup", createObject);
+        canvas.addEventListener("mousedown", sarah);
         saveBtn.addEventListener("click", sendDataToServer);
         //loadBtn.addEventListener("click", getDataFromServer);
         inputQuantity.addEventListener("change", startMeter);
         window.setInterval(update, 20);
     }
     function createObject(_event) {
-        let mousePositionX = _event.clientX - Firework.crc2.canvas.offsetLeft;
-        let mousepositionY = _event.clientY - Firework.crc2.canvas.offsetTop;
+        let mousePositionX = _event.clientX; //- crc2.canvas.offsetLeft;
+        let mousepositionY = _event.clientY; //- crc2.canvas.offsetTop;
         console.log("x: ", mousePositionX, "y: ", mousepositionY);
         let formData = new FormData(document.forms[0]);
         for (let entry of formData) {
-            switch (entry[0]) {
-                case "Quantity":
-                    quantity = Number(formData.get("Quantity"));
+            quantity = Number(formData.get("Quantity"));
+            lifetime = Number(formData.get("ExplosionSize"));
+            color = String(formData.get("Particlecolor"));
+            switch (entry[1]) {
+                case "dots":
+                    type = "dots";
                     break;
-                case "ExplosionSize":
-                    lifetime = Number(formData.get("ExplosionSize"));
+                case "confetti":
+                    type = "confetti";
                     break;
-                case "Particlecolor":
-                    color = String(formData.get("Particlecolor"));
+                case "heart":
+                    type = "heart";
                     break;
-                case "Shape":
-                    switch (entry[1]) {
-                        case "dots":
-                            // startFunctionCreateDots(quantity, mousePositionX, mousepositionY, color);
-                            break;
-                        case "confetti":
-                            //console.log("startFunctionCreateConfetti");
-                            break;
-                        case "heart":
-                            // console.log("startFunctionCreateHeart");
-                            break;
-                    }
-                default:
             }
         }
-        // console.log("createParticle", quantity, color);
         createParticle(quantity, mousePositionX, mousepositionY, color, lifetime);
+        console.log(type);
     }
     async function getDataFromServer(_event) {
         console.log("Datein wurden geladen");
@@ -76,8 +68,8 @@ var Firework;
     }
     Firework.getDataFromServer = getDataFromServer;
     // function createUserRocket(_result: Rocket | undefined): void {
-    //   let color: string | undefined = _result?.Particlecolor;
-    //   let lifetime: number | undefined = _result?.ExplosionSize;
+    //   let color: string | undefined = _result?.particlecolor;
+    //   let lifetime: number | undefined = _result?.explosionSize;
     //   console.log(color, lifetime);
     //   // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
     //   // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
@@ -96,16 +88,16 @@ var Firework;
         textArea.value = "";
     }
     function createParticle(_quantity, _mousePositionX, _mousePositionY, _color, _lifetime) {
-        let pointer = new Firework.Vector(_mousePositionX, _mousePositionY);
+        let origin = new Firework.Vector(_mousePositionX, _mousePositionY);
         let color = _color;
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < _quantity; i++) {
             // console.log("startFunctionCreateDots");
-            let radian = (Math.PI * 2) / 30;
-            let ix = Math.cos(radian * i) * 20; //Math.random();
-            let iy = Math.sin(radian * i) * 20; //Math.random();
+            let radian = (Math.PI * 2) / _quantity;
+            let ix = Math.cos(radian * i) * 100; //Math.random();
+            let iy = Math.sin(radian * i) * 100;
             let velocity = new Firework.Vector(ix, iy);
             //velocity.random(80, 100);
-            let particle = new Firework.Particle(color, pointer, velocity, lifetime);
+            let particle = new Firework.Particle(origin, velocity, color, lifetime);
             particlesarray.push(particle);
             console.log(particle);
         }
@@ -115,7 +107,7 @@ var Firework;
     }
     function update() {
         console.log("Update läuft");
-        //crc2.fillStyle = "rgba(0,0,0,0.2)";
+        Firework.crc2.fillStyle = "rgba(0,0,0,0.2)";
         Firework.crc2.fillRect(0, 0, Firework.crc2.canvas.width, Firework.crc2.canvas.height);
         for (let particle of particlesarray) {
             particle.move(1 / 50);
@@ -126,6 +118,11 @@ var Firework;
         let target = _event.target;
         let meter = document.querySelector("meter");
         meter.value = parseFloat(target.value);
+    }
+    function sarah(_event) {
+        let mouseklick = _event.button;
+        if (mouseklick === 2)
+            console.log("HalloSarah", _event.button);
     }
 })(Firework || (Firework = {}));
 //# sourceMappingURL=Main.js.map

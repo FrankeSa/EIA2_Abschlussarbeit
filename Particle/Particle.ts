@@ -6,14 +6,17 @@ namespace Firework {
         lifetime: number;
 
 
-        constructor(_color: string, _pointer: Vector, _velocity: Vector, _lifetime: number) {
+        constructor(_position: Vector, _velocity: Vector, _color: string, _lifetime: number) {
 
 
 
             // console.log("constructor particle");
-            this.position = _pointer;
+            this.position = _position;
+            this.position = new Vector(_position.x, _position.y);
             this.color = _color;
             this.velocity = _velocity;
+            this.velocity = new Vector(_velocity.x, _velocity.y);
+
 
 
             this.lifetime = _lifetime;
@@ -21,17 +24,17 @@ namespace Firework {
         }
 
         move(_timeslice: number): void {
+            //console.log("Move");
+          
+            let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
+            offset.scale(_timeslice);
+            this.position.add(offset);
 
 
+            // this.position.x += this.velocity.x;
+            // this.position.y += this.velocity.y;
 
 
-
-
-            // let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
-            // offset.scale(_timeslice);
-            //this.position.add(offset);
-            this.position.x += this.velocity.x;
-            this.position.y += this.velocity.y;
             // this.position.test();
 
             // if (this.position.x < 0)
@@ -46,9 +49,9 @@ namespace Firework {
             // if (this.position.y > crc2.canvas.height)
             //     this.position.y -= crc2.canvas.height;
             // super.move(_timeslice);
-            // this.lifetime -= _timeslice;
-            // if (this.lifetime < 0)
-            //     this.velocity = new Vector(0, 0);
+            this.lifetime -= _timeslice;
+            if (this.lifetime < 0)
+                this.velocity = new Vector(0, 0);
 
 
 

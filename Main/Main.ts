@@ -6,6 +6,7 @@ namespace Firework {
   let quantity: number;
   let color: string;
   let lifetime: number;
+  let type: string;
   let particlesarray: Particle[] = [];
 
 
@@ -30,7 +31,8 @@ namespace Firework {
     let inputQuantity: HTMLButtonElement = <HTMLButtonElement>document.querySelector("input#quantity");
     form = <HTMLFormElement>document.querySelector("form#controlPanel");
 
-    canvas.addEventListener("click", createObject);
+    canvas.addEventListener("mouseup", createObject);
+    canvas.addEventListener("mousedown", sarah);
     saveBtn.addEventListener("click", sendDataToServer);
     //loadBtn.addEventListener("click", getDataFromServer);
     inputQuantity.addEventListener("change", startMeter);
@@ -41,47 +43,31 @@ namespace Firework {
 
 
   function createObject(_event: MouseEvent): void {
-    let mousePositionX: number = _event.clientX - crc2.canvas.offsetLeft;
-    let mousepositionY: number = _event.clientY - crc2.canvas.offsetTop;
+    let mousePositionX: number = _event.clientX; //- crc2.canvas.offsetLeft;
+    let mousepositionY: number = _event.clientY; //- crc2.canvas.offsetTop;
     console.log("x: ", mousePositionX, "y: ", mousepositionY);
     let formData: FormData = new FormData(document.forms[0]);
 
 
     for (let entry of formData) {
-
-      switch (entry[0]) {
-        case "Quantity":
-          quantity = Number(formData.get("Quantity"));
-
+      quantity = Number(formData.get("Quantity"));
+      lifetime = Number(formData.get("ExplosionSize"));
+      color = String(formData.get("Particlecolor"));
+      switch (entry[1]) {
+        case "dots":
+          type = "dots";
           break;
-        case "ExplosionSize":
-
-          lifetime = Number(formData.get("ExplosionSize"));
+        case "confetti":
+          type = "confetti";
           break;
-        case "Particlecolor":
-          color = String(formData.get("Particlecolor"));
+        case "heart":
+          type = "heart";
           break;
-        case "Shape":
-          switch (entry[1]) {
-            case "dots":
-              // startFunctionCreateDots(quantity, mousePositionX, mousepositionY, color);
-              break;
-            case "confetti":
-              //console.log("startFunctionCreateConfetti");
-              break;
-            case "heart":
-              // console.log("startFunctionCreateHeart");
-              break;
-          }
-        default:
       }
-
     }
-    // console.log("createParticle", quantity, color);
     createParticle(quantity, mousePositionX, mousepositionY, color, lifetime);
-
+    console.log(type);
   }
-
 
   export async function getDataFromServer(_event: Event): Promise<void> {
     console.log("Datein wurden geladen");
@@ -99,8 +85,8 @@ namespace Firework {
 
   // function createUserRocket(_result: Rocket | undefined): void {
 
-  //   let color: string | undefined = _result?.Particlecolor;
-  //   let lifetime: number | undefined = _result?.ExplosionSize;
+  //   let color: string | undefined = _result?.particlecolor;
+  //   let lifetime: number | undefined = _result?.explosionSize;
   //   console.log(color, lifetime);
   //   // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
   //   // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
@@ -125,24 +111,21 @@ namespace Firework {
 
 
   function createParticle(_quantity: number, _mousePositionX: number, _mousePositionY: number, _color: string, _lifetime: number): void {
-    let pointer: Vector = new Vector(_mousePositionX, _mousePositionY);
+    let origin: Vector = new Vector(_mousePositionX, _mousePositionY);
     let color: string = _color;
 
 
-    for (let i: number = 0; i < 30; i++) {
+    for (let i: number = 0; i < _quantity; i++) {
       // console.log("startFunctionCreateDots");
-      let radian: number = (Math.PI * 2) / 30;
-
-      let ix: number = Math.cos(radian * i) * 20 //Math.random();
-      let iy: number = Math.sin(radian * i) * 20 //Math.random();
+      let radian: number = (Math.PI * 2) / _quantity;
+      let ix: number = Math.cos(radian * i) * 100; //Math.random();
+      let iy: number = Math.sin(radian * i) * 100;
 
       let velocity: Vector = new Vector(ix, iy);
       //velocity.random(80, 100);
-      let particle: Particle = new Particle(color, pointer, velocity, lifetime);
+      let particle: Particle = new Particle(origin, velocity, color, lifetime);
       particlesarray.push(particle);
       console.log(particle);
-
-
 
     }
 
@@ -159,7 +142,7 @@ namespace Firework {
   function update(): void {
     console.log("Update läuft");
 
-    //crc2.fillStyle = "rgba(0,0,0,0.2)";
+    crc2.fillStyle = "rgba(0,0,0,0.2)";
 
 
     crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
@@ -179,7 +162,12 @@ namespace Firework {
 
   }
 
+  function sarah(_event: MouseEvent): void {
+    let mouseklick: number = _event.button;
+    if (mouseklick === 2)
+      console.log("HalloSarah", _event.button);
 
+  }
 
 
 
