@@ -18,6 +18,18 @@ namespace Firework {
             this.y *= _factor;
         }
 
+        add(_addend: Vector): void {
+            this.x += _addend.x;
+            this.y += _addend.y;
+        }
+
+        test(): void {
+            let angleIncrement: number = (Math.PI * 2) / 5;
+            let step: number = Math.cos(angleIncrement * 0);
+            this.x = step;
+
+        }
+
         random(_minLength: number, _maxLength: number): void {
             let length: number = _minLength + Math.random() * (_maxLength - _minLength);
             let direction: number = Math.random() * 2 * Math.PI;
@@ -26,7 +38,10 @@ namespace Firework {
             this.scale(length);
         }
 
+        copy(): Vector {
+            return new Vector(this.x, this.y);
 
+        }
 
 
     }

@@ -6,7 +6,8 @@ var Firework;
     let form;
     let quantity;
     let color;
-    // let lifetime: number;
+    let lifetime;
+    let particlesarray = [];
     async function handleLoad(_event) {
         console.log("HalloWelt");
         let response = await fetch(serverPage + "?" + "command=getTitels");
@@ -25,10 +26,11 @@ var Firework;
         saveBtn.addEventListener("click", sendDataToServer);
         //loadBtn.addEventListener("click", getDataFromServer);
         inputQuantity.addEventListener("change", startMeter);
+        window.setInterval(update, 20);
     }
     function createObject(_event) {
-        let mousePositionX = _event.offsetX;
-        let mousepositionY = _event.offsetY;
+        let mousePositionX = _event.clientX - Firework.crc2.canvas.offsetLeft;
+        let mousepositionY = _event.clientY - Firework.crc2.canvas.offsetTop;
         console.log("x: ", mousePositionX, "y: ", mousepositionY);
         let formData = new FormData(document.forms[0]);
         for (let entry of formData) {
@@ -37,7 +39,7 @@ var Firework;
                     quantity = Number(formData.get("Quantity"));
                     break;
                 case "ExplosionSize":
-                    // lifetime = Number(formData.get("ExplosionSize"));
+                    lifetime = Number(formData.get("ExplosionSize"));
                     break;
                 case "Particlecolor":
                     color = String(formData.get("Particlecolor"));
@@ -58,7 +60,7 @@ var Firework;
             }
         }
         // console.log("createParticle", quantity, color);
-        startFunctionCreateDots(quantity, mousePositionX, mousepositionY, color);
+        createParticle(quantity, mousePositionX, mousepositionY, color, lifetime);
     }
     async function getDataFromServer(_event) {
         console.log("Datein wurden geladen");
@@ -93,16 +95,33 @@ var Firework;
         console.log("Daten geschickt: ", responseText);
         textArea.value = "";
     }
-    function startFunctionCreateDots(_quantity, _mousePositionX, _mousePositionY, _color) {
+    function createParticle(_quantity, _mousePositionX, _mousePositionY, _color, _lifetime) {
         let pointer = new Firework.Vector(_mousePositionX, _mousePositionY);
-        for (let i = 0; i < _quantity; i++) {
-            console.log("startFunctionCreateDots");
-            // crc2.arc(_mousePositionX, _mousePositionY, 10, 0, 2 * Math.PI);
-            // crc2.fillStyle = _color;
-            // crc2.fill();
+        let color = _color;
+        //velocity.random(80, 100);
+        for (let i = 0; i < 5; i++) {
+            // console.log("startFunctionCreateDots");
+            // let angelIncrementX: number = (Math.PI * 2) / _quantity;
+            // let angelIncrementY: number = (Math.PI * 2) / _quantity;
+            // let ix: number = Math.cos(angelIncrementX * i) * Math.random();
+            // let iy: number = Math.sin(angelIncrementY * i) * Math.random();
+            let velocity = new Firework.Vector(0, 0);
+            velocity.random(40, 80);
+            let particle = new Firework.Particle(color, pointer, velocity, lifetime);
+            particlesarray.push(particle);
+            console.log(particle);
         }
-        let particle = new Firework.Particle(pointer);
-        particle.draw(_color);
+        //let particle: Particle = new Particle(pointer, color, velocity);
+        // particlesarray.push(particle);
+        // console.log(particle);
+    }
+    function update() {
+        //crc2.fillStyle = "rgba(0,0,0,0.2)";
+        Firework.crc2.fillRect(0, 0, Firework.crc2.canvas.width, Firework.crc2.canvas.height);
+        for (let particle of particlesarray) {
+            particle.move(1 / 50);
+            particle.draw();
+        }
     }
     function startMeter(_event) {
         let target = _event.target;
