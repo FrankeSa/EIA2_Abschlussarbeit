@@ -138,7 +138,7 @@ namespace Firework {
       // let iy: number = Math.sin(angelIncrementY * i) * Math.random();
 
       let velocity: Vector = new Vector(0, 0);
-      velocity.random(40, 80);
+      velocity.random(40, 40);
 
 
       let particle: Particle = new Particle(color, pointer, velocity, lifetime);

@@ -106,7 +106,7 @@ var Firework;
             // let ix: number = Math.cos(angelIncrementX * i) * Math.random();
             // let iy: number = Math.sin(angelIncrementY * i) * Math.random();
             let velocity = new Firework.Vector(0, 0);
-            velocity.random(40, 80);
+            velocity.random(40, 40);
             let particle = new Firework.Particle(color, pointer, velocity, lifetime);
             particlesarray.push(particle);
             console.log(particle);
