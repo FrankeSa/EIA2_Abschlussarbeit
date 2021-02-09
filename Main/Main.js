@@ -41,7 +41,7 @@ var Firework;
             color = String(formData.get("Particlecolor"));
             switch (entry[1]) {
                 case "dots":
-                    type = "dots";
+                    type = "dot";
                     break;
                 case "confetti":
                     type = "confetti";
@@ -93,8 +93,8 @@ var Firework;
         for (let i = 0; i < _quantity; i++) {
             // console.log("startFunctionCreateDots");
             let radian = (Math.PI * 2) / _quantity;
-            let ix = Math.cos(radian * i) * 100; //Math.random();
-            let iy = Math.sin(radian * i) * 100;
+            let ix = Math.cos(radian * i) * 200 * Math.random();
+            let iy = Math.sin(radian * i) * 200 * Math.random();
             let velocity = new Firework.Vector(ix, iy);
             //velocity.random(80, 100);
             let particle = new Firework.Particle(origin, velocity, color, lifetime);

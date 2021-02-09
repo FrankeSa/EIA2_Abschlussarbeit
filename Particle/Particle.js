@@ -28,16 +28,16 @@ var Firework;
             // if (this.position.y > crc2.canvas.height)
             //     this.position.y -= crc2.canvas.height;
             // super.move(_timeslice);
-            this.lifetime -= _timeslice;
-            if (this.lifetime < 0)
-                this.velocity = new Firework.Vector(0, 0);
+            // this.lifetime -= _timeslice;
+            // if (this.lifetime < 0)
+            //     this.velocity = new Vector(0, 0);
         }
         draw() {
             //console.log("Particle draw");
             Firework.crc2.save();
             Firework.crc2.beginPath();
             Firework.crc2.translate(this.position.x, this.position.y);
-            Firework.crc2.arc(0, 0, 10, 0, 2 * Math.PI);
+            Firework.crc2.arc(0, 0, 5, 0, 2 * Math.PI);
             Firework.crc2.fillStyle = this.color;
             Firework.crc2.fill();
             Firework.crc2.closePath();

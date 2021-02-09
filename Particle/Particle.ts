@@ -49,9 +49,9 @@ namespace Firework {
             // if (this.position.y > crc2.canvas.height)
             //     this.position.y -= crc2.canvas.height;
             // super.move(_timeslice);
-            this.lifetime -= _timeslice;
-            if (this.lifetime < 0)
-                this.velocity = new Vector(0, 0);
+            // this.lifetime -= _timeslice;
+            // if (this.lifetime < 0)
+            //     this.velocity = new Vector(0, 0);
 
 
 
@@ -64,7 +64,7 @@ namespace Firework {
             crc2.save();
             crc2.beginPath();
             crc2.translate(this.position.x, this.position.y);
-            crc2.arc(0, 0, 10, 0, 2 * Math.PI);
+            crc2.arc(0, 0, 5, 0, 2 * Math.PI);
             crc2.fillStyle = this.color;
             crc2.fill();
             crc2.closePath();

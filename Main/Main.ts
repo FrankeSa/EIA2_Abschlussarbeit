@@ -28,7 +28,8 @@ namespace Firework {
 
     let saveBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#saveBtn");
     //let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
-    let inputQuantity: HTMLButtonElement = <HTMLButtonElement>document.querySelector("input#quantity");
+    let 
+    inputQuantity: HTMLButtonElement = <HTMLButtonElement>document.querySelector("input#quantity");
     form = <HTMLFormElement>document.querySelector("form#controlPanel");
 
     canvas.addEventListener("mouseup", createObject);
@@ -55,7 +56,7 @@ namespace Firework {
       color = String(formData.get("Particlecolor"));
       switch (entry[1]) {
         case "dots":
-          type = "dots";
+          type = "dot";
           break;
         case "confetti":
           type = "confetti";
@@ -118,8 +119,8 @@ namespace Firework {
     for (let i: number = 0; i < _quantity; i++) {
       // console.log("startFunctionCreateDots");
       let radian: number = (Math.PI * 2) / _quantity;
-      let ix: number = Math.cos(radian * i) * 100; //Math.random();
-      let iy: number = Math.sin(radian * i) * 100;
+      let ix: number = Math.cos(radian * i) *200* Math.random();
+      let iy: number = Math.sin(radian * i) *200* Math.random();
 
       let velocity: Vector = new Vector(ix, iy);
       //velocity.random(80, 100);
