@@ -53,8 +53,8 @@ var Firework;
                         break;
                 }
             }
-            createParticle(quantity, mousePositionX, mousepositionY, color, lifetime);
-            console.log(type);
+            createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
+            console.log("MainTpe", type);
         }
     }
     async function getDataFromServer(_event) {
@@ -91,7 +91,7 @@ var Firework;
         console.log("Daten geschickt: ", responseText);
         textArea.value = "";
     }
-    function createParticle(_quantity, _mousePositionX, _mousePositionY, _color, _lifetime) {
+    function createParticle(_quantity, _mousePositionX, _mousePositionY, _color, _lifetime, _type) {
         let origin = new Firework.Vector(_mousePositionX, _mousePositionY);
         let color = _color;
         for (let i = 0; i < _quantity; i++) {
@@ -100,7 +100,7 @@ var Firework;
             let px = Math.cos(radian * i) * 110 * Math.random() * 2; //(2)power
             let py = Math.sin(radian * i) * 110 * Math.random() * 2; //(2)power
             let velocity = new Firework.Vector(px, py);
-            let particle = new Firework.Particle(origin, velocity, color, lifetime);
+            let particle = new Firework.Particle(origin, velocity, color, lifetime, type);
             moveables.push(particle);
         }
     }

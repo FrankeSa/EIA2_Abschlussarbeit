@@ -67,8 +67,8 @@ namespace Firework {
             break;
         }
       }
-      createParticle(quantity, mousePositionX, mousepositionY, color, lifetime);
-      console.log(type);
+      createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
+      console.log("MainTpe", type);
     }
   }
 
@@ -114,7 +114,7 @@ namespace Firework {
   }
 
 
-  function createParticle(_quantity: number, _mousePositionX: number, _mousePositionY: number, _color: string, _lifetime: number): void {
+  function createParticle(_quantity: number, _mousePositionX: number, _mousePositionY: number, _color: string, _lifetime: number, _type: string): void {
     let origin: Vector = new Vector(_mousePositionX, _mousePositionY);
     let color: string = _color;
 
@@ -125,7 +125,7 @@ namespace Firework {
       let px: number = Math.cos(radian * i) * 110 * Math.random() * 2; //(2)power
       let py: number = Math.sin(radian * i) * 110 * Math.random() * 2; //(2)power
       let velocity: Vector = new Vector(px, py);
-      let particle: MoveableObject = new Particle(origin, velocity, color, lifetime);
+      let particle: MoveableObject = new Particle(origin, velocity, color, lifetime, type);
       moveables.push(particle);
 
     }
