@@ -17,11 +17,6 @@ var Firework;
             this.x += _addend.x;
             this.y += _addend.y;
         }
-        test() {
-            let angleIncrement = (Math.PI * 2) / 5;
-            let step = Math.cos(angleIncrement * 0);
-            this.x = step;
-        }
         random(_minLength, _maxLength) {
             let length = _minLength + Math.random() * (_maxLength - _minLength);
             let direction = Math.random() * 2 * Math.PI;

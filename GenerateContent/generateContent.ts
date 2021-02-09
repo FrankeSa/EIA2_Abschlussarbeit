@@ -4,7 +4,7 @@ namespace Firework {
         rocketTitel: string;
         explosionSize: number;
         particlecolor: string;
-        shape: string;
+        particleshape: string;
        }
 
     export function generateContent(_titelList: Rocket[]): void {

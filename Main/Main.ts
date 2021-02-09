@@ -7,7 +7,7 @@ namespace Firework {
   let color: string;
   let lifetime: number;
   let type: string;
-  let particlesarray: Particle[] = [];
+  let moveables: MoveableObject[] = [];
 
 
   async function handleLoad(_event: Event): Promise<void> {
@@ -28,8 +28,7 @@ namespace Firework {
 
     let saveBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#saveBtn");
     //let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
-    let 
-    inputQuantity: HTMLButtonElement = <HTMLButtonElement>document.querySelector("input#quantity");
+    let inputQuantity: HTMLButtonElement = <HTMLButtonElement>document.querySelector("input#quantity");
     form = <HTMLFormElement>document.querySelector("form#controlPanel");
 
     canvas.addEventListener("mouseup", createObject);
@@ -44,30 +43,33 @@ namespace Firework {
 
 
   function createObject(_event: MouseEvent): void {
-    let mousePositionX: number = _event.clientX; //- crc2.canvas.offsetLeft;
-    let mousepositionY: number = _event.clientY; //- crc2.canvas.offsetTop;
-    console.log("x: ", mousePositionX, "y: ", mousepositionY);
-    let formData: FormData = new FormData(document.forms[0]);
+    let mouseklick: number = _event.button;
+    if (mouseklick === 0) {
+      let mousePositionX: number = _event.clientX; //- crc2.canvas.offsetLeft;
+      let mousepositionY: number = _event.clientY; //- crc2.canvas.offsetTop;
+      console.log("x: ", mousePositionX, "y: ", mousepositionY);
+      let formData: FormData = new FormData(document.forms[0]);
 
 
-    for (let entry of formData) {
-      quantity = Number(formData.get("Quantity"));
-      lifetime = Number(formData.get("ExplosionSize"));
-      color = String(formData.get("Particlecolor"));
-      switch (entry[1]) {
-        case "dots":
-          type = "dot";
-          break;
-        case "confetti":
-          type = "confetti";
-          break;
-        case "heart":
-          type = "heart";
-          break;
+      for (let entry of formData) {
+        quantity = Number(formData.get("quantity"));
+        lifetime = Number(formData.get("explosionSize"));
+        color = String(formData.get("particlecolor"));
+        switch (entry[1]) {
+          case "dot":
+            type = "dot";
+            break;
+          case "confetti":
+            type = "confetti";
+            break;
+          case "heart":
+            type = "heart";
+            break;
+        }
       }
+      createParticle(quantity, mousePositionX, mousepositionY, color, lifetime);
+      console.log(type);
     }
-    createParticle(quantity, mousePositionX, mousepositionY, color, lifetime);
-    console.log(type);
   }
 
   export async function getDataFromServer(_event: Event): Promise<void> {
@@ -80,19 +82,20 @@ namespace Firework {
     let allDatas: Rocket[] = JSON.parse(responseContent);
     let result: Rocket | undefined = allDatas.find(item => item.rocketTitel === userValue);
     console.log(result);
-    // createUserRocket(result);
+    createUserRocket(result);
 
   }
 
-  // function createUserRocket(_result: Rocket | undefined): void {
+  function createUserRocket(_result: Rocket | undefined): void {
 
-  //   let color: string | undefined = _result?.particlecolor;
-  //   let lifetime: number | undefined = _result?.explosionSize;
-  //   console.log(color, lifetime);
-  //   // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
-  //   // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
+    let color: string | undefined = _result?.particlecolor;
+    let lifetime: number | undefined = _result?.explosionSize;
+    let type: string | undefined = _result?.particleshape;
+    console.log(color, lifetime, type);
+    // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
+    // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
 
-  // }
+  }
 
 
   async function sendDataToServer(_event: Event): Promise<void> {
@@ -119,42 +122,44 @@ namespace Firework {
     for (let i: number = 0; i < _quantity; i++) {
       // console.log("startFunctionCreateDots");
       let radian: number = (Math.PI * 2) / _quantity;
-      let ix: number = Math.cos(radian * i) *200* Math.random();
-      let iy: number = Math.sin(radian * i) *200* Math.random();
-
-      let velocity: Vector = new Vector(ix, iy);
-      //velocity.random(80, 100);
-      let particle: Particle = new Particle(origin, velocity, color, lifetime);
-      particlesarray.push(particle);
-      console.log(particle);
+      let px: number = Math.cos(radian * i) * 110 * Math.random() * 2; //(2)power
+      let py: number = Math.sin(radian * i) * 110 * Math.random() * 2; //(2)power
+      let velocity: Vector = new Vector(px, py);
+      let particle: MoveableObject = new Particle(origin, velocity, color, lifetime);
+      moveables.push(particle);
 
     }
-
-
-    //let particle: Particle = new Particle(pointer, color, velocity);
-    // particlesarray.push(particle);
-    // console.log(particle);
-
-
   }
 
 
 
   function update(): void {
-    console.log("Update läuft");
 
     crc2.fillStyle = "rgba(0,0,0,0.2)";
-
-
     crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
 
-    for (let particle of particlesarray) {
-      particle.move(1 / 50);
-      particle.draw();
+    for (let moveable of moveables) {
+      moveable.move(1 / 50);
+      moveable.draw();
 
     }
+    deleteExpandables();
 
   }
+
+  function deleteExpandables(): void {
+    for (let index: number = moveables.length - 1; index >= 0; index--) {
+      if (moveables[index].expendable) //im Array an stelle des gerade befindenden Index
+        moveables.splice(index, 1);
+    }
+  }
+
+
+
+
+
+
+
 
   function startMeter(_event: Event): void {
     let target: HTMLInputElement = <HTMLInputElement>_event.target;
@@ -165,7 +170,7 @@ namespace Firework {
 
   function sarah(_event: MouseEvent): void {
     let mouseklick: number = _event.button;
-    if (mouseklick === 2)
+    if (mouseklick === 1)
       console.log("HalloSarah", _event.button);
 
   }

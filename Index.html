@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Stylesheet.css" type="text/css" media="screen" />
-    <script src="./Main/Main.js"></script>
-    <script src="./GenerateContent/generateContent.js"></script>
     <script src="./MoveableObject/MoveableObject.js"></script>
     <script src="./Particle/Particle.js"></script>
+    <script src="./Main/Main.js"></script>
+    <script src="./GenerateContent/generateContent.js"></script>
+
     <script src="./Vector/Vector.js"></script>
 
 
@@ -18,36 +19,36 @@
 
 <body>
 
-    <canvas width="670" height="500"></canvas>
+    <canvas width="970" height="500"></canvas>
 
 
     <form id="controlPanel" method="GET">
 
         <fieldset>
             <legend> choose particle quantity </legend>
-            <input id="quantity" type="number" name="Quantity" step="100" min="100" max="400" value="100" />
+            <input id="quantity" type="number" name="quantity" step="100" min="100" max="400" value="100" />
             <meter value="0" min="100" max="400"> </meter>
         </fieldset>
         <fieldset>
             <legend> choose explosion size</legend>
-            <input type="radio" name="ExplosionSize" id="small" value="2" checked />
+            <input type="radio" name="explosionSize" id="small" value="3" checked />
             <label for="small">Small</label>
-            <input type="radio" name="ExplosionSize" id="medium" value="3" />
+            <input type="radio" name="explosionSize" id="medium" value="4" />
             <label for="medium">Medium</label>
-            <input type="radio" name="ExplosionSize" id="big" value="4" />
+            <input type="radio" name="explosionSize" id="big" value="5" />
             <label for="big">Big</label>
         </fieldset>
         <fieldset>
             <legend> choose particle shape </legend>
-            <select name="Shape">
-                <option value="dots">Dots</option>
+            <select name="particleshape">
+                <option value="dot">Dots</option>
                 <option value="confetti">Confetti</option>
                 <option value="heart">Heart </option>
             </select>
         </fieldset>
         <fieldset>
             <legend> choose particle color </legend>
-            <input type="color" name="Particlecolor" id="particlecolor" value="#ffffff">
+            <input type="color" name="particlecolor" id="particlecolor" value="#ffffff">
         </fieldset>
     </form>
 
