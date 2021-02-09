@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Stylesheet.css" type="text/css" media="screen" />
+
     <script src="./MoveableObject/MoveableObject.js"></script>
     <script src="./Particle/Particle.js"></script>
     <script src="./Main/Main.js"></script>
     <script src="./GenerateContent/generateContent.js"></script>
-
     <script src="./Vector/Vector.js"></script>
 
 
@@ -19,7 +19,7 @@
 
 <body>
 
-    <canvas width="970" height="500"></canvas>
+    <canvas width="1070" height="500"></canvas>
 
 
     <form id="controlPanel" method="GET">
@@ -43,7 +43,8 @@
             <select name="particleshape">
                 <option value="dot">Dots</option>
                 <option value="confetti">Confetti</option>
-                <option value="heart">Heart </option>
+                <option value="star">Star </option>
+                <option value="popcorn">Popcorn </option>
             </select>
         </fieldset>
         <fieldset>
@@ -62,7 +63,10 @@
         </fieldset>
         <button type="button" id="loadBtn">load rocket</button>
     </div>
+    <img>
 
 </body>
+<img id="nasalogo" src="./assets/nasa.png" alt="nasalogo">
+<img id="fireworkrockets" src="./assets/fireworkrockets.png" alt="fireworkrockets">
 
 </html>

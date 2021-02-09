@@ -7,17 +7,17 @@ body{
 }
 
 canvas{
-    background-color: black;
+    background-color: #000000;
     grid-template-columns: 1;
     grid-row-start: 1;
     grid-row-end: 3;
-    border: solid white;
+    border: solid #ffffff;
 }
 
 form{
 
 grid-column: 2;
-background-color: #d9d9d9;
+background-color: #d5e1e8;
 padding: 1em;
 
 }
@@ -30,15 +30,37 @@ padding: 0.5em;
 
 div{    
 grid-column: 2;
-background-color: #d9d9d9;
+background-color: #d5e1e8;
 padding: 1em;
 }
 
 
-    meter::-webkit-meter-bar {
-        background: rgb(255, 255, 255);
+meter::-webkit-meter-bar {
+background: rgb(255, 255, 255);
     }
 
 meter::-webkit-meter-optimum-value {
-    background: linear-gradient(#c8e90c, #c8e90c);
+background: linear-gradient(#c8e90c, #c8e90c);
+}
+
+#particlecolor{
+
+width: 100px;
+height: 50px;
+}
+
+#nasalogo{
+    position: relative;
+    grid-column: 2;
+    grid-row: 3;
+    margin: 10%;
+
+}
+
+#fireworkrockets{
+    position: relative;
+    grid-column: 1;
+    grid-row: 3;
+   
+
 }

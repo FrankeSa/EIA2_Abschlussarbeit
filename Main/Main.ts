@@ -62,14 +62,15 @@ namespace Firework {
           case "confetti":
             type = "confetti";
             break;
-          case "heart":
-            type = "heart";
+          case "star":
+            type = "star";
+          case "popcorn":
+            type = "popcorn";
             break;
         }
       }
       createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
-      console.log("MainTpe", type);
-    }
+     }
   }
 
   export async function getDataFromServer(_event: Event): Promise<void> {
@@ -115,6 +116,7 @@ namespace Firework {
 
 
   function createParticle(_quantity: number, _mousePositionX: number, _mousePositionY: number, _color: string, _lifetime: number, _type: string): void {
+   
     let origin: Vector = new Vector(_mousePositionX, _mousePositionY);
     let color: string = _color;
 

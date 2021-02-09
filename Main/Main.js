@@ -48,13 +48,14 @@ var Firework;
                     case "confetti":
                         type = "confetti";
                         break;
-                    case "heart":
-                        type = "heart";
+                    case "star":
+                        type = "star";
+                    case "popcorn":
+                        type = "popcorn";
                         break;
                 }
             }
             createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
-            console.log("MainTpe", type);
         }
     }
     async function getDataFromServer(_event) {
