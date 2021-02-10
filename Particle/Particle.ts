@@ -30,7 +30,6 @@ namespace Firework {
 
 
         draw(): void {
-            //console.log("Particle draw");
             switch (this.type) {
                 case "dot":
                     crc2.save();
@@ -86,8 +85,7 @@ namespace Firework {
                     crc2.fill();
                     crc2.restore();
                     break;
-            }
-           
+            }           
         }
     }
 }

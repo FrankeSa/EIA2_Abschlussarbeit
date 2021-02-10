@@ -20,7 +20,6 @@ var Firework;
             // this.position.y += this.velocity.y;
         }
         draw() {
-            //console.log("Particle draw");
             switch (this.type) {
                 case "dot":
                     Firework.crc2.save();
