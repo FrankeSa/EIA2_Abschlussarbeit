@@ -53,6 +53,7 @@ var Firework;
             }
         }
         createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
+        console.log(type);
     }
     async function getDataFromServer(_event) {
         console.log("Datein wurden geladen");
