@@ -70,7 +70,7 @@ namespace Firework {
       }
     }
     createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
-  console.log(type);
+    console.log(type);
   }
 
   export async function getDataFromServer(_event: Event): Promise<void> {

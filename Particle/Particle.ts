@@ -14,6 +14,7 @@ namespace Firework {
             this.velocity = _velocity.copy();
             this.lifetime = _lifetime;
             this.type = _type;
+            console.log("constructor",this.type);
 
         }
 
