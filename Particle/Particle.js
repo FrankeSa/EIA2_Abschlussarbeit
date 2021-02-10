@@ -4,7 +4,6 @@ var Firework;
     class Particle extends Firework.MoveableObject {
         constructor(_position, _velocity, _color, _lifetime, _type) {
             super(_position);
-            this.gravity = 1;
             this.color = _color;
             this.velocity = _velocity.copy();
             this.lifetime = _lifetime;
@@ -12,7 +11,7 @@ var Firework;
         }
         move(_timeslice) {
             super.move(_timeslice);
-            this.velocity.y += this.gravity;
+            this.velocity.y += Particle.gravity;
             this.lifetime -= _timeslice;
             if (this.lifetime < 0)
                 this.expendable = true;
@@ -30,6 +29,7 @@ var Firework;
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.fill();
                     Firework.crc2.restore();
+                    console.log(this.type);
                     break;
                 case "confetti":
                     Firework.crc2.save();
@@ -41,6 +41,7 @@ var Firework;
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.fill();
                     Firework.crc2.restore();
+                    console.log(this.type);
                     break;
                 case "star":
                     Firework.crc2.save();
@@ -62,6 +63,7 @@ var Firework;
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.fill();
                     Firework.crc2.restore();
+                    console.log(this.type);
                     break;
                 case "popcorn":
                     Firework.crc2.save();
@@ -74,10 +76,12 @@ var Firework;
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.fill();
                     Firework.crc2.restore();
+                    console.log(this.type);
                     break;
             }
         }
     }
+    Particle.gravity = 1;
     Firework.Particle = Particle;
 })(Firework || (Firework = {}));
 //# sourceMappingURL=Particle.js.map

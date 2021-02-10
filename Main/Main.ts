@@ -1,13 +1,13 @@
 namespace Firework {
   window.addEventListener("load", handleLoad);
   let serverPage: string = "https://sarahabschlussarbeit.herokuapp.com/"; //"http://localhost:5001/";
-  export let crc2: CanvasRenderingContext2D;
   let form: HTMLFormElement;
   let quantity: number;
   let color: string;
   let lifetime: number;
   let type: string;
   let moveables: MoveableObject[] = [];
+  export let crc2: CanvasRenderingContext2D;
 
 
   async function handleLoad(_event: Event): Promise<void> {
@@ -43,33 +43,34 @@ namespace Firework {
 
 
   function createObject(_event: MouseEvent): void {
-    let mouseklick: number = _event.button;
-    if (mouseklick === 0) {
-      let mousePositionX: number = _event.clientX; //- crc2.canvas.offsetLeft;
-      let mousepositionY: number = _event.clientY; //- crc2.canvas.offsetTop;
-      let formData: FormData = new FormData(document.forms[0]);
 
 
-      for (let entry of formData) {
-        quantity = Number(formData.get("quantity"));
-        lifetime = Number(formData.get("explosionSize"));
-        color = String(formData.get("particlecolor"));
-        switch (entry[1]) {
-          case "dot":
-            type = "dot";
-            break;
-          case "confetti":
-            type = "confetti";
-            break;
-          case "star":
-            type = "star";
-          case "star":
-            type = "star";
-            break;
-        }
+    let mousePositionX: number = _event.clientX; //- crc2.canvas.offsetLeft;
+    let mousepositionY: number = _event.clientY; //- crc2.canvas.offsetTop;
+    let formData: FormData = new FormData(document.forms[0]);
+
+
+    for (let entry of formData) {
+
+      quantity = Number(formData.get("quantity"));
+      lifetime = Number(formData.get("explosionSize"));
+      color = String(formData.get("particlecolor"));
+      switch (entry[1]) {
+        case "dot":
+          type = "dot";
+          break;
+        case "confetti":
+          type = "confetti";
+          break;
+        case "star":
+          type = "star";
+        case "popcorn":
+          type = "popcorn";
+          break;
       }
-      createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
-     }
+    }
+    createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
+  
   }
 
   export async function getDataFromServer(_event: Event): Promise<void> {
@@ -115,13 +116,11 @@ namespace Firework {
 
 
   function createParticle(_quantity: number, _mousePositionX: number, _mousePositionY: number, _color: string, _lifetime: number, _type: string): void {
-   
+
     let origin: Vector = new Vector(_mousePositionX, _mousePositionY);
     let color: string = _color;
 
-
     for (let i: number = 0; i < _quantity; i++) {
-      // console.log("startFunctionCreateDots");
       let radian: number = (Math.PI * 2) / _quantity;
       let px: number = Math.cos(radian * i) * 110 * Math.random() * 2; //(2)power
       let py: number = Math.sin(radian * i) * 110 * Math.random() * 2; //(2)power

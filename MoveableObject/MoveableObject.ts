@@ -1,8 +1,8 @@
 namespace Firework {
-    export class MoveableObject {
-        position: Vector;
-        velocity: Vector;
-        expendable: boolean = false;
+    export abstract class MoveableObject {
+        public position: Vector;
+        public velocity: Vector;
+        public expendable: boolean = false;
 
 
         constructor(_position?: Vector) {
@@ -16,18 +16,14 @@ namespace Firework {
 
         }
 
-        move(_timeslice: number): void {
+        public move(_timeslice: number): void {
 
             let offset: Vector = this.velocity.copy();
             offset.scale(_timeslice);
             this.position.add(offset);
         }
 
-        draw(): void {
-            //console.log("MoveableObject draw");
-            //
-        }
-
+        public abstract draw(): void;   
 
     }
 

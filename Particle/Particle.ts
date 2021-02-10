@@ -1,11 +1,12 @@
 namespace Firework {
     export class Particle extends MoveableObject {
-        position: Vector;
-        velocity: Vector;
-        color: string;
-        lifetime: number;
-        type: string;
-        gravity: number = 1;
+        private static gravity: number = 1;
+        public position: Vector;
+        public velocity: Vector;
+        private type: string;
+        private lifetime: number;
+        private color: string;
+
 
         constructor(_position: Vector, _velocity: Vector, _color: string, _lifetime: number, _type: string) {
             super(_position);
@@ -16,9 +17,9 @@ namespace Firework {
 
         }
 
-        move(_timeslice: number): void {
+        public move(_timeslice: number): void {
             super.move(_timeslice);
-            this.velocity.y += this.gravity;
+            this.velocity.y += Particle.gravity;
             this.lifetime -= _timeslice;
             if (this.lifetime < 0)
                 this.expendable = true;
@@ -29,7 +30,7 @@ namespace Firework {
         }
 
 
-        draw(): void {
+        public draw(): void {
             switch (this.type) {
                 case "dot":
                     crc2.save();
@@ -40,6 +41,7 @@ namespace Firework {
                     crc2.fillStyle = this.color;
                     crc2.fill();
                     crc2.restore();
+                    console.log(this.type);
                     break;
                 case "confetti":
                     crc2.save();
@@ -51,6 +53,7 @@ namespace Firework {
                     crc2.fillStyle = this.color;
                     crc2.fill();
                     crc2.restore();
+                    console.log(this.type);
                     break;
                 case "star":
                     crc2.save();
@@ -72,6 +75,7 @@ namespace Firework {
                     crc2.fillStyle = this.color;
                     crc2.fill();
                     crc2.restore();
+                    console.log(this.type);
                     break;
                 case "popcorn":
                     crc2.save();
@@ -84,8 +88,9 @@ namespace Firework {
                     crc2.fillStyle = this.color;
                     crc2.fill();
                     crc2.restore();
+                    console.log(this.type);
                     break;
-            }           
+            }
         }
     }
 }

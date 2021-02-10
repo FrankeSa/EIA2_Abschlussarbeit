@@ -31,31 +31,28 @@ var Firework;
         window.setInterval(update, 20);
     }
     function createObject(_event) {
-        let mouseklick = _event.button;
-        if (mouseklick === 0) {
-            let mousePositionX = _event.clientX; //- crc2.canvas.offsetLeft;
-            let mousepositionY = _event.clientY; //- crc2.canvas.offsetTop;
-            let formData = new FormData(document.forms[0]);
-            for (let entry of formData) {
-                quantity = Number(formData.get("quantity"));
-                lifetime = Number(formData.get("explosionSize"));
-                color = String(formData.get("particlecolor"));
-                switch (entry[1]) {
-                    case "dot":
-                        type = "dot";
-                        break;
-                    case "confetti":
-                        type = "confetti";
-                        break;
-                    case "star":
-                        type = "star";
-                    case "star":
-                        type = "star";
-                        break;
-                }
+        let mousePositionX = _event.clientX; //- crc2.canvas.offsetLeft;
+        let mousepositionY = _event.clientY; //- crc2.canvas.offsetTop;
+        let formData = new FormData(document.forms[0]);
+        for (let entry of formData) {
+            quantity = Number(formData.get("quantity"));
+            lifetime = Number(formData.get("explosionSize"));
+            color = String(formData.get("particlecolor"));
+            switch (entry[1]) {
+                case "dot":
+                    type = "dot";
+                    break;
+                case "confetti":
+                    type = "confetti";
+                    break;
+                case "star":
+                    type = "star";
+                case "popcorn":
+                    type = "popcorn";
+                    break;
             }
-            createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
         }
+        createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
     }
     async function getDataFromServer(_event) {
         console.log("Datein wurden geladen");
@@ -95,7 +92,6 @@ var Firework;
         let origin = new Firework.Vector(_mousePositionX, _mousePositionY);
         let color = _color;
         for (let i = 0; i < _quantity; i++) {
-            // console.log("startFunctionCreateDots");
             let radian = (Math.PI * 2) / _quantity;
             let px = Math.cos(radian * i) * 110 * Math.random() * 2; //(2)power
             let py = Math.sin(radian * i) * 110 * Math.random() * 2; //(2)power

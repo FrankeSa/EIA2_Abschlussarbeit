@@ -15,10 +15,6 @@ var Firework;
             offset.scale(_timeslice);
             this.position.add(offset);
         }
-        draw() {
-            //console.log("MoveableObject draw");
-            //
-        }
     }
     Firework.MoveableObject = MoveableObject;
 })(Firework || (Firework = {}));
