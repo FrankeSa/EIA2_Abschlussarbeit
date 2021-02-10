@@ -35,7 +35,6 @@ var Firework;
         if (mouseklick === 0) {
             let mousePositionX = _event.clientX; //- crc2.canvas.offsetLeft;
             let mousepositionY = _event.clientY; //- crc2.canvas.offsetTop;
-            console.log("x: ", mousePositionX, "y: ", mousepositionY);
             let formData = new FormData(document.forms[0]);
             for (let entry of formData) {
                 quantity = Number(formData.get("quantity"));
@@ -50,8 +49,8 @@ var Firework;
                         break;
                     case "star":
                         type = "star";
-                    case "popcorn":
-                        type = "popcorn";
+                    case "star":
+                        type = "star";
                         break;
                 }
             }

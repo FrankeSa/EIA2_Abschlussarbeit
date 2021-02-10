@@ -5,12 +5,8 @@ var Firework;
         constructor(_position, _velocity, _color, _lifetime, _type) {
             super(_position);
             this.gravity = 1;
-            // console.log("constructor particle");
-            //this.position = _position.copy();
-            // this.position = new Vector(_position.x, _position.y);
             this.color = _color;
             this.velocity = _velocity.copy();
-            this.velocity = new Firework.Vector(_velocity.x, _velocity.y);
             this.lifetime = _lifetime;
             this.type = _type;
         }

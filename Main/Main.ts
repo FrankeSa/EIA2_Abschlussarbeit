@@ -47,7 +47,6 @@ namespace Firework {
     if (mouseklick === 0) {
       let mousePositionX: number = _event.clientX; //- crc2.canvas.offsetLeft;
       let mousepositionY: number = _event.clientY; //- crc2.canvas.offsetTop;
-      console.log("x: ", mousePositionX, "y: ", mousepositionY);
       let formData: FormData = new FormData(document.forms[0]);
 
 
@@ -64,8 +63,8 @@ namespace Firework {
             break;
           case "star":
             type = "star";
-          case "popcorn":
-            type = "popcorn";
+          case "star":
+            type = "star";
             break;
         }
       }

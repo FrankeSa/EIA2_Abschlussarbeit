@@ -9,13 +9,8 @@ namespace Firework {
 
         constructor(_position: Vector, _velocity: Vector, _color: string, _lifetime: number, _type: string) {
             super(_position);
-
-            // console.log("constructor particle");
-            //this.position = _position.copy();
-            // this.position = new Vector(_position.x, _position.y);
             this.color = _color;
             this.velocity = _velocity.copy();
-            this.velocity = new Vector(_velocity.x, _velocity.y);
             this.lifetime = _lifetime;
             this.type = _type;
 
@@ -92,6 +87,7 @@ namespace Firework {
                     crc2.restore();
                     break;
             }
+           
         }
     }
 }
