@@ -5,7 +5,8 @@ namespace Firework {
         explosionSize: number;
         particlecolor: string;
         particleshape: string;
-       }
+        quantity: number;
+    }
 
     export function generateContent(_titelList: Rocket[]): void {
 
@@ -36,9 +37,6 @@ namespace Firework {
             option.value = option.textContent = titel.rocketTitel;
 
             selection.appendChild(option);
-            // group.appendChild(selection);
-
-
 
         }
         return selection;

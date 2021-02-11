@@ -20,7 +20,6 @@ var Firework;
             option.setAttribute("name", titel.rocketTitel);
             option.value = option.textContent = titel.rocketTitel;
             selection.appendChild(option);
-            // group.appendChild(selection);
         }
         return selection;
     }

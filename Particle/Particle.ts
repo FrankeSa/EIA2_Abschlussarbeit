@@ -14,8 +14,6 @@ namespace Firework {
             this.velocity = _velocity.copy();
             this.lifetime = _lifetime;
             this.type = _type;
-            console.log("constructor",this.type);
-
         }
 
         public move(_timeslice: number): void {
@@ -42,7 +40,6 @@ namespace Firework {
                     crc2.fillStyle = this.color;
                     crc2.fill();
                     crc2.restore();
-                    console.log(this.type);
                     break;
                 case "confetti":
                     crc2.save();
@@ -54,7 +51,6 @@ namespace Firework {
                     crc2.fillStyle = this.color;
                     crc2.fill();
                     crc2.restore();
-                    console.log(this.type);
                     break;
                 case "star":
                     crc2.save();
@@ -76,7 +72,6 @@ namespace Firework {
                     crc2.fillStyle = this.color;
                     crc2.fill();
                     crc2.restore();
-                    console.log(this.type);
                     break;
                 case "popcorn":
                     crc2.save();
@@ -89,7 +84,6 @@ namespace Firework {
                     crc2.fillStyle = this.color;
                     crc2.fill();
                     crc2.restore();
-                    console.log(this.type);
                     break;
             }
         }

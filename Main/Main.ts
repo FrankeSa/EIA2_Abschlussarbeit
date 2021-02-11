@@ -5,8 +5,9 @@ namespace Firework {
   let quantity: number;
   let color: string;
   let lifetime: number;
-  let type: string;
+  let shape: string;
   let moveables: MoveableObject[] = [];
+  let result: Rocket;
   export let crc2: CanvasRenderingContext2D;
 
 
@@ -31,8 +32,8 @@ namespace Firework {
     let inputQuantity: HTMLButtonElement = <HTMLButtonElement>document.querySelector("input#quantity");
     form = <HTMLFormElement>document.querySelector("form#controlPanel");
 
-    canvas.addEventListener("mouseup", createObject);
-    canvas.addEventListener("mousedown", sarah);
+    canvas.addEventListener("click", createObject);
+    document.addEventListener("keydown", sarah);
     saveBtn.addEventListener("click", sendDataToServer);
     //loadBtn.addEventListener("click", getDataFromServer);
     inputQuantity.addEventListener("change", startMeter);
@@ -57,20 +58,20 @@ namespace Firework {
       color = String(formData.get("particlecolor"));
       switch (entry[1]) {
         case "dot":
-          type = "dot";
+          shape = "dot";
           break;
         case "confetti":
-          type = "confetti";
+          shape = "confetti";
           break;
         case "star":
-          type = "star";
+          shape = "star";
+          break;
         case "popcorn":
-          type = "popcorn";
+          shape = "popcorn";
           break;
       }
     }
-    createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
-    console.log(type);
+    createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, shape);
   }
 
   export async function getDataFromServer(_event: Event): Promise<void> {
@@ -81,18 +82,20 @@ namespace Firework {
     let response: Response = await fetch(serverPage + "?" + "command=getAllDatas");
     let responseContent: string = await response.text();
     let allDatas: Rocket[] = JSON.parse(responseContent);
-    let result: Rocket | undefined = allDatas.find(item => item.rocketTitel === userValue);
+    result = <Rocket>allDatas.find(item => item.rocketTitel === userValue);
     console.log(result);
     createUserRocket(result);
 
   }
 
-  function createUserRocket(_result: Rocket | undefined): void {
 
-    let color: string | undefined = _result?.particlecolor;
-    let lifetime: number | undefined = _result?.explosionSize;
-    let type: string | undefined = _result?.particleshape;
-    console.log(color, lifetime, type);
+  function createUserRocket(_result: Rocket): void {
+
+    let color: string = _result.particlecolor;
+    let lifetime: number = _result.explosionSize;
+    let shape: string = _result.particleshape;
+    let quantity: number = _result.quantity;
+    console.log("Das ist deine Rakete", "Particleshape= ", shape, "Particlecolor= ", color, "ExplosionSize= ", lifetime, "Particleqoantity= ", quantity);
     // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
     // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
 
@@ -125,7 +128,7 @@ namespace Firework {
       let px: number = Math.cos(radian * i) * 110 * Math.random() * 2; //(2)power
       let py: number = Math.sin(radian * i) * 110 * Math.random() * 2; //(2)power
       let velocity: Vector = new Vector(px, py);
-      let particle: MoveableObject = new Particle(origin, velocity, color, lifetime, type);
+      let particle: MoveableObject = new Particle(origin, velocity, color, lifetime, shape);
       moveables.push(particle);
 
     }
@@ -141,11 +144,10 @@ namespace Firework {
     for (let moveable of moveables) {
       moveable.move(1 / 50);
       moveable.draw();
-
     }
     deleteExpandables();
-
   }
+
 
   function deleteExpandables(): void {
     for (let index: number = moveables.length - 1; index >= 0; index--) {
@@ -156,7 +158,10 @@ namespace Firework {
 
 
 
+  function sarah(_event: KeyboardEvent): void {
+    console.log(_event);
 
+  }
 
 
 
@@ -165,13 +170,6 @@ namespace Firework {
     let target: HTMLInputElement = <HTMLInputElement>_event.target;
     let meter: HTMLMeterElement = <HTMLMeterElement>document.querySelector("meter");
     meter.value = parseFloat(target.value);
-
-  }
-
-  function sarah(_event: MouseEvent): void {
-    let mouseklick: number = _event.button;
-    if (mouseklick === 1)
-      console.log("HalloSarah", _event.button);
 
   }
 

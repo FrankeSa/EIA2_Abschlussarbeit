@@ -8,7 +8,6 @@ var Firework;
             this.velocity = _velocity.copy();
             this.lifetime = _lifetime;
             this.type = _type;
-            console.log("constructor", this.type);
         }
         move(_timeslice) {
             super.move(_timeslice);
@@ -30,7 +29,6 @@ var Firework;
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.fill();
                     Firework.crc2.restore();
-                    console.log(this.type);
                     break;
                 case "confetti":
                     Firework.crc2.save();
@@ -42,7 +40,6 @@ var Firework;
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.fill();
                     Firework.crc2.restore();
-                    console.log(this.type);
                     break;
                 case "star":
                     Firework.crc2.save();
@@ -64,7 +61,6 @@ var Firework;
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.fill();
                     Firework.crc2.restore();
-                    console.log(this.type);
                     break;
                 case "popcorn":
                     Firework.crc2.save();
@@ -77,7 +73,6 @@ var Firework;
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.fill();
                     Firework.crc2.restore();
-                    console.log(this.type);
                     break;
             }
         }

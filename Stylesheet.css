@@ -4,6 +4,8 @@ body{
     grid-template-columns: 70% auto;
     grid-template-rows: auto auto;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    
 }
 
 canvas{
@@ -12,6 +14,11 @@ canvas{
     grid-row-start: 1;
     grid-row-end: 3;
     border: solid #ffffff;
+    cursor: pointer;  
+}
+canvas:hover{    
+    border:solid #c8e90c;
+    cursor: crosshair;
 }
 
 form{
@@ -19,12 +26,11 @@ form{
 grid-column: 2;
 background-color: #d5e1e8;
 padding: 1em;
-
 }
 
 fieldset{
 margin: 0.5em;
-padding: 0.5em;
+padding: 0.7em;
 /* border-style: none; */
 }
 
@@ -43,11 +49,48 @@ meter::-webkit-meter-optimum-value {
 background: linear-gradient(#c8e90c, #c8e90c);
 }
 
-#particlecolor{
+meter{
+    height: 20px;
+}
 
+#particlecolor{
 width: 100px;
 height: 50px;
+cursor: pointer; 
 }
+
+input:focus{    
+    background-color: #c8e90c;
+    font-style: italic;
+    font-size: 15px;
+    
+}
+
+input{
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+select{
+ cursor: pointer;   
+ border-radius: 4px;
+}
+
+select:focus{
+    font-size: 20px;  
+}
+
+button{
+    border-radius: 4px;
+    height: 20px;
+    cursor: pointer;
+    }
+
+button:hover{
+    color: #e90000;
+    background-color: #c8e90c;
+    }
+
 
 #nasalogo{
     position: relative;
@@ -60,7 +103,9 @@ height: 50px;
 #fireworkrockets{
     position: relative;
     grid-column: 1;
-    grid-row: 3;
-   
-
+    grid-row: 3; 
 }
+#nasalogo:hover{
+    height: 60%;
+}
+

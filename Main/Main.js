@@ -9,6 +9,7 @@ var Firework;
     let lifetime;
     let type;
     let moveables = [];
+    let result;
     async function handleLoad(_event) {
         console.log("HalloWelt");
         let response = await fetch(serverPage + "?" + "command=getTitels");
@@ -24,7 +25,6 @@ var Firework;
         let inputQuantity = document.querySelector("input#quantity");
         form = document.querySelector("form#controlPanel");
         canvas.addEventListener("mouseup", createObject);
-        canvas.addEventListener("mousedown", sarah);
         saveBtn.addEventListener("click", sendDataToServer);
         //loadBtn.addEventListener("click", getDataFromServer);
         inputQuantity.addEventListener("change", startMeter);
@@ -47,13 +47,13 @@ var Firework;
                     break;
                 case "star":
                     type = "star";
+                    break;
                 case "popcorn":
                     type = "popcorn";
                     break;
             }
         }
         createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
-        console.log(type);
     }
     async function getDataFromServer(_event) {
         console.log("Datein wurden geladen");
@@ -63,7 +63,7 @@ var Firework;
         let response = await fetch(serverPage + "?" + "command=getAllDatas");
         let responseContent = await response.text();
         let allDatas = JSON.parse(responseContent);
-        let result = allDatas.find(item => item.rocketTitel === userValue);
+        result = allDatas.find(item => item.rocketTitel === userValue);
         console.log(result);
         createUserRocket(result);
     }
@@ -120,11 +120,6 @@ var Firework;
         let target = _event.target;
         let meter = document.querySelector("meter");
         meter.value = parseFloat(target.value);
-    }
-    function sarah(_event) {
-        let mouseklick = _event.button;
-        if (mouseklick === 1)
-            console.log("HalloSarah", _event.button);
     }
 })(Firework || (Firework = {}));
 //# sourceMappingURL=Main.js.map
