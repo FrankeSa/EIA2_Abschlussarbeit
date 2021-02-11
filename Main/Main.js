@@ -7,7 +7,7 @@ var Firework;
     let quantity;
     let color;
     let lifetime;
-    let type;
+    let shape;
     let moveables = [];
     let result;
     async function handleLoad(_event) {
@@ -24,7 +24,8 @@ var Firework;
         //let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
         let inputQuantity = document.querySelector("input#quantity");
         form = document.querySelector("form#controlPanel");
-        canvas.addEventListener("mouseup", createObject);
+        canvas.addEventListener("click", createObject);
+        document.addEventListener("keydown", sarah);
         saveBtn.addEventListener("click", sendDataToServer);
         //loadBtn.addEventListener("click", getDataFromServer);
         inputQuantity.addEventListener("change", startMeter);
@@ -40,20 +41,20 @@ var Firework;
             color = String(formData.get("particlecolor"));
             switch (entry[1]) {
                 case "dot":
-                    type = "dot";
+                    shape = "dot";
                     break;
                 case "confetti":
-                    type = "confetti";
+                    shape = "confetti";
                     break;
                 case "star":
-                    type = "star";
+                    shape = "star";
                     break;
                 case "popcorn":
-                    type = "popcorn";
+                    shape = "popcorn";
                     break;
             }
         }
-        createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, type);
+        createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, shape);
     }
     async function getDataFromServer(_event) {
         console.log("Datein wurden geladen");
@@ -69,10 +70,11 @@ var Firework;
     }
     Firework.getDataFromServer = getDataFromServer;
     function createUserRocket(_result) {
-        let color = _result?.particlecolor;
-        let lifetime = _result?.explosionSize;
-        let type = _result?.particleshape;
-        console.log(color, lifetime, type);
+        let color = _result.particlecolor;
+        let lifetime = _result.explosionSize;
+        let shape = _result.particleshape;
+        let quantity = _result.quantity;
+        console.log("Das ist deine Rakete", "Particleshape= ", shape, "Particlecolor= ", color, "ExplosionSize= ", lifetime, "Particleqoantity= ", quantity);
         // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
         // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
     }
@@ -97,7 +99,7 @@ var Firework;
             let px = Math.cos(radian * i) * 110 * Math.random() * 2; //(2)power
             let py = Math.sin(radian * i) * 110 * Math.random() * 2; //(2)power
             let velocity = new Firework.Vector(px, py);
-            let particle = new Firework.Particle(origin, velocity, color, lifetime, type);
+            let particle = new Firework.Particle(origin, velocity, color, lifetime, shape);
             moveables.push(particle);
         }
     }
@@ -115,6 +117,9 @@ var Firework;
             if (moveables[index].expendable) //im Array an stelle des gerade befindenden Index
                 moveables.splice(index, 1);
         }
+    }
+    function sarah(_event) {
+        console.log(_event);
     }
     function startMeter(_event) {
         let target = _event.target;
