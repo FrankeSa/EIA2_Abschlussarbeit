@@ -21,13 +21,12 @@ var Firework;
             return;
         Firework.crc2 = canvas.getContext("2d");
         let saveBtn = document.querySelector("button#saveBtn");
-        //let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
+        let loadBtn = document.querySelector("button#loadBtn");
         let inputQuantity = document.querySelector("input#quantity");
         form = document.querySelector("form#controlPanel");
         canvas.addEventListener("click", createObject);
-        document.addEventListener("keydown", sarah);
         saveBtn.addEventListener("click", sendDataToServer);
-        //loadBtn.addEventListener("click", getDataFromServer);
+        loadBtn.addEventListener("click", notifyUser);
         inputQuantity.addEventListener("change", startMeter);
         window.setInterval(update, 20);
     }
@@ -55,6 +54,7 @@ var Firework;
             }
         }
         createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, shape);
+        soundEffect();
     }
     async function getDataFromServer(_event) {
         console.log("Datein wurden geladen");
@@ -74,7 +74,7 @@ var Firework;
         let lifetime = _result.explosionSize;
         let shape = _result.particleshape;
         let quantity = _result.quantity;
-        console.log("Das ist deine Rakete", "Particleshape= ", shape, "Particlecolor= ", color, "ExplosionSize= ", lifetime, "Particleqoantity= ", quantity);
+        console.log("Das ist deine Rakete=>", "Particleshape=", shape, "Particlecolor=", color, "ExplosionSize=", lifetime, "Particlequantity=", quantity);
         // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
         // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
     }
@@ -118,13 +118,18 @@ var Firework;
                 moveables.splice(index, 1);
         }
     }
-    function sarah(_event) {
-        console.log(_event);
+    function soundEffect() {
+        let thetone = "explosionsound.wav";
+        let sound = new Audio("assets/" + thetone);
+        sound.play();
     }
     function startMeter(_event) {
         let target = _event.target;
         let meter = document.querySelector("meter");
         meter.value = parseFloat(target.value);
+    }
+    function notifyUser(_event) {
+        alert("If you save this rocket, your current selection will be lost");
     }
 })(Firework || (Firework = {}));
 //# sourceMappingURL=Main.js.map

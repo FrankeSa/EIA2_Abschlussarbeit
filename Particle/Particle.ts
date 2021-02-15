@@ -3,17 +3,17 @@ namespace Firework {
         private static gravity: number = 1;
         public position: Vector;
         public velocity: Vector;
-        private type: string;
+        private shape: string;
         private lifetime: number;
         private color: string;
 
 
-        constructor(_position: Vector, _velocity: Vector, _color: string, _lifetime: number, _type: string) {
+        constructor(_position: Vector, _velocity: Vector, _color: string, _lifetime: number, _shape: string) {
             super(_position);
             this.color = _color;
             this.velocity = _velocity.copy();
             this.lifetime = _lifetime;
-            this.type = _type;
+            this.shape = _shape;
         }
 
         public move(_timeslice: number): void {
@@ -30,7 +30,7 @@ namespace Firework {
 
 
         public draw(): void {
-            switch (this.type) {
+            switch (this.shape) {
                 case "dot":
                     crc2.save();
                     crc2.beginPath();

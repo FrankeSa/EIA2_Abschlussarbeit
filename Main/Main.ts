@@ -28,14 +28,13 @@ namespace Firework {
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
 
     let saveBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#saveBtn");
-    //let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
+    let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
     let inputQuantity: HTMLButtonElement = <HTMLButtonElement>document.querySelector("input#quantity");
     form = <HTMLFormElement>document.querySelector("form#controlPanel");
 
     canvas.addEventListener("click", createObject);
-    document.addEventListener("keydown", sarah);
     saveBtn.addEventListener("click", sendDataToServer);
-    //loadBtn.addEventListener("click", getDataFromServer);
+    loadBtn.addEventListener("click", notifyUser);
     inputQuantity.addEventListener("change", startMeter);
     window.setInterval(update, 20);
   }
@@ -72,6 +71,7 @@ namespace Firework {
       }
     }
     createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, shape);
+    soundEffect();
   }
 
   export async function getDataFromServer(_event: Event): Promise<void> {
@@ -95,7 +95,7 @@ namespace Firework {
     let lifetime: number = _result.explosionSize;
     let shape: string = _result.particleshape;
     let quantity: number = _result.quantity;
-    console.log("Das ist deine Rakete", "Particleshape= ", shape, "Particlecolor= ", color, "ExplosionSize= ", lifetime, "Particleqoantity= ", quantity);
+    console.log("Das ist deine Rakete=>", "Particleshape=", shape, "Particlecolor=", color, "ExplosionSize=", lifetime, "Particlequantity=", quantity);
     // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
     // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
 
@@ -155,22 +155,19 @@ namespace Firework {
         moveables.splice(index, 1);
     }
   }
-
-
-
-  function sarah(_event: KeyboardEvent): void {
-    console.log(_event);
-
+  function soundEffect(): void {
+    let thetone: string = "explosionsound.wav";
+    let sound: HTMLAudioElement = new Audio("assets/" + thetone);
+    sound.play();
   }
-
-
-
-
   function startMeter(_event: Event): void {
     let target: HTMLInputElement = <HTMLInputElement>_event.target;
     let meter: HTMLMeterElement = <HTMLMeterElement>document.querySelector("meter");
     meter.value = parseFloat(target.value);
+  }
 
+  function notifyUser(_event: Event): void {
+    alert("If you save this rocket, your current selection will be lost");
   }
 
 

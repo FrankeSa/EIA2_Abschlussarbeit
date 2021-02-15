@@ -2,12 +2,12 @@
 var Firework;
 (function (Firework) {
     class Particle extends Firework.MoveableObject {
-        constructor(_position, _velocity, _color, _lifetime, _type) {
+        constructor(_position, _velocity, _color, _lifetime, _shape) {
             super(_position);
             this.color = _color;
             this.velocity = _velocity.copy();
             this.lifetime = _lifetime;
-            this.type = _type;
+            this.shape = _shape;
         }
         move(_timeslice) {
             super.move(_timeslice);
@@ -19,7 +19,7 @@ var Firework;
             // this.position.y += this.velocity.y;
         }
         draw() {
-            switch (this.type) {
+            switch (this.shape) {
                 case "dot":
                     Firework.crc2.save();
                     Firework.crc2.beginPath();
