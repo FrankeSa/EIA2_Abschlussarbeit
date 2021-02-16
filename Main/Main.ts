@@ -11,6 +11,7 @@ namespace Firework {
   export let crc2: CanvasRenderingContext2D;
 
 
+
   async function handleLoad(_event: Event): Promise<void> {
     console.log("HalloWelt");
 
@@ -43,7 +44,7 @@ namespace Firework {
   function createObject(_event: MouseEvent): void {
 
     let mousePositionX: number = _event.clientX; //- crc2.canvas.offsetLeft;
-    let mousepositionY: number = _event.clientY; //- crc2.canvas.offsetTop;
+    let mousePositionY: number = _event.clientY; //- crc2.canvas.offsetTop;
     let formData: FormData = new FormData(document.forms[0]);
 
     for (let entry of formData) {
@@ -66,18 +67,25 @@ namespace Firework {
           break;
       }
     }
-    createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, shape);
+
+    createParticle(quantity, mousePositionX, mousePositionY, color, lifetime, shape);
     soundEffect();
+    createUserRocket(result, _event);
   }
 
-  function createUserRocket(_result: Rocket): void {
+  function createUserRocket(_result: Rocket, _event: MouseEvent): void {
+    // let middle: number = 1;
+    if (_event.shiftKey == true) {
 
-    let color: string = _result.particlecolor;
-    let lifetime: number = _result.explosionSize;
-    let shape: string = _result.particleshape;
-    let quantity: number = _result.quantity;
-    console.log("Das ist deine Rakete=>", "Particleshape=", shape, "Particlecolor=", color, "ExplosionSize=", lifetime, "Particlequantity=", quantity);
-
+      let mousePosX: number = _event.clientX;
+      let mousePosY: number = _event.clientY;
+      let color: string = _result.particlecolor;
+      let lifetime: number = _result.explosionSize;
+      let shape: string = _result.particleshape;
+      let quantity: number = _result.quantity;
+      createParticle(quantity, mousePosX, mousePosY, color, lifetime, shape);
+      console.log("Das ist deine Rakete=>", "Particleshape=", shape, "Particlecolor=", color, "ExplosionSize=", lifetime, "Particlequantity=", quantity);
+    }
   }
 
   export async function getDataFromServer(_event: Event): Promise<void> {
@@ -89,7 +97,7 @@ namespace Firework {
     let responseContent: string = await response.text();
     let allDatas: Rocket[] = JSON.parse(responseContent);
     result = <Rocket>allDatas.find(item => item.rocketTitel === userValue);
-    createUserRocket(result);
+    //createUserRocket(result);
   }
 
 
@@ -110,7 +118,7 @@ namespace Firework {
 
 
   function createParticle(_quantity: number, _mousePositionX: number, _mousePositionY: number, _color: string, _lifetime: number, _type: string): void {
-
+    console.log(_quantity, _mousePositionY, _mousePositionX, _color, _lifetime, _type);
     let origin: Vector = new Vector(_mousePositionX, _mousePositionY);
     let color: string = _color;
 
@@ -121,7 +129,6 @@ namespace Firework {
       let velocity: Vector = new Vector(px, py);
       let particle: MoveableObject = new Particle(origin, velocity, color, lifetime, shape);
       moveables.push(particle);
-
     }
   }
 
@@ -164,65 +171,4 @@ namespace Firework {
     form.reset();
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+}//namespaceFirework Ende

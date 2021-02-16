@@ -32,7 +32,7 @@ var Firework;
     }
     function createObject(_event) {
         let mousePositionX = _event.clientX; //- crc2.canvas.offsetLeft;
-        let mousepositionY = _event.clientY; //- crc2.canvas.offsetTop;
+        let mousePositionY = _event.clientY; //- crc2.canvas.offsetTop;
         let formData = new FormData(document.forms[0]);
         for (let entry of formData) {
             quantity = Number(formData.get("quantity"));
@@ -53,15 +53,22 @@ var Firework;
                     break;
             }
         }
-        createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, shape);
+        createParticle(quantity, mousePositionX, mousePositionY, color, lifetime, shape);
         soundEffect();
+        createUserRocket(result, _event);
     }
-    function createUserRocket(_result) {
-        let color = _result.particlecolor;
-        let lifetime = _result.explosionSize;
-        let shape = _result.particleshape;
-        let quantity = _result.quantity;
-        console.log("Das ist deine Rakete=>", "Particleshape=", shape, "Particlecolor=", color, "ExplosionSize=", lifetime, "Particlequantity=", quantity);
+    function createUserRocket(_result, _event) {
+        // let middle: number = 1;
+        if (_event.shiftKey == true) {
+            let mousePosX = _event.clientX;
+            let mousePosY = _event.clientY;
+            let color = _result.particlecolor;
+            let lifetime = _result.explosionSize;
+            let shape = _result.particleshape;
+            let quantity = _result.quantity;
+            createParticle(quantity, mousePosX, mousePosY, color, lifetime, shape);
+            console.log("Das ist deine Rakete=>", "Particleshape=", shape, "Particlecolor=", color, "ExplosionSize=", lifetime, "Particlequantity=", quantity);
+        }
     }
     async function getDataFromServer(_event) {
         console.log("Datein wurden geladen");
@@ -72,7 +79,7 @@ var Firework;
         let responseContent = await response.text();
         let allDatas = JSON.parse(responseContent);
         result = allDatas.find(item => item.rocketTitel === userValue);
-        createUserRocket(result);
+        //createUserRocket(result);
     }
     Firework.getDataFromServer = getDataFromServer;
     async function sendDataToServer(_event) {
@@ -89,6 +96,7 @@ var Firework;
         textArea.value = "";
     }
     function createParticle(_quantity, _mousePositionX, _mousePositionY, _color, _lifetime, _type) {
+        console.log(_quantity, _mousePositionY, _mousePositionX, _color, _lifetime, _type);
         let origin = new Firework.Vector(_mousePositionX, _mousePositionY);
         let color = _color;
         for (let i = 0; i < _quantity; i++) {
@@ -129,5 +137,5 @@ var Firework;
         alert("If you load this rocket, your current selection will be lost");
         form.reset();
     }
-})(Firework || (Firework = {}));
+})(Firework || (Firework = {})); //namespaceFirework Ende
 //# sourceMappingURL=Main.js.map
