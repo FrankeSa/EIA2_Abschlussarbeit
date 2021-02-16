@@ -26,12 +26,10 @@ namespace Firework {
     if (!canvas)
       return;
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
-
     let saveBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#saveBtn");
     let loadBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#loadBtn");
     let inputQuantity: HTMLButtonElement = <HTMLButtonElement>document.querySelector("input#quantity");
     form = <HTMLFormElement>document.querySelector("form#controlPanel");
-
     canvas.addEventListener("click", createObject);
     saveBtn.addEventListener("click", sendDataToServer);
     loadBtn.addEventListener("click", notifyUser);
@@ -44,11 +42,9 @@ namespace Firework {
 
   function createObject(_event: MouseEvent): void {
 
-
     let mousePositionX: number = _event.clientX; //- crc2.canvas.offsetLeft;
     let mousepositionY: number = _event.clientY; //- crc2.canvas.offsetTop;
     let formData: FormData = new FormData(document.forms[0]);
-
 
     for (let entry of formData) {
 
@@ -74,6 +70,16 @@ namespace Firework {
     soundEffect();
   }
 
+  function createUserRocket(_result: Rocket): void {
+
+    let color: string = _result.particlecolor;
+    let lifetime: number = _result.explosionSize;
+    let shape: string = _result.particleshape;
+    let quantity: number = _result.quantity;
+    console.log("Das ist deine Rakete=>", "Particleshape=", shape, "Particlecolor=", color, "ExplosionSize=", lifetime, "Particlequantity=", quantity);
+
+  }
+
   export async function getDataFromServer(_event: Event): Promise<void> {
     console.log("Datein wurden geladen");
     let target: HTMLInputElement = <HTMLInputElement>_event.target;
@@ -83,22 +89,7 @@ namespace Firework {
     let responseContent: string = await response.text();
     let allDatas: Rocket[] = JSON.parse(responseContent);
     result = <Rocket>allDatas.find(item => item.rocketTitel === userValue);
-    console.log(result);
     createUserRocket(result);
-
-  }
-
-
-  function createUserRocket(_result: Rocket): void {
-
-    let color: string = _result.particlecolor;
-    let lifetime: number = _result.explosionSize;
-    let shape: string = _result.particleshape;
-    let quantity: number = _result.quantity;
-    console.log("Das ist deine Rakete=>", "Particleshape=", shape, "Particlecolor=", color, "ExplosionSize=", lifetime, "Particlequantity=", quantity);
-    // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
-    // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
-
   }
 
 
@@ -155,11 +146,13 @@ namespace Firework {
         moveables.splice(index, 1);
     }
   }
+
   function soundEffect(): void {
-    let thetone: string = "explosionsound.wav";
-    let sound: HTMLAudioElement = new Audio("assets/" + thetone);
+    let tone: string = "explosionsound.wav";
+    let sound: HTMLAudioElement = new Audio("assets/" + tone);
     sound.play();
   }
+
   function startMeter(_event: Event): void {
     let target: HTMLInputElement = <HTMLInputElement>_event.target;
     let meter: HTMLMeterElement = <HTMLMeterElement>document.querySelector("meter");
@@ -167,7 +160,8 @@ namespace Firework {
   }
 
   function notifyUser(_event: Event): void {
-    alert("If you save this rocket, your current selection will be lost");
+    alert("If you load this rocket, your current selection will be lost");
+    form.reset();
   }
 
 

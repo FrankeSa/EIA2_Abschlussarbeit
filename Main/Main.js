@@ -56,6 +56,13 @@ var Firework;
         createParticle(quantity, mousePositionX, mousepositionY, color, lifetime, shape);
         soundEffect();
     }
+    function createUserRocket(_result) {
+        let color = _result.particlecolor;
+        let lifetime = _result.explosionSize;
+        let shape = _result.particleshape;
+        let quantity = _result.quantity;
+        console.log("Das ist deine Rakete=>", "Particleshape=", shape, "Particlecolor=", color, "ExplosionSize=", lifetime, "Particlequantity=", quantity);
+    }
     async function getDataFromServer(_event) {
         console.log("Datein wurden geladen");
         let target = _event.target;
@@ -65,19 +72,9 @@ var Firework;
         let responseContent = await response.text();
         let allDatas = JSON.parse(responseContent);
         result = allDatas.find(item => item.rocketTitel === userValue);
-        console.log(result);
         createUserRocket(result);
     }
     Firework.getDataFromServer = getDataFromServer;
-    function createUserRocket(_result) {
-        let color = _result.particlecolor;
-        let lifetime = _result.explosionSize;
-        let shape = _result.particleshape;
-        let quantity = _result.quantity;
-        console.log("Das ist deine Rakete=>", "Particleshape=", shape, "Particlecolor=", color, "ExplosionSize=", lifetime, "Particlequantity=", quantity);
-        // erzeugt neuer Particle mit diesen Werten und pusht ihn in moveable Array
-        // eine Funktion die z.B. auf MouseUp hört, erzeugt eine Explosion mit diesen Werten
-    }
     async function sendDataToServer(_event) {
         let controlPanelData = new FormData(form);
         let textArea = document.querySelector("input#textarea");
@@ -119,8 +116,8 @@ var Firework;
         }
     }
     function soundEffect() {
-        let thetone = "explosionsound.wav";
-        let sound = new Audio("assets/" + thetone);
+        let tone = "explosionsound.wav";
+        let sound = new Audio("assets/" + tone);
         sound.play();
     }
     function startMeter(_event) {
@@ -129,7 +126,8 @@ var Firework;
         meter.value = parseFloat(target.value);
     }
     function notifyUser(_event) {
-        alert("If you save this rocket, your current selection will be lost");
+        alert("If you load this rocket, your current selection will be lost");
+        form.reset();
     }
 })(Firework || (Firework = {}));
 //# sourceMappingURL=Main.js.map

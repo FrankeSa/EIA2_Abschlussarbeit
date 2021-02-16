@@ -10,11 +10,9 @@ var Firework;
     }
     Firework.generateContent = generateContent;
     function createSelect(_titelList) {
-        // let group: HTMLDivElement = document.createElement("div");
         let selection = document.createElement("select");
         selection.name = "LoadedTitels";
         selection.addEventListener("change", Firework.getDataFromServer);
-        //selection.id = "Test";
         for (let titel of _titelList) {
             let option = document.createElement("option");
             option.setAttribute("name", titel.rocketTitel);
@@ -23,11 +21,5 @@ var Firework;
         }
         return selection;
     }
-    // function handleChange(_event: Event): void {
-    //     let target: HTMLInputElement = <HTMLInputElement>_event.target;
-    //     let userValue: string;
-    //     userValue = target.value;
-    //     console.log(userValue);
-    // }
 })(Firework || (Firework = {}));
 //# sourceMappingURL=generateContent.js.map

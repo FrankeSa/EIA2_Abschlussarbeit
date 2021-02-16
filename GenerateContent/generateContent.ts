@@ -19,58 +19,20 @@ namespace Firework {
     }
 
 
-
-
     function createSelect(_titelList: Rocket[]): HTMLElement | null {
 
-        // let group: HTMLDivElement = document.createElement("div");
         let selection: HTMLSelectElement = document.createElement("select");
         selection.name = "LoadedTitels";
         selection.addEventListener("change", getDataFromServer);
-        //selection.id = "Test";
 
         for (let titel of _titelList) {
             let option: HTMLOptionElement = document.createElement("option");
-
             option.setAttribute("name", titel.rocketTitel);
-
             option.value = option.textContent = titel.rocketTitel;
-
             selection.appendChild(option);
-
         }
         return selection;
     }
-
-
-
-    // function handleChange(_event: Event): void {
-
-    //     let target: HTMLInputElement = <HTMLInputElement>_event.target;
-    //     let userValue: string;
-    //     userValue = target.value;
-
-    //     console.log(userValue);
-
-    // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
