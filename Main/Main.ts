@@ -14,6 +14,7 @@ namespace Firework {
 
   async function handleLoad(_event: Event): Promise<void> {
     console.log("HalloWelt");
+    alert("Hello User! on the right side you can create your rocket charge.To start the explosion click with left mousebutton on the black field beside. To start the explosion for your loaded rockets, load your rocket first and then press additionally the shift key on your keyboard. HAVE FUN!");
 
     let response: Response = await fetch(serverPage + "?" + "command=getTitels");
     let listOfTitels: string = await response.text();

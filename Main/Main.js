@@ -12,6 +12,7 @@ var Firework;
     let result;
     async function handleLoad(_event) {
         console.log("HalloWelt");
+        alert("Hello User! on the right side you can create your rocket charge.To start the explosion click with left mousebutton on the black field beside. To start the explosion for your loaded rockets, load your rocket first and then press additionally the shift key on your keyboard. HAVE FUN!");
         let response = await fetch(serverPage + "?" + "command=getTitels");
         let listOfTitels = await response.text();
         let titelList = JSON.parse(listOfTitels);
