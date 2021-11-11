@@ -19,10 +19,8 @@ namespace Firework {
     let response: Response = await fetch(serverPage + "?" + "command=getTitels");
     let listOfTitels: string = await response.text();
     let titelList: Rocket[] = JSON.parse(listOfTitels);
-
-
+    
     generateContent(titelList);
-
 
     let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
     if (!canvas)
@@ -44,8 +42,8 @@ namespace Firework {
 
   function createObject(_event: MouseEvent): void {
 
-    let mousePositionX: number = _event.clientX; //- crc2.canvas.offsetLeft;
-    let mousePositionY: number = _event.clientY; //- crc2.canvas.offsetTop;
+    let mousePositionX: number = _event.clientX; 
+    let mousePositionY: number = _event.clientY; 
     let formData: FormData = new FormData(document.forms[0]);
 
     for (let entry of formData) {
@@ -124,7 +122,7 @@ namespace Firework {
     let color: string = _color;
 
     for (let i: number = 0; i < _quantity; i++) {
-      let radian: number = (Math.PI * 2) / _quantity;
+      let radian: number = (Math.PI * 2) / _quantity; // radian = Winkel für ein Partikel
       let px: number = Math.cos(radian * i) * 110 * Math.random() * 2; //(2)power
       let py: number = Math.sin(radian * i) * 110 * Math.random() * 2; //(2)power
       let velocity: Vector = new Vector(px, py);

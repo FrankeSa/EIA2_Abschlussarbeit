@@ -32,8 +32,8 @@ var Firework;
         window.setInterval(update, 20);
     }
     function createObject(_event) {
-        let mousePositionX = _event.clientX; //- crc2.canvas.offsetLeft;
-        let mousePositionY = _event.clientY; //- crc2.canvas.offsetTop;
+        let mousePositionX = _event.clientX;
+        let mousePositionY = _event.clientY;
         let formData = new FormData(document.forms[0]);
         for (let entry of formData) {
             quantity = Number(formData.get("quantity"));
@@ -101,7 +101,7 @@ var Firework;
         let origin = new Firework.Vector(_mousePositionX, _mousePositionY);
         let color = _color;
         for (let i = 0; i < _quantity; i++) {
-            let radian = (Math.PI * 2) / _quantity;
+            let radian = (Math.PI * 2) / _quantity; // radian = Winkel für ein Partikel
             let px = Math.cos(radian * i) * 110 * Math.random() * 2; //(2)power
             let py = Math.sin(radian * i) * 110 * Math.random() * 2; //(2)power
             let velocity = new Firework.Vector(px, py);
